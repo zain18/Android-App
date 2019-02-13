@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">EverSmileProject</string>
+    <string name="failed" />
+    <string name="email_id">wazein@hotmail.com</string>
+    <string name="password">Enter password</string>
+    <string name="login">Log In</string>
+    <string name="create_a_new_account">Create a new account</string>
+    <string name="image">eversmile</string>
+
+</resources>
