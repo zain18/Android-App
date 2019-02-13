@@ -8,7 +8,10 @@ import android.view.View;
 import android.widget.Button;
 import com.google.firebase.auth.FirebaseAuth;
 
+<<<<<<< HEAD
+=======
 // test 22
+>>>>>>> 779767c415bdd0f204d0e63b8be2e409a67adaab
 public class MainActivity extends AppCompatActivity {
 
     FirebaseAuth mAuth;
