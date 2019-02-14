@@ -72,14 +72,14 @@ public class signin extends AppCompatActivity {
             }
         });
         mAuth = FirebaseAuth.getInstance();
-        // Checking the email id and password is Empty
+        // Checking the email id and password if Empty
         ahlogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String email = inputEmail.getText().toString();
                 final String password = inputPassword.getText().toString();
                 if (TextUtils.isEmpty(email)) {
-                    Toast.makeText(getApplicationContext(), "Please enter email id", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Please enter your mail ", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if (TextUtils.isEmpty(password)) {
@@ -138,7 +138,7 @@ public class signin extends AppCompatActivity {
             } catch (ApiException e) {
                 // Google Sign In failed, update UI appropriately
                 Log.w(TAG, "Google sign in failed", e);
-                // ...
+                //
             }
         }
     }
@@ -159,7 +159,6 @@ public class signin extends AppCompatActivity {
                             Toast.makeText(signin.this, "Aut Fail", Toast.LENGTH_SHORT).show();
                             //updateUI(null);
                         }
-
                     }
                 });
     }

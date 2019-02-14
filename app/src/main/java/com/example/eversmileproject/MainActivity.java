@@ -9,8 +9,6 @@ import android.widget.Button;
 import com.google.firebase.auth.FirebaseAuth;
 
 
-// test 22
-
 public class MainActivity extends AppCompatActivity {
 
     FirebaseAuth mAuth;
@@ -43,4 +41,3 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 }
-// this is a test

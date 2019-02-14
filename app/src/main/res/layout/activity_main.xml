@@ -7,17 +7,18 @@
     android:orientation="vertical"
     android:padding="24dp"
     tools:context=".MainActivity">
+
     <TextView
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:lineSpacingExtra="8sp"
-        android:text="After Login "
+        android:text="@string/the_activity_after_the_user_login"
         android:textSize="36sp"
         android:textStyle="bold" />
     <Button
         android:id="@+id/signout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="LogOut" />
+        android:text="@string/logout" />
 </LinearLayout>
