@@ -14,8 +14,8 @@
         tools:context=".singin_activity">
 
         <ImageView
-            android:layout_width="219dp"
-            android:layout_height="172dp"
+            android:layout_width="243dp"
+            android:layout_height="214dp"
             android:layout_gravity="center"
             android:adjustViewBounds="true"
             android:contentDescription="@string/image"
@@ -68,7 +68,7 @@
             android:text="@string/create_a_new_account"
             android:textAlignment="center"
             android:textAllCaps="false"
-            android:textSize="15sp"
+            android:textSize="18sp"
             android:visibility="visible" />
 
         <com.google.android.gms.common.SignInButton
