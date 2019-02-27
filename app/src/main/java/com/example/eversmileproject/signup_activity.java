@@ -59,7 +59,7 @@ public class signup_activity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Enter your Password please", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                // added if statemnet 
+                // added if statement
                 if (!termsCheck.isChecked()) {
                     Toast.makeText(getApplicationContext(), "Please Agree to terms and conditions", Toast.LENGTH_SHORT).show();
                     return;
