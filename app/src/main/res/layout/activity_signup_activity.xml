@@ -2,6 +2,7 @@
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/signup"
     android:fitsSystemWindows="true">
 
     <LinearLayout
@@ -26,11 +27,6 @@
             android:hint="Password"
             android:inputType="textPassword" />
         <!-- Signup Button -->
-        <Button
-            android:id="@+id/termsBtn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="View Terms" />
 
         <CheckBox
             android:id="@+id/termsCheckBox"
@@ -55,6 +51,13 @@
             android:gravity="center"
             android:text="Already a member? Login"
             android:textSize="16dip" />
+
+        <TextView
+            android:id="@+id/termsBtn"
+            android:layout_width="364dp"
+            android:layout_height="wrap_content"
+            android:text="@string/linktoterms" />
+
     </LinearLayout>
     <ProgressBar
         android:id="@+id/progressBar"

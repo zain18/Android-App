@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -21,16 +22,21 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class signup_activity extends AppCompatActivity {
 
+
     private EditText name, email_id, passwordcheck;
     private FirebaseAuth mAuth;
     private static final String TAG = "";
     private ProgressBar progressBar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup_activity);
+        final TextView termsText = (TextView) findViewById(R.id.termsBtn);
         final TextView btnSignUp = (TextView) findViewById(R.id.login_page);
         final CheckBox termsCheck = (CheckBox) findViewById(R.id.termsCheckBox); // terms checkbox
+
+        termsText.setMovementMethod(LinkMovementMethod.getInstance());
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
