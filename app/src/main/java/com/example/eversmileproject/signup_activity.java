@@ -5,9 +5,11 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -28,6 +30,9 @@ public class signup_activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup_activity);
+        final TextView termsText = (TextView) findViewById(R.id.termsBtn);
+        final CheckBox termsCheck = (CheckBox) findViewById(R.id.termsCheckBox);
+        termsText.setMovementMethod(LinkMovementMethod.getInstance());
         TextView btnSignUp = (TextView) findViewById(R.id.login_page);
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,6 +57,10 @@ public class signup_activity extends AppCompatActivity {
                 }
                 if (TextUtils.isEmpty(password)) {
                     Toast.makeText(getApplicationContext(), "Enter your Password please", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (!termsCheck.isChecked()) {
+                    Toast.makeText(getApplicationContext(), "Please Agree to terms and conditions", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 progressBar.setVisibility(View.VISIBLE);
