@@ -9,4 +9,7 @@
     <string name="logout">LogOut</string>
     <string name="the_activity_after_the_user_login">The Activity after the user Login</string>
     <string name="linktoterms"><a href="http://www.google.com">  Link to Terms</a></string>
+    <string name="seeBtn">See your EverSmile</string>
+    <string name="findBtn">Find your EverSmile</string>
+    <string name="shareBtn">Share your EverSmile</string>
 </resources>
