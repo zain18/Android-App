@@ -8,17 +8,28 @@
     android:padding="24dp"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/textView"
+    <Button
+        android:id="@+id/SeeBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:lineSpacingExtra="8sp"
-        android:text="@string/the_activity_after_the_user_login"
-        android:textSize="36sp"
-        android:textStyle="bold" />
+        android:text="@string/seeBtn" />
+
+    <Button
+        android:id="@+id/FindBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/findBtn" />
+
+    <Button
+        android:id="@+id/ShareBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/shareBtn" />
+
     <Button
         android:id="@+id/signout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/logout" />
+
 </LinearLayout>
