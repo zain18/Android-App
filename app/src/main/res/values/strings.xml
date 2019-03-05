@@ -12,4 +12,5 @@
     <string name="seeBtn">See your EverSmile</string>
     <string name="findBtn">Find your EverSmile</string>
     <string name="shareBtn">Share your EverSmile</string>
+    <string name="take_picture">Take picture</string>
 </resources>
