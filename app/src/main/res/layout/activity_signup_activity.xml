@@ -28,6 +28,12 @@
             android:inputType="textPassword" />
         <!-- Signup Button -->
 
+        <TextView
+            android:id="@+id/termsBtn"
+            android:layout_width="364dp"
+            android:layout_height="wrap_content"
+            android:text="@string/linktoterms" />
+
         <CheckBox
             android:id="@+id/termsCheckBox"
             android:layout_width="match_parent"
@@ -51,13 +57,6 @@
             android:gravity="center"
             android:text="Already a member? Login"
             android:textSize="16dip" />
-
-        <TextView
-            android:id="@+id/termsBtn"
-            android:layout_width="367dp"
-            android:layout_height="31dp"
-            android:text="@string/linktoterms"
-            android:textAlignment="center" />
 
     </LinearLayout>
     <ProgressBar
