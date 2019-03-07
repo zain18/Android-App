@@ -4,6 +4,8 @@
     package="com.example.eversmileproject">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <supports-screens
         android:anyDensity="true"
@@ -22,6 +24,8 @@
         <activity android:name=".FacebookLogin"></activity>
         <activity android:name=".UserProfile" />
         <activity android:name=".signup_activity" />
+        <activity android:name=".see_eversmile"/>
+        <activity android:name=".view_pics"/>
         <activity android:name=".signin" />
         <activity android:name=".MainActivity">
             <intent-filter>

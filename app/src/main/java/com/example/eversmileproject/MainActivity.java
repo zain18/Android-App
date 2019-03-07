@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
         Button button = (Button) findViewById(R.id.signout);
         Button ShareBtn =(Button) findViewById(R.id.ShareBtn);
+        Button seeBtn =(Button) findViewById(R.id.SeeBtn);
         mAuth = FirebaseAuth.getInstance();
         mAuthListner = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -59,6 +60,13 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(in);
             }
         });
+
+        seeBtn.setOnClickListener((new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, see_eversmile.class));
+            }
+        }));
 
 
 
