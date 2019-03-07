@@ -2,6 +2,7 @@ package com.example.eversmileproject;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.ImageFormat;
 import android.graphics.SurfaceTexture;
@@ -44,12 +45,15 @@ import java.util.List;
 public class see_eversmile extends AppCompatActivity {
     private static final String TAG = "see_eversmile";
     private Button takePictureButton;
+    private Button takeLeftButton;
+    private Button takeRightButton;
+    private Button viewPicsButton;
     private TextureView textureView;
     private static final SparseIntArray ORIENTATIONS = new SparseIntArray();
     static {
-        ORIENTATIONS.append(Surface.ROTATION_0, 90);
+        ORIENTATIONS.append(Surface.ROTATION_0, 270);
         ORIENTATIONS.append(Surface.ROTATION_90, 0);
-        ORIENTATIONS.append(Surface.ROTATION_180, 270);
+        ORIENTATIONS.append(Surface.ROTATION_180, 90);
         ORIENTATIONS.append(Surface.ROTATION_270, 180);
     }
     private String cameraId;
@@ -72,11 +76,32 @@ public class see_eversmile extends AppCompatActivity {
         assert textureView != null;
         textureView.setSurfaceTextureListener(textureListener);
         takePictureButton = (Button) findViewById(R.id.btn_takepicture);
+        takeLeftButton = (Button) findViewById(R.id.btn_leftpicture);
+        takeRightButton = (Button) findViewById(R.id.btn_rightpicture);
+        viewPicsButton = (Button) findViewById(R.id.btn_viewpics);
         assert takePictureButton != null;
         takePictureButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                takePicture();
+                takePicture("/face.jpg");
+            }
+        });
+        takeLeftButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                takePicture("/left.jpg");
+            }
+        });
+        takeRightButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                takePicture("/right.jpg");
+            }
+        });
+        viewPicsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(see_eversmile.this, view_pics.class));
             }
         });
     }
@@ -139,7 +164,7 @@ public class see_eversmile extends AppCompatActivity {
             e.printStackTrace();
         }
     }
-    protected void takePicture() {
+    protected void takePicture(String picName) {
         if(null == cameraDevice) {
             Log.e(TAG, "cameraDevice is null");
             return;
@@ -167,7 +192,7 @@ public class see_eversmile extends AppCompatActivity {
             // Orientation
             int rotation = getWindowManager().getDefaultDisplay().getRotation();
             captureBuilder.set(CaptureRequest.JPEG_ORIENTATION, ORIENTATIONS.get(rotation));
-            final File file = new File(Environment.getExternalStorageDirectory()+"/face.jpg");
+            final File file = new File(Environment.getExternalStorageDirectory()+picName);
             ImageReader.OnImageAvailableListener readerListener = new ImageReader.OnImageAvailableListener() {
                 @Override
                 public void onImageAvailable(ImageReader reader) {

@@ -12,5 +12,10 @@
     <string name="seeBtn">See your EverSmile</string>
     <string name="findBtn">Find your EverSmile</string>
     <string name="shareBtn">Share your EverSmile</string>
-    <string name="take_picture">Take picture</string>
+    <string name="take_face">Face picture</string>
+    <string name="take_left">Left picture</string>
+    <string name="take_right">Right picture</string>
+    <string name="view_pics">View pictures</string>
+    <string name="main_menu">Main Menu</string>
+    <string name="camera">Camera</string>
 </resources>

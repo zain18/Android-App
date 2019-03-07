@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".see_eversmile">
+
+
+    <ImageView
+        android:id="@+id/imageFaceView"
+        android:layout_width="165dp"
+        android:layout_height="165dp"
+        android:layout_centerHorizontal="true"/>
+
+    <TextView
+        android:id="@+id/faceView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imageFaceView"
+        android:layout_centerHorizontal="true"
+        android:text="@string/take_face" />
+
+    <ImageView
+        android:id="@+id/imageLeftView"
+        android:layout_width="165dp"
+        android:layout_height="165dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/faceView"/>
+
+    <TextView
+        android:id="@+id/leftView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imageLeftView"
+        android:layout_centerHorizontal="true"
+        android:text="@string/take_left" />
+
+    <ImageView
+        android:id="@+id/imageRightView"
+        android:layout_width="165dp"
+        android:layout_height="165dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/leftView"/>
+
+    <TextView
+        android:id="@+id/rightView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imageRightView"
+        android:layout_centerHorizontal="true"
+        android:text="@string/take_right" />
+
+    <Button
+        android:id="@+id/btn_mainMenu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="19dp"
+        android:text="@string/main_menu" />
+
+    <Button
+        android:id="@+id/btn_camera"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_toLeftOf="@+id/btn_mainMenu"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="19dp"
+        android:text="@string/camera" />
+</RelativeLayout>

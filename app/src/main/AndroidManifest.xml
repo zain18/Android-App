@@ -22,6 +22,7 @@
         <activity android:name=".signup_activity"></activity>
         <activity android:name=".signin" />
         <activity android:name=".see_eversmile" />
+        <activity android:name=".view_pics" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
