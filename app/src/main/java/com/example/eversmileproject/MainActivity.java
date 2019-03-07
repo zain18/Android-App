@@ -1,29 +1,39 @@
 package com.example.eversmileproject;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import com.facebook.CallbackManager;
+import com.facebook.login.widget.LoginButton;
 import com.google.firebase.auth.FirebaseAuth;
+import com.facebook.FacebookSdk;
+import com.facebook.appevents.AppEventsLogger;
+
 
 
 public class MainActivity extends AppCompatActivity {
 
     FirebaseAuth mAuth;
     FirebaseAuth.AuthStateListener mAuthListner;
-    @Override
+
     protected void onStart() {
         super.onStart();
         mAuth.addAuthStateListener(mAuthListner);
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         Button button = (Button) findViewById(R.id.signout);
+        Button ShareBtn =(Button) findViewById(R.id.ShareBtn);
         mAuth = FirebaseAuth.getInstance();
         mAuthListner = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -31,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
                 if (firebaseAuth.getCurrentUser()==null)
                 {
                     startActivity(new Intent(MainActivity.this, signin.class));
+
                 }
             }
         };
@@ -40,5 +51,17 @@ public class MainActivity extends AppCompatActivity {
                 mAuth.signOut();
             }
         });
+
+        ShareBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent in = new Intent(getApplicationContext(), FacebookLogin.class);
+                startActivity(in);
+            }
+        });
+
+
+
     }
+
 }

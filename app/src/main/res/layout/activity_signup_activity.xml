@@ -54,9 +54,10 @@
 
         <TextView
             android:id="@+id/termsBtn"
-            android:layout_width="364dp"
-            android:layout_height="wrap_content"
-            android:text="@string/linktoterms" />
+            android:layout_width="367dp"
+            android:layout_height="31dp"
+            android:text="@string/linktoterms"
+            android:textAlignment="center" />
 
     </LinearLayout>
     <ProgressBar
