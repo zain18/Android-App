@@ -4,8 +4,8 @@
     package="com.example.eversmileproject">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.CAMERA"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <supports-screens
         android:anyDensity="true"
@@ -21,11 +21,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="ExtraText">
-        <activity android:name=".FacebookLogin"></activity>
+        <activity android:name=".FacebookLogin" />
         <activity android:name=".UserProfile" />
         <activity android:name=".signup_activity" />
-        <activity android:name=".see_eversmile"/>
-        <activity android:name=".view_pics"/>
+        <activity android:name=".see_eversmile" />
+        <activity android:name=".view_pics" />
         <activity android:name=".signin" />
         <activity android:name=".MainActivity">
             <intent-filter>
@@ -60,9 +60,10 @@
             android:name="com.facebook.FacebookContentProvider"
             android:authorities="com.facebook.app.FacebookContentProvider{2129225573819941}"
             android:exported="true" />
+
         <meta-data
             android:name="com.google.android.app.API_KEY"
-            android:value="AIzaSyDrNMGTZ9AMp39n11GXFESQf6i-gH7BQrs"/>
+            android:value="AIzaSyDrNMGTZ9AMp39n11GXFESQf6i-gH7BQrs" />
     </application>
 
 </manifest>

@@ -1,8 +1,13 @@
 package com.example.eversmileproject;
 
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Base64;
+import android.util.Log;
+import android.widget.Toast;
 
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -10,10 +15,18 @@ import com.facebook.FacebookException;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.appevents.AppEventsLogger;
+import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.facebook.share.Sharer;
+import com.facebook.share.widget.ShareDialog;
 
 import org.json.JSONObject;
+
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.security.Signature;
+
 
 public class FacebookLogin extends AppCompatActivity {
 
@@ -23,7 +36,7 @@ public class FacebookLogin extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_facebook_login);
         callbackManager = CallbackManager.Factory.create();
-        LoginButton loginButton = (LoginButton) findViewById(R.id.login_button);
+        LoginButton loginButton = findViewById(R.id.login_button);
         loginButton.setReadPermissions("email");
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
@@ -59,7 +72,7 @@ public class FacebookLogin extends AppCompatActivity {
                             GraphResponse response) {
                         Intent intent = new Intent(FacebookLogin.this,
                                 UserProfile.class);
-                        intent.putExtra("userProfile", json_object.toString());
+                        intent.putExtra("UserProfile", json_object.toString());
                         startActivity(intent);
                     }
 
@@ -81,6 +94,5 @@ public class FacebookLogin extends AppCompatActivity {
         // Logs 'app deactivate' App Event.
         AppEventsLogger.deactivateApp(this);
     }
-
 
 }

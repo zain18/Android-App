@@ -23,6 +23,7 @@ import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
+import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.facebook.share.model.ShareLinkContent;
@@ -31,14 +32,13 @@ import com.facebook.share.model.SharePhotoContent;
 import com.facebook.share.widget.ShareButton;
 import com.facebook.share.widget.ShareDialog;
 import com.squareup.picasso.Picasso;
-
 import org.json.JSONObject;
-
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Arrays;
 
 public class UserProfile extends AppCompatActivity {
 
@@ -78,6 +78,17 @@ public class UserProfile extends AppCompatActivity {
         });
 
     }
+    public void ShareDialog(Bitmap imagePath){
+        SharePhoto photo = new SharePhoto.Builder()
+                .setBitmap(imagePath)
+                .setCaption("photo sharing")
+                .build();
+        SharePhotoContent content = new SharePhotoContent.Builder()
+                .addPhoto(photo)
+                .build();
+        shareDialog.show(content);
+    }
+
     private void selectImageToShareFacebook() {
         final CharSequence[] items = { "Take Photo", "Choose from Library",
                 "Cancel" };
@@ -104,8 +115,6 @@ public class UserProfile extends AppCompatActivity {
         });
         builder.show();
     }
-
-
 
 
     protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
@@ -141,6 +150,7 @@ public class UserProfile extends AppCompatActivity {
         ShareDialog(thumbnail);
     }
 
+
     private void onCaptureImageResult(Intent data) {
         Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
@@ -160,16 +170,7 @@ public class UserProfile extends AppCompatActivity {
         }
         ShareDialog(thumbnail);
     }
-    public void ShareDialog(Bitmap imagePath){
-        SharePhoto photo = new SharePhoto.Builder()
-                .setBitmap(imagePath)
-                .setCaption("StudyTutorial")
-                .build();
-        SharePhotoContent content = new SharePhotoContent.Builder()
-                .addPhoto(photo)
-                .build();
-        shareDialog.show(content);
-    }
+
 
 
 }

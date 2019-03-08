@@ -30,6 +30,13 @@
         android:layout_below="@+id/UserName"
         android:text=""/>
 
+    <com.facebook.share.widget.ShareButton
+        android:id="@+id/shareButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="37dp" />
+
     <Button
         android:id="@+id/button"
         android:layout_width="wrap_content"
@@ -45,6 +52,8 @@
         android:layout_below="@+id/button"
         android:layout_marginTop="34dp"
         android:background="@drawable/eversmile" />
+
+
 
 
 </RelativeLayout>
