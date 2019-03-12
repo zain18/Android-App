@@ -22,7 +22,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="ExtraText">
-        <activity android:name=".ShareToSnapchat"></activity>
+        <activity android:name=".ShareToSnapchat" />
         <activity android:name=".ShareToInstagram" />
         <activity android:name=".ShareToTwitter" />
         <activity android:name=".FacebookLogin" />

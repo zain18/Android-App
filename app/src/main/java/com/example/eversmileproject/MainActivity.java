@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
         ShareBtn3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, see_eversmile.class));
+                startActivity(new Intent(MainActivity.this, ShareToSnapchat.class));
             }
         });
 
