@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <supports-screens
         android:anyDensity="true"
@@ -21,6 +22,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="ExtraText">
+        <activity android:name=".ShareToSnapchat"></activity>
+        <activity android:name=".ShareToInstagram" />
+        <activity android:name=".ShareToTwitter" />
         <activity android:name=".FacebookLogin" />
         <activity android:name=".UserProfile" />
         <activity android:name=".signup_activity" />

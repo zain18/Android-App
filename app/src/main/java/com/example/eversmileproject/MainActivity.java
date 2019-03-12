@@ -10,10 +10,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import com.facebook.login.widget.LoginButton;
+import com.facebook.share.Share;
 import com.google.firebase.auth.FirebaseAuth;
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
 import com.facebook.CallbackManager;
+
 
 
 public class MainActivity extends AppCompatActivity {
@@ -30,9 +32,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         Button button = (Button) findViewById(R.id.signout);
         Button ShareBtn =(Button) findViewById(R.id.ShareBtn);
+        Button ShareBtn1 =(Button) findViewById(R.id.ShareBtn1);
+        Button ShareBtn2 =(Button) findViewById(R.id.ShareBtn2);
+        Button ShareBtn3 =(Button) findViewById(R.id.ShareBtn3);
         Button seeBtn =(Button) findViewById(R.id.SeeBtn);
         mAuth = FirebaseAuth.getInstance();
         mAuthListner = new FirebaseAuth.AuthStateListener() {
@@ -66,6 +70,26 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, see_eversmile.class));
             }
         }));
+        ShareBtn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, ShareToTwitter.class));
+            }
+        });
+        ShareBtn1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, ShareToInstagram.class));
+            }
+        });
+        ShareBtn3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, see_eversmile.class));
+            }
+        });
+
+
 
     }
 

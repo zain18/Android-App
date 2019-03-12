@@ -20,5 +20,29 @@
     <string name="view_pics">View pictures</string>
     <string name="main_menu">Main Menu</string>
     <string name="camera">Camera</string>
+    <string name="clientId">04a54c46fd4a496b8da58175bbe4d567</string>
+    <string name="clientSecret">89ab8c82496f4fb1bb17386e3238c5c1</string>
+    <string name="access_token">11618093010.04a54c4.b7203c173c2342d1a6d1d97b6997bbb1</string>
+    <string name="base_url">https://api.instagram.com/</string>
+    <string name="get_user_info_url">https://api.instagram.com/v1/users/self/?access_token=11618093010.04a54c4.b7203c173c2342d1a6d1d97b6997bbb1</string>
+    <string name="callbackUrl">https://oceanwp.org/instagram/</string>
+    <string name="com_auth0_client_id">lEi8o78oafHdOKPjzmvw2PVOCifQ6o68</string>
+    <string name="com_auth0_domain">ever-smile.auth0.com</string>
+    <string name="action_settings">Settings</string>
+    <string name="twitter_consumer_secret">f6eNzCE8xNozHlVAA9yveGJY4uDzy2d1YFIki42oUn0kEd3c60</string>
+    <string name="twitter_consumer_key">wp9Jwe09zQIf57e5BlXl1aQII</string>
+    <string name="Twitter_Access_Token">1104877713305858048-L51MVbfiyHtr0AI6SOGoTve4n190LS</string>
+    <string name="Twitter_Secret_Token">2C2Ai6oA6l73niDxO6fzQkC7KgWu6c0qacOpeSUew7cat</string>
+    <string name="custom_log_in_with_twitter">Custom Log in with Twitter</string>
+    <string name="get_profile_image">Fetch Profile Image</string>
+    <string name="share_activity">Share Activity Demo</string>
+    <string name="shared_activity">Shared Activity Demo</string>
+    <string name="imageview">Share ImageView</string>
+    <string name="share_image">Share Image</string>
+    <string name="share_text">Share Text</string>
+    <string name="select_image">Select Image</string>
+    <string name="enter_text">Enter something to share</string>
+    <string name="shared_text">Shared Text</string>
+    <string name="shared_image">Shared Image</string>
 
 </resources>

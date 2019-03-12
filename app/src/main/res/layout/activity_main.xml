@@ -25,7 +25,23 @@
         android:id="@+id/ShareBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/shareBtn" />
+        android:text="Share to Facebook" />
+
+    <Button
+        android:id="@+id/ShareBtn1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Share to Instagram" />
+    <Button
+        android:id="@+id/ShareBtn2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Share to Twitter" />
+    <Button
+        android:id="@+id/ShareBtn3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Share to Snapchat" />
 
     <Button
         android:id="@+id/signout"
