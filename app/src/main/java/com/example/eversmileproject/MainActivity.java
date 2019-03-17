@@ -33,9 +33,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Button button = (Button) findViewById(R.id.signout);
         Button ShareBtn =(Button) findViewById(R.id.ShareBtn);
-        Button ShareBtn1 =(Button) findViewById(R.id.ShareBtn1);
-        Button ShareBtn2 =(Button) findViewById(R.id.ShareBtn2);
-        Button ShareBtn3 =(Button) findViewById(R.id.ShareBtn3);
         Button seeBtn =(Button) findViewById(R.id.SeeBtn);
         Button findBtn = (Button) findViewById(R.id.FindBtn);
         mAuth = FirebaseAuth.getInstance();
@@ -56,13 +53,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        ShareBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent in = new Intent(getApplicationContext(), FacebookLogin.class);
-                startActivity(in);
-            }
-        });
 
         seeBtn.setOnClickListener((new View.OnClickListener() {
             @Override
@@ -70,22 +60,10 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, see_eversmile.class));
             }
         }));
-        ShareBtn2.setOnClickListener(new View.OnClickListener() {
+        ShareBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, ShareToTwitter.class));
-            }
-        });
-        ShareBtn1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, ShareToInstagram.class));
-            }
-        });
-        ShareBtn3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, ShareToSnapchat.class));
+                startActivity(new Intent(MainActivity.this, share_eversmile.class));
             }
         });
         findBtn.setOnClickListener(new View.OnClickListener() {
