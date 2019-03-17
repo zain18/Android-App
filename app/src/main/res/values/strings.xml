@@ -46,5 +46,6 @@
     <string name="shared_image">Shared Image</string>
     <string name="google_maps_key">AIzaSyCTmr2KXUb6yo_z4GdP9qJoB0rySij2xG8</string>
     <string name="title_activity_maps">Map</string>
+    <string name="store">Store to Cloud</string>
 
 </resources>
