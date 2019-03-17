@@ -17,7 +17,6 @@ import com.facebook.appevents.AppEventsLogger;
 import com.facebook.CallbackManager;
 
 
-
 public class MainActivity extends AppCompatActivity {
 
     FirebaseAuth mAuth;
@@ -38,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
         Button ShareBtn2 =(Button) findViewById(R.id.ShareBtn2);
         Button ShareBtn3 =(Button) findViewById(R.id.ShareBtn3);
         Button seeBtn =(Button) findViewById(R.id.SeeBtn);
+        Button findBtn = (Button) findViewById(R.id.FindBtn);
         mAuth = FirebaseAuth.getInstance();
         mAuthListner = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -88,7 +88,12 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, ShareToSnapchat.class));
             }
         });
-
+        findBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, Maps.class));
+            }
+        });
 
 
     }

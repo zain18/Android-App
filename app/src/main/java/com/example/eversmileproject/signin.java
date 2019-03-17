@@ -36,7 +36,7 @@ public class signin extends AppCompatActivity {
     private ProgressBar progressBar;
     SignInButton button;
     private final static int RC_SIGN_IN = 123;
-    GoogleSignInClient mGoogleSignInClient;
+   GoogleSignInClient mGoogleSignInClient;
     FirebaseAuth.AuthStateListener mAuthListner;
     @Override
     protected void onStart() {
@@ -65,6 +65,7 @@ public class signin extends AppCompatActivity {
                 signIn();
             }
         });
+
         btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -122,9 +123,9 @@ public class signin extends AppCompatActivity {
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
     }
     private void signIn() {
-        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+       Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
-    }
+   }
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -142,6 +143,7 @@ public class signin extends AppCompatActivity {
             }
         }
     }
+
     private void firebaseAuthWithGoogle(GoogleSignInAccount account) {
         AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
         mAuth.signInWithCredential(credential)
