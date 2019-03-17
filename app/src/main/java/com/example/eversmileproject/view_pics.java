@@ -45,9 +45,9 @@ public class view_pics extends AppCompatActivity{
         //Create Firebase storage references
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference storageRef = storage.getReference();
-        StorageReference imagesRef = storageRef.child("images");
         String currentUser = FirebaseAuth.getInstance().getCurrentUser().getUid(); // unique reference for user
-        StorageReference imagesUserRef = imagesRef.child(currentUser);
+        StorageReference userRef = storageRef.child(currentUser);
+        StorageReference imagesUserRef = userRef.child("images");
         final StorageReference faceRef = imagesUserRef.child("face.jpg");
         final StorageReference leftRef = imagesUserRef.child("left.jpg");
         final StorageReference rightRef = imagesUserRef.child("right.jpg");
