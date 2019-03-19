@@ -20,7 +20,6 @@ import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
@@ -28,22 +27,14 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
-import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
-import com.google.android.gms.maps.model.MarkerOptions;
-
-import java.util.HashMap;
-import java.util.List;
 
 public class Maps extends FragmentActivity implements OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
         LocationListener {
+    public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
     private GoogleMap mMap;
     double latitude;
     double longitude;
@@ -52,6 +43,7 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback,
     Location mLastLocation;
     Marker mCurrLocationMarker;
     LocationRequest mLocationRequest;
+
 
 
     @Override
@@ -78,7 +70,6 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback,
     }
 
 
-
     private boolean CheckGooglePlayServices() {
         GoogleApiAvailability googleAPI = GoogleApiAvailability.getInstance();
         int result = googleAPI.isGooglePlayServicesAvailable(this);
@@ -98,7 +89,7 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback,
         mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
 
         //Initialize Google Play Services
-        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (ContextCompat.checkSelfPermission(this,
                     Manifest.permission.ACCESS_FINE_LOCATION)
                     == PackageManager.PERMISSION_GRANTED) {
@@ -112,22 +103,21 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback,
         }
 
 
-
-        Button btnHospital = (Button) findViewById(R.id.btnHospital);
-        btnHospital.setOnClickListener(new View.OnClickListener() {
-            String Hospital = "dentist";
+        Button btnOrtho = (Button) findViewById(R.id.btnOrtho);
+        btnOrtho.setOnClickListener(new View.OnClickListener() {
+            String Orthodontic = "dentist";
             @Override
             public void onClick(View v) {
                 Log.d("onClick", "Button is Clicked");
                 mMap.clear();
-                String url = getUrl(latitude, longitude, Hospital);
+                String url = getUrl(latitude, longitude, Orthodontic);
                 Object[] DataTransfer = new Object[2];
                 DataTransfer[0] = mMap;
                 DataTransfer[1] = url;
                 Log.d("onClick", url);
                 GetNearbyPlacesData getNearbyPlacesData = new GetNearbyPlacesData();
                 getNearbyPlacesData.execute(DataTransfer);
-                Toast.makeText(Maps.this,"Nearby Hospitals", Toast.LENGTH_LONG).show();
+                Toast.makeText(Maps.this,"Nearby Orthodontics", Toast.LENGTH_LONG).show();
             }
         });
 
@@ -161,7 +151,7 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback,
         googlePlacesUrl.append("&radius=" + PROXIMITY_RADIUS);
         googlePlacesUrl.append("&type=" + nearbyPlace);
         googlePlacesUrl.append("&sensor=true");
-        googlePlacesUrl.append("&key=" + "AIzaSyATuUiZUkEc_UgHuqsBJa1oqaODI-3mLs0");
+        googlePlacesUrl.append("&key=" + "AIzaSyCTmr2KXUb6yo_z4GdP9qJoB0rySij2xG8");
         Log.d("getUrl", googlePlacesUrl.toString());
         return (googlePlacesUrl.toString());
 
@@ -211,7 +201,7 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback,
         Log.d("onLocationChanged", "Exit");
 
     }
-    public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
+
     public boolean checkLocationPermission(){
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.ACCESS_FINE_LOCATION)
@@ -220,7 +210,6 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback,
             // Asking user if explanation is needed
             if (ActivityCompat.shouldShowRequestPermissionRationale(this,
                     Manifest.permission.ACCESS_FINE_LOCATION)) {
-
 
 
                 //Prompt the user once explanation has been shown

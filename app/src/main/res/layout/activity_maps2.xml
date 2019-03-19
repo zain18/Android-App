@@ -35,7 +35,7 @@
 
         <Button
 
-            android:id="@+id/btnHospital"
+            android:id="@+id/btnOrtho"
 
             android:layout_width="wrap_content"
 
