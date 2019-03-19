@@ -59,6 +59,7 @@
         <activity android:name=".UserProfile" />
         <activity android:name=".signup_activity" />
         <activity android:name=".see_eversmile" />
+        <activity android:name=".share_eversmile" />
         <activity android:name=".view_pics" />
         <activity android:name=".signin" />
         <activity android:name=".MainActivity">
