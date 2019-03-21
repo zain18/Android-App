@@ -95,4 +95,5 @@ public class FacebookLogin extends AppCompatActivity {
         AppEventsLogger.deactivateApp(this);
     }
 
+
 }

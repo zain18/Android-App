@@ -30,7 +30,7 @@ public class share_eversmile extends AppCompatActivity {
         faceBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(share_eversmile.this, FacebookLogin.class));
+                startActivity(new Intent(share_eversmile.this, Facebookintent.class));
             }
         });
 

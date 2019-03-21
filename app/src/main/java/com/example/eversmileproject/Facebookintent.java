@@ -1,98 +1,114 @@
 package com.example.eversmileproject;
 
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.pm.ResolveInfo;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Environment;
+import android.os.Parcelable;
 import android.provider.MediaStore;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.view.View.OnClickListener;
+import android.widget.LinearLayout;
 import android.widget.TextView;
-import com.facebook.CallbackManager;
-import com.facebook.FacebookCallback;
-import com.facebook.FacebookException;
-import com.facebook.GraphRequest;
-import com.facebook.GraphResponse;
-import com.facebook.login.LoginManager;
-import com.facebook.login.LoginResult;
-import com.facebook.login.widget.LoginButton;
-import com.facebook.share.model.ShareLinkContent;
-import com.facebook.share.model.SharePhoto;
-import com.facebook.share.model.SharePhotoContent;
-import com.facebook.share.widget.ShareButton;
-import com.facebook.share.widget.ShareDialog;
-import com.squareup.picasso.Picasso;
-import org.json.JSONObject;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
+import twitter4j.StatusUpdate;
+import twitter4j.Twitter;
+import twitter4j.TwitterException;
+import twitter4j.TwitterFactory;
+import twitter4j.conf.Configuration;
+import twitter4j.conf.ConfigurationBuilder;
 
-public class UserProfile extends AppCompatActivity {
+public class Facebookintent extends AppCompatActivity {
 
-    JSONObject response, profile_pic_data, profile_pic_url;
     int REQUEST_CAMERA = 0, SELECT_FILE = 1;
-    ShareDialog shareDialog;
-    CallbackManager callbackManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_profile);
-        Intent intent = getIntent();
-        String jsondata = intent.getStringExtra("UserProfile");
-        Log.w("Jsondata", jsondata);
-        TextView user_name = (TextView) findViewById(R.id.UserName);
-        ImageView user_picture = (ImageView) findViewById(R.id.profilePic);
-        TextView user_email = (TextView) findViewById(R.id.email);
-        try {
-            response = new JSONObject(jsondata);
-            user_email.setText(response.get("email").toString());
-            user_name.setText(response.get("name").toString());
-            profile_pic_data = new JSONObject(response.get("picture").toString());
-            profile_pic_url = new JSONObject(profile_pic_data.getString("data"));
-            Picasso.with(this).load(profile_pic_url.getString("url"))
-                    .into(user_picture);
-
-        } catch(Exception e){
-            e.printStackTrace();
-        }
-        Button imageShare = (Button)findViewById(R.id.imageShare);
-        shareDialog = new ShareDialog(this);
-        imageShare.setOnClickListener(new View.OnClickListener() {
+        setContentView(R.layout.activity_facebookintent);
+        Button shareToface = (Button)findViewById(R.id.shareToFace);
+        shareToface.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                selectImageToShareFacebook();
+                selectImageToShare();
             }
         });
-
     }
-    public void ShareDialog(Bitmap imagePath){
-        SharePhoto photo = new SharePhoto.Builder()
-                .setBitmap(imagePath)
-                .setCaption("photo sharing")
-                .build();
-        SharePhotoContent content = new SharePhotoContent.Builder()
-                .addPhoto(photo)
-                .build();
-        shareDialog.show(content);
+    private void initShareIntent(String type, Bitmap bit) {
+        boolean found = false;
+        Intent share = new Intent(android.content.Intent.ACTION_SEND);
+        share.setType("image/*");
+        Drawable d = new BitmapDrawable(getResources(), bit);
+        Bitmap b = convertToBitmap(d, 300, 300);
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        b.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+        String path = MediaStore.Images.Media.insertImage(getContentResolver(),
+                b, "Title", null);
+        Uri imageUri =  Uri.parse(path);
+
+        // gets the list of intents that can be loaded.
+        List<ResolveInfo> resInfo = getPackageManager().queryIntentActivities(share, 0);
+        if (!resInfo.isEmpty()){
+            for (ResolveInfo info : resInfo) {
+                if (info.activityInfo.packageName.toLowerCase().contains(type) ||
+                        info.activityInfo.name.toLowerCase().contains(type) ) {
+
+
+                    share.putExtra(Intent.EXTRA_STREAM, imageUri);
+
+                    share.setPackage(info.activityInfo.packageName);
+                    found = true;
+                    break;
+                }
+            }
+            if (!found)
+                return;
+
+            startActivity(Intent.createChooser(share, "Select"));
+        }
     }
 
-    private void selectImageToShareFacebook() {
+    /*private void shareImage(Bitmap bitmap){
+
+        Drawable d = new BitmapDrawable(getResources(), bitmap);
+        Bitmap b = convertToBitmap(d, 50, 50);
+        Intent share = new Intent(Intent.ACTION_SEND);
+        share.setType("image/*");
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        b.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+        String path = MediaStore.Images.Media.insertImage(getContentResolver(),
+                b, "Title", null);
+        Uri imageUri =  Uri.parse(path);
+        share.putExtra(Intent.EXTRA_STREAM, imageUri);
+        startActivity(Intent.createChooser(share, "Select"));
+    }*/
+
+    private void selectImageToShare() {
         final CharSequence[] items = { "Take Photo", "Choose from Library",
                 "Cancel" };
-        AlertDialog.Builder builder = new AlertDialog.Builder(UserProfile.this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(Facebookintent.this);
         builder.setTitle("Select profile Photo!");
         builder.setItems(items, new DialogInterface.OnClickListener() {
             @Override
@@ -119,7 +135,6 @@ public class UserProfile extends AppCompatActivity {
 
     protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        callbackManager.onActivityResult(requestCode, resultCode, data);
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == SELECT_FILE)
                 onSelectFromGalleryResult(data);
@@ -147,7 +162,8 @@ public class UserProfile extends AppCompatActivity {
         options.inSampleSize = scale;
         options.inJustDecodeBounds = false;
         thumbnail = BitmapFactory.decodeFile(selectedImagePath, options);
-        ShareDialog(thumbnail);
+        initShareIntent("face",thumbnail);
+
     }
 
 
@@ -168,9 +184,16 @@ public class UserProfile extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        ShareDialog(thumbnail);
+        initShareIntent("face",thumbnail);
+
     }
+    public Bitmap convertToBitmap(Drawable drawable, int widthPixels, int heightPixels) {
+        Bitmap mutableBitmap = Bitmap.createBitmap(widthPixels, heightPixels, Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(mutableBitmap);
+        drawable.setBounds(0, 0, widthPixels, heightPixels);
+        drawable.draw(canvas);
 
-
+        return mutableBitmap;
+    }
 
 }
