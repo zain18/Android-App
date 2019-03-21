@@ -47,10 +47,9 @@
     <string name="google_maps_key">AIzaSyDrNMGTZ9AMp39n11GXFESQf6i-gH7BQrs</string>
     <string name="title_activity_maps">Map</string>
     <string name="title_activity_user_location">Map</string>
-    <string name="shareFacebook">ShareToFacebook</string>
-    <string name="shareTwitter">ShareToTwitter</string>
-    <string name="shareInstagram">ShareToInsta</string>
-    <string name="shareSnapchat">ShareToSnap</string>
-    <string name="store">Storebtn</string>
-
+    <string name="store">Store to cloud</string>
+    <string name="shareFacebook">Share to Facebook</string>
+    <string name="shareTwitter">Share to Twitter</string>
+    <string name="shareInstagram">Share to Instagram</string>
+    <string name="shareSnapchat">Share to Snapchat</string>
 </resources>
