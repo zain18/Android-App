@@ -105,7 +105,7 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback,
 
         Button btnOrtho = (Button) findViewById(R.id.btnOrtho);
         btnOrtho.setOnClickListener(new View.OnClickListener() {
-            String Orthodontic = "dentist";
+            String Orthodontic = "Eversmile Dental";
             @Override
             public void onClick(View v) {
                 Log.d("onClick", "Button is Clicked");
@@ -122,6 +122,7 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback,
         });
 
     }
+
     protected synchronized void buildGoogleApiClient() {
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .addConnectionCallbacks(this)
@@ -149,7 +150,7 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback,
         StringBuilder googlePlacesUrl = new StringBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?");
         googlePlacesUrl.append("location=" + latitude + "," + longitude);
         googlePlacesUrl.append("&radius=" + PROXIMITY_RADIUS);
-        googlePlacesUrl.append("&type=" + nearbyPlace);
+        googlePlacesUrl.append("&name=" + nearbyPlace);
         googlePlacesUrl.append("&sensor=true");
         googlePlacesUrl.append("&key=" + "AIzaSyCTmr2KXUb6yo_z4GdP9qJoB0rySij2xG8");
         Log.d("getUrl", googlePlacesUrl.toString());

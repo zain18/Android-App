@@ -36,7 +36,7 @@ public class signin extends AppCompatActivity {
     private ProgressBar progressBar;
     SignInButton button;
     private final static int RC_SIGN_IN = 123;
-   GoogleSignInClient mGoogleSignInClient;
+    GoogleSignInClient mGoogleSignInClient;
     FirebaseAuth.AuthStateListener mAuthListner;
     @Override
     protected void onStart() {
