@@ -52,4 +52,6 @@
     <string name="shareTwitter">Share to Twitter</string>
     <string name="shareInstagram">Share to Instagram</string>
     <string name="shareSnapchat">Share to Snapchat</string>
+    <string name="backGal">Back to Gallery</string>
+    <string name="note">Write a note</string>
 </resources>

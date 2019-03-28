@@ -155,7 +155,6 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback,
         googlePlacesUrl.append("&key=" + "AIzaSyCTmr2KXUb6yo_z4GdP9qJoB0rySij2xG8");
         Log.d("getUrl", googlePlacesUrl.toString());
         return (googlePlacesUrl.toString());
-
     }
 
     @Override

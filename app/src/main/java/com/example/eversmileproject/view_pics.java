@@ -24,6 +24,7 @@ public class view_pics extends AppCompatActivity{
     private Button mainMenuBtn;
     private Button cameraBtn;
     private Button storeBtn;
+    private Button noteBtn;
     private ImageView faceView;
     private ImageView leftView;
     private ImageView rightView;
@@ -35,6 +36,7 @@ public class view_pics extends AppCompatActivity{
         mainMenuBtn = (Button) findViewById(R.id.btn_mainMenu);
         cameraBtn = (Button) findViewById(R.id.btn_camera);
         storeBtn = (Button) findViewById(R.id.btn_store);
+        noteBtn = (Button) findViewById(R.id.btn_note);
         faceView = (ImageView) findViewById(R.id.imageFaceView);
         leftView = (ImageView) findViewById(R.id.imageLeftView);
         rightView = (ImageView) findViewById(R.id.imageRightView);
@@ -66,6 +68,12 @@ public class view_pics extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(view_pics.this, see_eversmile.class));
+            }
+        });
+        noteBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(view_pics.this, edit_text.class));
             }
         });
         // Button to upload to cloud
