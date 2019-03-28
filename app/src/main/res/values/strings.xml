@@ -19,7 +19,7 @@
     <string name="take_right">Right Photo</string>
     <string name="view_pics">Gallery</string>
     <string name="everSmile_title">EverSmile</string>
-    <string name="main_menu">Main Menu</string>
+    <string name="main_menu">Home</string>
     <string name="camera">Camera</string>
     <string name="clientId">04a54c46fd4a496b8da58175bbe4d567</string>
     <string name="clientSecret">89ab8c82496f4fb1bb17386e3238c5c1</string>
@@ -48,11 +48,11 @@
     <string name="google_maps_key">AIzaSyDrNMGTZ9AMp39n11GXFESQf6i-gH7BQrs</string>
     <string name="title_activity_maps">Map</string>
     <string name="title_activity_user_location">Map</string>
-    <string name="store">Upload to EverSmile</string>
+    <string name="store">Upload</string>
     <string name="shareFacebook">Share to Facebook</string>
     <string name="shareTwitter">Share to Twitter</string>
     <string name="shareInstagram">Share to Instagram</string>
     <string name="shareSnapchat">Share to Snapchat</string>
     <string name="backGal">Back to Gallery</string>
-    <string name="note">Add Photo Note</string>
+    <string name="note">Note</string>
 </resources>

@@ -47,8 +47,8 @@
 
     <Button
         android:id="@+id/imageShare"
-        android:layout_width="114dp"
-        android:layout_height="60dp"
+        android:layout_width="117dp"
+        android:layout_height="59dp"
         android:layout_below="@+id/button"
         android:layout_marginTop="34dp"
         android:background="@drawable/eversmile" />
