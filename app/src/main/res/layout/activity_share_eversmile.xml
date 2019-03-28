@@ -4,6 +4,7 @@
     android:id="@+id/FacebookBtn"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/light_gray"
     android:gravity="center"
     android:orientation="vertical"
     android:padding="24dp"
@@ -13,30 +14,40 @@
         android:id="@+id/shareFace"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/shareFacebook" />
+        android:background="@color/colorAccent"
+        android:text="@string/shareFacebook"
+        android:textColor="@color/com_facebook_button_background_color_focused" />
 
     <Button
         android:id="@+id/shareTwit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/shareTwitter" />
+        android:background="@color/colorAccent"
+        android:text="@string/shareTwitter"
+        android:textColor="@color/com_facebook_button_background_color_focused" />
 
     <Button
         android:id="@+id/shareInsta"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/shareInstagram" />
+        android:background="@color/colorAccent"
+        android:text="@string/shareInstagram"
+        android:textColor="@color/com_facebook_button_background_color_focused" />
 
     <Button
         android:id="@+id/shareSnap"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/shareSnapchat" />
+        android:background="@color/colorAccent"
+        android:text="@string/shareSnapchat"
+        android:textColor="@color/com_facebook_button_background_color_focused" />
 
     <Button
         android:id="@+id/shareMain"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/main_menu" />
+        android:background="@color/colorAccent"
+        android:text="@string/main_menu"
+        android:textColor="@color/com_facebook_button_background_color_focused" />
 
 </LinearLayout>

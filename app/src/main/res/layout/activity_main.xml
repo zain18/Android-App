@@ -1,36 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/FacebookBtn"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/light_gray"
     android:gravity="center"
     android:orientation="vertical"
     android:padding="24dp"
+    android:visibility="visible"
     tools:context=".MainActivity">
 
     <Button
         android:id="@+id/SeeBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/seeBtn" />
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="370dp"
+        android:layout_marginBottom="10dp"
+        android:height="0dp"
+        android:background="@color/colorAccent"
+        android:text="@string/seeBtn"
+        android:textColor="@color/com_facebook_button_background_color_focused" />
 
     <Button
         android:id="@+id/FindBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/findBtn" />
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="430dp"
+        android:layout_marginBottom="10dp"
+        android:height="0dp"
+        android:background="@color/colorAccent"
+        android:text="@string/findBtn"
+        android:textColor="@color/com_facebook_button_background_color_focused" />
 
     <Button
         android:id="@+id/ShareBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Share your EverSmile" />
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="490dp"
+        android:layout_marginBottom="10dp"
+        android:height="0dp"
+        android:background="@color/colorAccent"
+        android:text="@string/shareBtn"
+        android:textColor="@color/com_facebook_button_background_color_focused" />
 
     <Button
         android:id="@+id/signout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/logout" />
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="550dp"
+        android:layout_marginBottom="10dp"
+        android:height="0dp"
+        android:background="@color/colorAccent"
+        android:text="@string/logout"
+        android:textColor="@color/com_facebook_button_background_color_focused" />
 
-</LinearLayout>
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="336dp"
+        android:layout_height="79dp"
+        android:layout_alignEnd="@+id/SeeBtn"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="72dp"
+        android:layout_marginEnd="21dp"
+        android:text="@string/everSmile_title"
+        android:textAlignment="viewStart"
+        android:textColor="@android:color/black"
+        android:textSize="60sp" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="75dp"
+        android:layout_height="150dp"
+        android:layout_alignTop="@+id/textView"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="-30dp"
+        android:layout_marginEnd="0dp"
+        app:srcCompat="@drawable/e4b46c1e2e02f9f034dcdfb0f4210347" />
+
+</RelativeLayout>
