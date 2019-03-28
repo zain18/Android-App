@@ -63,10 +63,11 @@
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
-        android:layout_height="79dp"
+        android:layout_height="wrap_content"
         android:layout_alignEnd="@+id/SeeBtn"
         android:layout_alignParentTop="true"
         android:layout_marginTop="127dp"
+        android:layout_centerHorizontal="true"
         android:layout_marginEnd="90dp"
         android:text="@string/everSmile_title"
         android:textAlignment="viewStart"
