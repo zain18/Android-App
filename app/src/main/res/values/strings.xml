@@ -14,10 +14,10 @@
     <string name="shareBtn">Share your EverSmile</string>
     <string name="facebook_app_id">2129225573819941</string>
     <string name="fb_login_protocol_scheme">fb2129225573819941</string>
-    <string name="take_face">Face picture</string>
-    <string name="take_left">Left picture</string>
-    <string name="take_right">Right picture</string>
-    <string name="view_pics">View pictures</string>
+    <string name="take_face">Face Photo</string>
+    <string name="take_left">Left Photo</string>
+    <string name="take_right">Right Photo</string>
+    <string name="view_pics">Gallery</string>
     <string name="everSmile_title">EverSmile</string>
     <string name="main_menu">Main Menu</string>
     <string name="camera">Camera</string>
@@ -48,11 +48,11 @@
     <string name="google_maps_key">AIzaSyDrNMGTZ9AMp39n11GXFESQf6i-gH7BQrs</string>
     <string name="title_activity_maps">Map</string>
     <string name="title_activity_user_location">Map</string>
-    <string name="store">Store to cloud</string>
+    <string name="store">Upload to EverSmile</string>
     <string name="shareFacebook">Share to Facebook</string>
     <string name="shareTwitter">Share to Twitter</string>
     <string name="shareInstagram">Share to Instagram</string>
     <string name="shareSnapchat">Share to Snapchat</string>
     <string name="backGal">Back to Gallery</string>
-    <string name="note">Write a note</string>
+    <string name="note">Add Photo Note</string>
 </resources>
