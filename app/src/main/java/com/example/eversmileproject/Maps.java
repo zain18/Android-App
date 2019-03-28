@@ -4,7 +4,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
-
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -105,7 +104,7 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback,
 
         Button btnOrtho = (Button) findViewById(R.id.btnOrtho);
         btnOrtho.setOnClickListener(new View.OnClickListener() {
-            String Orthodontic = "Eversmile Dental";
+            String Orthodontic = "Orthodontics";
             @Override
             public void onClick(View v) {
                 Log.d("onClick", "Button is Clicked");

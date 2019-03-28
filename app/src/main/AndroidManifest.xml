@@ -58,8 +58,6 @@
         <activity android:name=".ShareToSnapchat" />
         <activity android:name=".ShareToInstagram" />
         <activity android:name=".ShareToTwitter" />
-        <activity android:name=".FacebookLogin" />
-        <activity android:name=".UserProfile" />
         <activity android:name=".signup_activity" />
         <activity android:name=".see_eversmile" />
         <activity android:name=".edit_text" />
