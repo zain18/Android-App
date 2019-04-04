@@ -5,7 +5,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
-import android.content.Context;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -27,8 +26,9 @@ import com.google.firebase.storage.StorageReference;
 public class edit_text extends AppCompatActivity {
     static SimpleDateFormat s = new SimpleDateFormat("MMddyyyyhhmmss");
     static String format = s.format(new Date());
+    String userName = FirebaseAuth.getInstance().getCurrentUser().getEmail();
     private static final String FILE_NAME = format+".txt";
-    String path = Environment.getExternalStorageDirectory() + "/" + FILE_NAME;
+    String path = Environment.getExternalStorageDirectory() + "/" + userName + FILE_NAME;
     File tempFile = new File(path);
     private Button saveBtn;
     private Button backBtn;
@@ -50,8 +50,8 @@ public class edit_text extends AppCompatActivity {
         String currentUser = FirebaseAuth.getInstance().getCurrentUser().getUid(); // unique reference for user
         StorageReference userRef = storageRef.child(currentUser);
         StorageReference noteUserRef = userRef.child("notes");
-        final StorageReference noteRef = noteUserRef.child(FILE_NAME);
-        final Uri noteFile = Uri.fromFile(new File(Environment.getExternalStorageDirectory()+"/" +FILE_NAME));
+        final StorageReference noteRef = noteUserRef.child(userName + FILE_NAME);
+        final Uri noteFile = Uri.fromFile(new File(Environment.getExternalStorageDirectory()+"/" + userName + FILE_NAME));
 
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,7 +63,7 @@ public class edit_text extends AppCompatActivity {
                     fos = new FileOutputStream(tempFile);
                     fos.write(text.getBytes());
                     mEditText.getText().clear();
-                    Toast.makeText(edit_text.this, "Saved to " + Environment.getExternalStorageDirectory() + "/" + FILE_NAME,
+                    Toast.makeText(edit_text.this, "Note saved to cloud",
                             Toast.LENGTH_LONG).show();
 
                     noteRef.putFile(noteFile);

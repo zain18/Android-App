@@ -32,6 +32,9 @@ import android.view.TextureView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -80,22 +83,23 @@ public class see_eversmile extends AppCompatActivity {
         takeRightButton = (Button) findViewById(R.id.btn_rightpicture);
         viewPicsButton = (Button) findViewById(R.id.btn_viewpics);
         assert takePictureButton != null;
+        final String userName = FirebaseAuth.getInstance().getCurrentUser().getEmail();
         takePictureButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                takePicture("/face.jpg");
+                takePicture("/" + userName + "face.jpg");
             }
         });
         takeLeftButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                takePicture("/left.jpg");
+                takePicture("/" + userName + "left.jpg");
             }
         });
         takeRightButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                takePicture("/right.jpg");
+                takePicture("/" + userName + "right.jpg");
             }
         });
         viewPicsButton.setOnClickListener(new View.OnClickListener() {
