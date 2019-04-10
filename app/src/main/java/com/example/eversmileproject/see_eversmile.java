@@ -105,7 +105,9 @@ public class see_eversmile extends AppCompatActivity {
         viewPicsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 startActivity(new Intent(see_eversmile.this, view_pics.class));
+                //stopBackgroundThread();
             }
         });
     }

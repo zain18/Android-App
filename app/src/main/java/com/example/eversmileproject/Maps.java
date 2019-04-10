@@ -17,8 +17,6 @@ import android.os.Build;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
@@ -28,6 +26,13 @@ import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.Marker;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QuerySnapshot;
 
 public class Maps extends FragmentActivity implements OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks,
@@ -66,6 +71,7 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback,
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
     }
 
 
@@ -86,6 +92,8 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback,
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
         mMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
+        DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference officesRef = rootRef.child("offices");
 
         //Initialize Google Play Services
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -101,26 +109,24 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback,
             mMap.setMyLocationEnabled(true);
         }
 
-
-        Button btnOrtho = (Button) findViewById(R.id.btnOrtho);
-        btnOrtho.setOnClickListener(new View.OnClickListener() {
-            String Orthodontic = "Orthodontics";
+        FirebaseFirestore firebase = FirebaseFirestore.getInstance();
+        firebase.collection("offices").addSnapshotListener(new EventListener<QuerySnapshot>() {
+            LatLng marker;
             @Override
-            public void onClick(View v) {
-                Log.d("onClick", "Button is Clicked");
-                mMap.clear();
-                String url = getUrl(latitude, longitude, Orthodontic);
-                Object[] DataTransfer = new Object[2];
-                DataTransfer[0] = mMap;
-                DataTransfer[1] = url;
-                Log.d("onClick", url);
-                GetNearbyPlacesData getNearbyPlacesData = new GetNearbyPlacesData();
-                getNearbyPlacesData.execute(DataTransfer);
-                Toast.makeText(Maps.this,"Nearby Orthodontics", Toast.LENGTH_LONG).show();
+            public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
+                for (DocumentSnapshot doc:queryDocumentSnapshots) {
+                    double officeLatitude = doc.getDouble("latitude");   //Obtains the latitude for a given address
+                    double officeLongitude = doc.getDouble("longitude"); //Obtains the longitude for a given address
+                    String officeName = doc.getString("doctor");
+                    marker = new LatLng(officeLatitude, officeLongitude);    //Creates a map marker utilising the latitude and longitude values retrieved from the database
+                    mMap.addMarker(new MarkerOptions().position(marker).title(officeName));
+
+
+                }
             }
         });
 
-    }
+            }
 
     protected synchronized void buildGoogleApiClient() {
         mGoogleApiClient = new GoogleApiClient.Builder(this)
