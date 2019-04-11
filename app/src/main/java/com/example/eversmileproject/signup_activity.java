@@ -1,11 +1,15 @@
 package com.example.eversmileproject;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Spannable;
+import android.text.SpannableString;
 import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
+import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -36,6 +40,10 @@ public class signup_activity extends AppCompatActivity {
         final TextView btnSignUp = (TextView) findViewById(R.id.login_page);
         final CheckBox termsCheck = (CheckBox) findViewById(R.id.termsCheckBox); // terms checkbox
         setTitle("Please log in to EverSmile!");
+        Spannable text = new SpannableString(getTitle());
+        text.setSpan(new ForegroundColorSpan(Color.WHITE), 0, text.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+        setTitle(text);
+
 
         termsText.setMovementMethod(LinkMovementMethod.getInstance());
         btnSignUp.setOnClickListener(new View.OnClickListener() {

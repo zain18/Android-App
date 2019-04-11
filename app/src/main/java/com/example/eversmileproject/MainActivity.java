@@ -15,6 +15,13 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
 import android.graphics.drawable.ColorDrawable;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.SpannableStringBuilder;
+import android.text.style.ForegroundColorSpan;
+import android.graphics.Color;
+
+
 
 import com.facebook.login.widget.LoginButton;
 import com.facebook.share.Share;
@@ -37,6 +44,9 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
         mAuth.addAuthStateListener(mAuthListner);
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(0xFFD81B60));
+        Spannable text = new SpannableString(getTitle());
+        text.setSpan(new ForegroundColorSpan(Color.WHITE), 0, text.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+        setTitle(text);
     }
 
     @Override
@@ -50,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
         Button seeBtn =(Button) findViewById(R.id.SeeBtn);
         Button findBtn = (Button) findViewById(R.id.FindBtn);
 
+
         mAuth = FirebaseAuth.getInstance();
         mAuthListner = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -61,6 +72,10 @@ public class MainActivity extends AppCompatActivity {
                     getEmail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
                 }
                 setTitle(getEmail);
+                Spannable text = new SpannableString(getTitle());
+                text.setSpan(new ForegroundColorSpan(Color.WHITE), 0, text.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+                setTitle(text);
+
             }
         };
 

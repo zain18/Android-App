@@ -50,6 +50,7 @@
             android:layout_marginBottom="24dp"
             android:background="@color/colorAccent"
             android:padding="12dp"
+            android:textColor="@android:color/white"
             android:text="Create Account" />
 
         <TextView

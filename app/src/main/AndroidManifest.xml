@@ -32,6 +32,7 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
+        android:titleTextColor="#FFFFFe"
         tools:ignore="ExtraText">
 
 
