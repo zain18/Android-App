@@ -35,6 +35,7 @@ public class signup_activity extends AppCompatActivity {
         final TextView termsText = (TextView) findViewById(R.id.termsBtn);
         final TextView btnSignUp = (TextView) findViewById(R.id.login_page);
         final CheckBox termsCheck = (CheckBox) findViewById(R.id.termsCheckBox); // terms checkbox
+        setTitle("Please log in to EverSmile!");
 
         termsText.setMovementMethod(LinkMovementMethod.getInstance());
         btnSignUp.setOnClickListener(new View.OnClickListener() {

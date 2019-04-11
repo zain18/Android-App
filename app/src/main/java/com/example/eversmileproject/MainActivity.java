@@ -54,13 +54,13 @@ public class MainActivity extends AppCompatActivity {
         mAuthListner = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                String getEmail = "";
+                String getEmail = "Please log in to EverSmile!";
                 if (firebaseAuth.getCurrentUser() == null) {
                     startActivity(new Intent(MainActivity.this, signin.class));
                 } else {
                     getEmail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
                 }
-                setTitle("Logged in: " + getEmail);
+                setTitle(getEmail);
             }
         };
 

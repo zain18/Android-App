@@ -42,6 +42,7 @@ public class signin extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         mAuth.addAuthStateListener(mAuthListner);
+        setTitle("Please log in to EverSmile!");
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
