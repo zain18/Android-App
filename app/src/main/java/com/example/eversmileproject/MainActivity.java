@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     getEmail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
                 }
-                setTitle("Logged in as: " + getEmail);
+                setTitle("Logged in: " + getEmail);
             }
         };
 

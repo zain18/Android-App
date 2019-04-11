@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">EverSmileProject</string>
+    <string name="app_name">EverSmile</string>
     <string name="loginMsg">Please log in to EverSmile!</string>
     <string name="failed" />
     <string name="email_id">Email</string>

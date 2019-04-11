@@ -60,28 +60,15 @@
         android:text="@string/logout"
         android:textColor="@color/com_facebook_button_background_color_focused" />
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/SeeBtn"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="127dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginEnd="90dp"
-        android:text="@string/everSmile_title"
-        android:textAlignment="viewStart"
-        android:textColor="@android:color/black"
-        android:textSize="60sp" />
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="75dp"
-        android:layout_height="150dp"
-        android:layout_alignTop="@+id/textView"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="-30dp"
+        android:layout_width="236dp"
+        android:layout_height="236dp"
+        android:layout_marginBottom="-325dp"
+        android:layout_above="@+id/SeeBtn"
         android:layout_marginEnd="0dp"
-        app:srcCompat="@drawable/e4b46c1e2e02f9f034dcdfb0f4210347" />
+        android:layout_centerHorizontal="true"
+        app:srcCompat="@drawable/eversmile" />
 
 </RelativeLayout>
