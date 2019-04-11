@@ -40,7 +40,9 @@
 
             android:layout_height="wrap_content"
 
-            android:text="Nearby Orthodontics" />
+            android:background="@color/colorAccent"
+            android:text="@string/nearbyOrthos"
+            android:textColor="@color/com_facebook_button_background_color_focused" />
 
 
     </LinearLayout>

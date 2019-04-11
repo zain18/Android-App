@@ -13,6 +13,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.TextView;
+import android.graphics.drawable.ColorDrawable;
+
 import com.facebook.login.widget.LoginButton;
 import com.facebook.share.Share;
 import com.google.firebase.auth.FirebaseAuth;
@@ -29,9 +32,11 @@ public class MainActivity extends AppCompatActivity {
     FirebaseAuth mAuth;
     FirebaseAuth.AuthStateListener mAuthListner;
 
+    public TextView userName;
     protected void onStart() {
         super.onStart();
         mAuth.addAuthStateListener(mAuthListner);
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(0xFFD81B60));
     }
 
     @Override
@@ -39,21 +44,29 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //TextView userName = (TextView) findViewById(R.id.userName);
         Button button = (Button) findViewById(R.id.signout);
         Button ShareBtn =(Button) findViewById(R.id.ShareBtn);
         Button seeBtn =(Button) findViewById(R.id.SeeBtn);
         Button findBtn = (Button) findViewById(R.id.FindBtn);
+
         mAuth = FirebaseAuth.getInstance();
         mAuthListner = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                if (firebaseAuth.getCurrentUser()==null)
-                {
+                String getEmail = "";
+                if (firebaseAuth.getCurrentUser() == null) {
                     startActivity(new Intent(MainActivity.this, signin.class));
-
+                } else {
+                    getEmail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
                 }
+                setTitle("Logged in as: " + getEmail);
             }
         };
+
+        //userName.setText("Logged in as: " + getEmail);
+
+
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

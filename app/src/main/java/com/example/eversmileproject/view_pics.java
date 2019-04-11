@@ -50,7 +50,7 @@ public class view_pics extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         // Initialize layout elements
         setContentView(R.layout.activity_view_pics);
-        openDialog("Remember to save your pictures");
+        openDialog("Don't forget to upload your photos!");
         mainMenuBtn = (Button) findViewById(R.id.btn_mainMenu);
         cameraBtn = (Button) findViewById(R.id.btn_camera);
         storeBtn = (Button) findViewById(R.id.btn_store);

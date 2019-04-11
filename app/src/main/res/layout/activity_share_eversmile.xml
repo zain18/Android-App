@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/FacebookBtn"
     android:layout_width="match_parent"
@@ -12,44 +14,35 @@
 
     <Button
         android:id="@+id/shareFace"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
         android:layout_marginBottom="10dp"
-        android:background="@color/colorAccent"
-        android:text="@string/shareFacebook"
-        android:textColor="@color/com_facebook_button_background_color_focused" />
+        android:background="@drawable/fblogo"/>
 
     <Button
         android:id="@+id/shareTwit"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
         android:layout_marginBottom="10dp"
-        android:background="@color/colorAccent"
-        android:text="@string/shareTwitter"
-        android:textColor="@color/com_facebook_button_background_color_focused" />
+        android:background="@drawable/twitter"/>
 
     <Button
         android:id="@+id/shareInsta"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
         android:layout_marginBottom="10dp"
-        android:background="@color/colorAccent"
-        android:text="@string/shareInstagram"
-        android:textColor="@color/com_facebook_button_background_color_focused" />
-
+        android:background="@drawable/instagram"/>
     <Button
         android:id="@+id/shareSnap"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
         android:layout_marginBottom="10dp"
-        android:background="@color/colorAccent"
-        android:text="@string/shareSnapchat"
-        android:textColor="@color/com_facebook_button_background_color_focused" />
+        android:background="@drawable/snapchat"/>
 
     <Button
         android:id="@+id/shareMain"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
         android:layout_marginBottom="10dp"
         android:background="@color/colorAccent"
         android:text="@string/main_menu"

@@ -28,10 +28,10 @@
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
+        android:label="@string/loginMsg"
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Design.Light.NoActionBar"
+        android:theme="@style/AppTheme"
         tools:ignore="ExtraText">
 
 
@@ -51,18 +51,36 @@
 
         <activity
             android:name=".UserLocation"
-            android:label="@string/title_activity_user_location" />
+            android:label="@string/title_activity_user_location"
+            android:theme="@style/AppThemeNoBar"
+            />
         <activity
             android:name=".Maps"
-            android:label="@string/title_activity_maps" />
-        <activity android:name=".ShareToSnapchat" />
-        <activity android:name=".ShareToInstagram" />
-        <activity android:name=".ShareToTwitter" />
+            android:label="@string/title_activity_maps"
+            android:theme="@style/AppThemeNoBar"
+            />
+        <activity android:name=".ShareToSnapchat"
+            android:theme="@style/AppThemeNoBar"
+            />
+        <activity android:name=".ShareToInstagram"
+            android:theme="@style/AppThemeNoBar"
+            />
+        <activity android:name=".ShareToTwitter"
+            android:theme="@style/AppThemeNoBar"
+            />
         <activity android:name=".signup_activity" />
-        <activity android:name=".see_eversmile" />
-        <activity android:name=".edit_text" />
-        <activity android:name=".share_eversmile" />
-        <activity android:name=".view_pics" />
+        <activity android:name=".see_eversmile"
+            android:theme="@style/AppThemeNoBar"
+            />
+        <activity android:name=".edit_text"
+            android:theme="@style/AppThemeNoBar"
+            />
+        <activity android:name=".share_eversmile"
+            android:theme="@style/AppThemeNoBar"
+            />
+        <activity android:name=".view_pics"
+            android:theme="@style/AppThemeNoBar"
+            />
         <activity android:name=".signin" />
         <activity android:name=".MainActivity">
             <intent-filter>
