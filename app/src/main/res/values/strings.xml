@@ -50,11 +50,12 @@
     <string name="title_activity_maps">Map</string>
     <string name="title_activity_user_location">Map</string>
     <string name="store">Upload\nPhotos</string>
+    <string name="storeNote">Upload\nNote</string>
     <string name="shareFacebook">Share to Facebook</string>
     <string name="shareTwitter">Share to Twitter</string>
     <string name="shareInstagram">Share to Instagram</string>
     <string name="shareSnapchat">Share to Snapchat</string>
-    <string name="backGal">Back to Gallery</string>
+    <string name="backGal">Back to\nGallery</string>
     <string name="nearbyOrthos">Nearby\nDoctors</string>
     <string name="note">Add\nNote</string>
     <string name="userName">FirebaseAuth.getInstance().getCurrentUser().getEmail()</string>
