@@ -1,16 +1,18 @@
 package com.example.eversmileproject;
 
+import android.accounts.Account;
+import android.accounts.AccountManager;
+import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.Spannable;
-import android.text.SpannableString;
 import android.text.TextUtils;
-import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -42,14 +44,20 @@ public class signin extends AppCompatActivity {
     private final static int RC_SIGN_IN = 123;
     GoogleSignInClient mGoogleSignInClient;
     FirebaseAuth.AuthStateListener mAuthListner;
+    private static final String PREFS_NAME = "preferences";
+    private static final String PREF_UNAME = "Username";
+    private static final String PREF_PASSWORD = "Password";
+    AutoCompleteTextView autoCompleteTextView1;
+    AutoCompleteTextView autoCompleteTextView2;
+    private final String DefaultUnameValue = "";
+    private String UnameValue;
+
+    private final String DefaultPasswordValue = "";
+    private String PasswordValue;
     @Override
     protected void onStart() {
         super.onStart();
         mAuth.addAuthStateListener(mAuthListner);
-        setTitle("Please log in to EverSmile!");
-        Spannable text = new SpannableString(getTitle());
-        text.setSpan(new ForegroundColorSpan(Color.WHITE), 0, text.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
-        setTitle(text);
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,8 +69,10 @@ public class signin extends AppCompatActivity {
             finish();
         }
         setContentView(R.layout.activity_signin);
-        inputEmail = (EditText) findViewById(R.id.email);
-        inputPassword = (EditText) findViewById(R.id.password);
+        autoCompleteTextView1 =  findViewById(R.id.email);
+        autoCompleteTextView1.setAdapter(getEmailAddressAdapter(this));
+        autoCompleteTextView2 =  findViewById(R.id.password);
+        autoCompleteTextView2.setAdapter(getEmailAddressAdapter(this));
         Button ahlogin = (Button) findViewById(R.id.ah_login);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
         TextView btnSignIn = (TextView) findViewById(R.id.sign_in_button);
@@ -85,8 +95,8 @@ public class signin extends AppCompatActivity {
         ahlogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String email = inputEmail.getText().toString();
-                final String password = inputPassword.getText().toString();
+                String email = autoCompleteTextView1.getText().toString();
+                final String password = autoCompleteTextView2.getText().toString();
                 if (TextUtils.isEmpty(email)) {
                     Toast.makeText(getApplicationContext(), "Please enter your mail ", Toast.LENGTH_SHORT).show();
                     return;
@@ -131,9 +141,9 @@ public class signin extends AppCompatActivity {
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
     }
     private void signIn() {
-       Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
-   }
+    }
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -171,5 +181,53 @@ public class signin extends AppCompatActivity {
                         }
                     }
                 });
+    }
+
+    private ArrayAdapter<String> getEmailAddressAdapter(Context context) {
+        Account[] accounts = AccountManager.get(context).getAccounts();
+        String[] addresses = new String[accounts.length];
+        for (int i = 0; i < accounts.length; i++) {
+            addresses[i] = accounts[i].name;
+        }
+        return new ArrayAdapter<String>(context, android.R.layout.simple_dropdown_item_1line, addresses);
+    }
+
+    private void savePreferences() {
+        SharedPreferences settings = getSharedPreferences(PREFS_NAME,
+                Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = settings.edit();
+
+        // Edit and commit
+        UnameValue = autoCompleteTextView1.getText().toString();
+        PasswordValue = autoCompleteTextView2.getText().toString();
+        System.out.println("onPause save name: " + UnameValue);
+        System.out.println("onPause save password: " + PasswordValue);
+        editor.putString(PREF_UNAME, UnameValue);
+        editor.putString(PREF_PASSWORD, PasswordValue);
+        editor.commit();
+    }
+    private void loadPreferences() {
+
+        SharedPreferences settings = getSharedPreferences(PREFS_NAME,
+                Context.MODE_PRIVATE);
+
+        // Get value
+        UnameValue = settings.getString(PREF_UNAME, DefaultUnameValue);
+        PasswordValue = settings.getString(PREF_PASSWORD, DefaultPasswordValue);
+        autoCompleteTextView1.setText(UnameValue);
+        autoCompleteTextView2.setText(PasswordValue);
+        System.out.println("onResume load name: " + UnameValue);
+        System.out.println("onResume load password: " + PasswordValue);
+    }
+    @Override
+    public void onPause() {
+        super.onPause();
+        savePreferences();
+
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        loadPreferences();
     }
 }

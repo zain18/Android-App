@@ -15,17 +15,17 @@
     <View
         android:id="@+id/divider2"
         android:layout_width="match_parent"
-        android:layout_height="5dp"
+        android:layout_height="3dp"
         android:layout_above="@+id/SeeBtn"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="27dp"
         android:background="@color/colorPrimary" />
 
     <View
         android:id="@+id/divider3"
         android:layout_width="match_parent"
-        android:layout_height="5dp"
+        android:layout_height="3dp"
         android:layout_above="@+id/imageView"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="10dp"
         android:background="@color/colorPrimary" />
 
     <View
@@ -33,7 +33,7 @@
         android:layout_width="match_parent"
         android:layout_height="5dp"
         android:layout_below="@+id/signout"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:background="@color/colorPrimary" />
 
     <Button
@@ -100,15 +100,26 @@
         android:text="@string/bookappointment"
         android:textColor="@color/com_facebook_button_background_color_focused" />
 
-
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="240dp"
-        android:layout_height="170.6dp"
+        android:layout_width="300dp"
+        android:layout_height="140dp"
         android:layout_above="@+id/SeeBtn"
         android:layout_centerHorizontal="true"
         android:layout_marginEnd="0dp"
         android:layout_marginBottom="40dp"
         app:srcCompat="@drawable/eversmile" />
+
+    <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/profile_image"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_above="@+id/divider3"
+        android:clickable="true"
+        android:src="@drawable/eversmileprofile"
+        android:state_pressed="true"
+        app:civ_border_color="@color/colorAccent"
+        app:civ_border_width="4dp" />
+
 
 </RelativeLayout>
