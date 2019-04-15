@@ -59,4 +59,5 @@
     <string name="nearbyOrthos">Nearby\nDoctors</string>
     <string name="note">Add\nNote</string>
     <string name="userName">FirebaseAuth.getInstance().getCurrentUser().getEmail()</string>
+    <string name="bookappointment">Book Appointment</string>
 </resources>

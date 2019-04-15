@@ -23,8 +23,6 @@
         android:normalScreens="true"
         android:smallScreens="true" />
 
-
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -34,11 +32,10 @@
         android:theme="@style/AppTheme"
         android:titleTextColor="#FFFFFe"
         tools:ignore="ExtraText">
-
-
-        <activity android:name=".Facebookintent"
-            android:theme="@style/AppThemeNoBar"
-            ></activity>
+        <activity android:name=".Appointments"></activity>
+        <activity
+            android:name=".Facebookintent"
+            android:theme="@style/AppThemeNoBar" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -51,41 +48,37 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-
         <activity
             android:name=".UserLocation"
             android:label="@string/title_activity_user_location"
-            android:theme="@style/AppThemeNoBar"
-            />
+            android:theme="@style/AppThemeNoBar" />
         <activity
             android:name=".Maps"
             android:label="@string/title_activity_maps"
-            android:theme="@style/AppThemeNoBar"
-            />
-        <activity android:name=".ShareToSnapchat"
-            android:theme="@style/AppThemeNoBar"
-            />
-        <activity android:name=".ShareToInstagram"
-            android:theme="@style/AppThemeNoBar"
-            />
-        <activity android:name=".ShareToTwitter"
-            android:theme="@style/AppThemeNoBar"
-            />
+            android:theme="@style/AppThemeNoBar" />
+        <activity
+            android:name=".ShareToSnapchat"
+            android:theme="@style/AppThemeNoBar" />
+        <activity
+            android:name=".ShareToInstagram"
+            android:theme="@style/AppThemeNoBar" />
+        <activity
+            android:name=".ShareToTwitter"
+            android:theme="@style/AppThemeNoBar" />
         <activity android:name=".signup_activity" />
-        <activity android:name=".see_eversmile"
-            android:theme="@style/AppThemeNoBar"
-            />
-        <activity android:name=".edit_text"
-            android:theme="@style/AppThemeNoBar"
-            />
-        <activity android:name=".share_eversmile"
-            android:theme="@style/AppThemeNoBar"
-            />
-        <activity android:name=".view_pics"
-            android:theme="@style/AppThemeNoBar"
-            />
-        <activity android:name=".signin"
-            />
+        <activity
+            android:name=".see_eversmile"
+            android:theme="@style/AppThemeNoBar" />
+        <activity
+            android:name=".edit_text"
+            android:theme="@style/AppThemeNoBar" />
+        <activity
+            android:name=".share_eversmile"
+            android:theme="@style/AppThemeNoBar" />
+        <activity
+            android:name=".view_pics"
+            android:theme="@style/AppThemeNoBar" />
+        <activity android:name=".signin" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -104,8 +97,8 @@
             android:label="@string/app_name" />
         <activity
             android:name="com.facebook.CustomTabActivity"
-            android:theme="@style/AppThemeNoBar"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/AppThemeNoBar">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -120,8 +113,6 @@
             android:name="com.facebook.FacebookContentProvider"
             android:authorities="com.facebook.app.FacebookContentProvider{2129225573819941}"
             android:exported="true" />
-
-
     </application>
 
 </manifest>

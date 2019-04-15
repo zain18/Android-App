@@ -83,8 +83,21 @@
         android:layout_marginBottom="0dp"
         android:height="0dp"
         android:background="@color/colorAccent"
-        android:layout_below="@+id/ShareBtn"
+        android:layout_below="@+id/appointment"
         android:text="@string/logout"
+        android:textColor="@color/com_facebook_button_background_color_focused" />
+
+    <Button
+        android:id="@+id/appointment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="0dp"
+        android:height="0dp"
+        android:layout_below="@+id/ShareBtn"
+        android:background="@color/colorAccent"
+        android:text="@string/bookappointment"
         android:textColor="@color/com_facebook_button_background_color_focused" />
 
 

@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
         Button ShareBtn =(Button) findViewById(R.id.ShareBtn);
         Button seeBtn =(Button) findViewById(R.id.SeeBtn);
         Button findBtn = (Button) findViewById(R.id.FindBtn);
-
+        Button appointment = (Button) findViewById(R.id.appointment);
 
         mAuth = FirebaseAuth.getInstance();
         mAuthListner = new FirebaseAuth.AuthStateListener() {
@@ -108,6 +108,13 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, Maps.class));
             }
         });
+        appointment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, Appointments.class));
+            }
+        });
+
 
 
     }
