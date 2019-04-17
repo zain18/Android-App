@@ -162,7 +162,7 @@ public class Facebookintent extends AppCompatActivity {
         options.inSampleSize = scale;
         options.inJustDecodeBounds = false;
         thumbnail = BitmapFactory.decodeFile(selectedImagePath, options);
-        initShareIntent("face",thumbnail);
+        initShareIntent("twi",thumbnail);
 
     }
 
@@ -196,4 +196,9 @@ public class Facebookintent extends AppCompatActivity {
         return mutableBitmap;
     }
 
+
 }
+
+
+
+
