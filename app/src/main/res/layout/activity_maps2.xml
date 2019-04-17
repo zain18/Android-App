@@ -34,14 +34,14 @@
 
         <Button
 
-            android:id="@+id/btnOrtho"
+            android:id="@+id/btn_find"
 
             android:layout_width="wrap_content"
 
             android:layout_height="wrap_content"
 
             android:background="@color/colorAccent"
-            android:text="@string/nearbyOrthos"
+            android:text="@string/main_menu"
             android:textColor="@color/com_facebook_button_background_color_focused" />
 
 

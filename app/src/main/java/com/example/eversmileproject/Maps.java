@@ -1,5 +1,6 @@
 package com.example.eversmileproject;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
@@ -17,6 +18,8 @@ import android.os.Build;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
@@ -43,6 +46,7 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback,
     double latitude;
     double longitude;
     private int PROXIMITY_RADIUS = 10000;
+    private Button findBtn;
     GoogleApiClient mGoogleApiClient;
     Location mLastLocation;
     Marker mCurrLocationMarker;
@@ -117,15 +121,22 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback,
                 for (DocumentSnapshot doc:queryDocumentSnapshots) {
                     double officeLatitude = doc.getDouble("latitude");   //Obtains the latitude for a given address
                     double officeLongitude = doc.getDouble("longitude"); //Obtains the longitude for a given address
+                    double officeRating = doc.getDouble("rating");
+                    String officeInsurance = doc.getString("insurance");
                     String officeName = doc.getString("doctor");
                     marker = new LatLng(officeLatitude, officeLongitude);    //Creates a map marker utilising the latitude and longitude values retrieved from the database
-                    mMap.addMarker(new MarkerOptions().position(marker).title(officeName));
-
-
+                    mMap.addMarker(new MarkerOptions().position(marker).title(officeName).snippet("Rating: "+officeRating+" stars. Accepts: "+officeInsurance).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA)));
                 }
             }
         });
 
+        findBtn = (Button) findViewById(R.id.btn_find);
+        findBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Maps.this, MainActivity.class));
+            }
+        });
             }
 
     protected synchronized void buildGoogleApiClient() {
@@ -189,7 +200,7 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback,
         markerOptions.position(latLng);
         markerOptions.title("Current Position");
         markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
-        mCurrLocationMarker = mMap.addMarker(markerOptions);
+       // mCurrLocationMarker = mMap.addMarker(markerOptions);
 
         //move map camera
         mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));

@@ -110,6 +110,7 @@ public class see_eversmile extends AppCompatActivity {
                 //stopBackgroundThread();
             }
         });
+
     }
     TextureView.SurfaceTextureListener textureListener = new TextureView.SurfaceTextureListener() {
         @Override
@@ -354,5 +355,7 @@ public class see_eversmile extends AppCompatActivity {
         stopBackgroundThread();
         super.onPause();
     }
+
+
 }
 

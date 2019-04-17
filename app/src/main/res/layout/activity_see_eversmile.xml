@@ -66,4 +66,5 @@
         android:text="@string/view_pics"
         android:textColor="@color/com_facebook_button_background_color_focused"
         tools:text="Gallery" />
+
 </RelativeLayout>
