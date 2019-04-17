@@ -8,7 +8,7 @@
     android:background="@color/light_gray"
     android:gravity="center"
     android:orientation="vertical"
-    android:padding="24dp"
+    android:padding="2dp"
     android:visibility="visible"
     tools:context=".MainActivity">
 
@@ -17,7 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="3dp"
         android:layout_above="@+id/SeeBtn"
-        android:layout_marginBottom="27dp"
+        android:layout_marginBottom="28dp"
         android:background="@color/colorPrimary" />
 
     <View
@@ -42,7 +42,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="0dp"
         android:layout_marginTop="0dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="0dp"
         android:height="0dp"
         android:background="@color/colorAccent"
         android:text="@string/seeBtn"
@@ -66,7 +66,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="0dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="0dp"
         android:layout_marginBottom="0dp"
         android:height="0dp"
         android:layout_below="@+id/FindBtn"
@@ -79,11 +79,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="0dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="0dp"
         android:layout_marginBottom="0dp"
         android:height="0dp"
         android:background="@color/colorAccent"
-        android:layout_below="@+id/appointment"
+        android:layout_below="@+id/profileSetUp"
         android:text="@string/logout"
         android:textColor="@color/com_facebook_button_background_color_focused" />
 
@@ -92,12 +92,25 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="0dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="0dp"
         android:layout_marginBottom="0dp"
         android:height="0dp"
         android:layout_below="@+id/ShareBtn"
         android:background="@color/colorAccent"
         android:text="@string/bookappointment"
+        android:textColor="@color/com_facebook_button_background_color_focused" />
+
+    <Button
+        android:id="@+id/profileSetUp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="0dp"
+        android:height="0dp"
+        android:layout_below="@+id/appointment"
+        android:background="@color/colorAccent"
+        android:text="@string/SetUpProfile"
         android:textColor="@color/com_facebook_button_background_color_focused" />
 
     <ImageView

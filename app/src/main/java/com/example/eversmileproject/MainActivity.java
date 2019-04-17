@@ -78,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
         Button seeBtn =(Button) findViewById(R.id.SeeBtn);
         Button findBtn = (Button) findViewById(R.id.FindBtn);
         Button appointment = (Button) findViewById(R.id.appointment);
+        Button userprofile = (Button) findViewById(R.id.profileSetUp);
         circleImageView = findViewById(R.id.profile_image);
 
         mAuth = FirebaseAuth.getInstance();
@@ -137,6 +138,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 selectImage();
+            }
+        });
+        userprofile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, UserInfo.class));
             }
         });
 

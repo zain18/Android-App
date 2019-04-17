@@ -33,7 +33,8 @@
         android:theme="@style/AppTheme"
         android:titleTextColor="#FFFFFe"
         tools:ignore="ExtraText">
-        <activity android:name=".Appointments"></activity>
+        <activity android:name=".UserInfo"></activity>
+        <activity android:name=".Appointments" />
         <activity
             android:name=".Facebookintent"
             android:theme="@style/AppThemeNoBar" />
