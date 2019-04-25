@@ -120,10 +120,9 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback,
                     double officeLatitude = doc.getDouble("latitude");   //Obtains the latitude for a given address
                     double officeLongitude = doc.getDouble("longitude"); //Obtains the longitude for a given address
                     double officeRating = doc.getDouble("rating");
-                    String officeInsurance = doc.getString("insurance");
                     String officeName = doc.getString("doctor");
                     marker = new LatLng(officeLatitude, officeLongitude);    //Creates a map marker utilising the latitude and longitude values retrieved from the database
-                    mMap.addMarker(new MarkerOptions().position(marker).title(officeName).snippet("Rating: "+officeRating+" stars. Accepts: "+officeInsurance).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA)));
+                    mMap.addMarker(new MarkerOptions().position(marker).title(officeName).snippet("Rating: "+officeRating+" stars.").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA)));
                 }
             }
         });

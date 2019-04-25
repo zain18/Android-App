@@ -49,6 +49,7 @@ public class UserInfo extends AppCompatActivity {
     private EditText Phone;
     private Button Submit;
     private Button homebtn;
+    private Button recordBtn;
     private ProgressBar progressBar;
     FirebaseFirestore db;
     private static final String NAME_KEY = "Name";
@@ -71,6 +72,7 @@ public class UserInfo extends AppCompatActivity {
         Submit = findViewById(R.id.SubmitButton);
         homebtn = findViewById(R.id.homebtn);
         progressBar = findViewById(R.id.progressBar1);
+        recordBtn = findViewById(R.id.recordBtn);
         db = FirebaseFirestore.getInstance();
 
         circleImageView = findViewById(R.id.profile_image);
@@ -120,6 +122,13 @@ public class UserInfo extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(UserInfo.this, MainActivity.class));
+            }
+        });
+
+        recordBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(UserInfo.this, UserRecords.class));
             }
         });
 

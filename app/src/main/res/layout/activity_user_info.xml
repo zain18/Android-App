@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".UserInfo">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white"
@@ -117,6 +117,16 @@
             android:layout_gravity="center|bottom"
             android:layout_marginTop="20dp"
             android:visibility="gone" />
+
+        <Button
+            android:id="@+id/recordBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:background="@color/colorPrimaryDark"
+            android:elevation="4dp"
+            android:text="View Records"
+            android:textColor="#fff" />
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
