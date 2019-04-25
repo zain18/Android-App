@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/FacebookBtn"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/light_gray"
+    android:background="@color/white"
     android:gravity="center"
     android:orientation="vertical"
-    android:padding="24dp"
+    android:padding="20dp"
     tools:context=".MainActivity">
 
     <Button
@@ -17,35 +17,49 @@
         android:layout_width="75dp"
         android:layout_height="75dp"
         android:layout_marginBottom="10dp"
-        android:background="@drawable/fblogo"/>
+        android:layout_above="@id/shareTwit"
+        android:background="@drawable/fblogo"
+        />
 
     <Button
         android:id="@+id/shareTwit"
         android:layout_width="75dp"
         android:layout_height="75dp"
         android:layout_marginBottom="10dp"
-        android:background="@drawable/twitter"/>
+        android:layout_above="@id/shareInsta"
+        android:background="@drawable/twitter"
+        />
 
     <Button
         android:id="@+id/shareInsta"
         android:layout_width="75dp"
         android:layout_height="75dp"
         android:layout_marginBottom="10dp"
-        android:background="@drawable/instagram"/>
+        android:layout_above="@id/shareSnap"
+        android:background="@drawable/instagram"
+        />
+
     <Button
         android:id="@+id/shareSnap"
         android:layout_width="75dp"
         android:layout_height="75dp"
         android:layout_marginBottom="10dp"
-        android:background="@drawable/snapchat"/>
+        android:layout_above="@id/shareMain"
+        android:background="@drawable/snapchat"
+        />
 
     <Button
         android:id="@+id/shareMain"
         android:layout_width="75dp"
         android:layout_height="75dp"
         android:layout_marginBottom="10dp"
-        android:background="@color/colorAccent"
+        android:background="@color/colorPrimary"
         android:text="@string/main_menu"
-        android:textColor="@color/com_facebook_button_background_color_focused" />
+        android:textColor="@color/white"
+        />
 
-</LinearLayout>
+
+
+
+
+</RelativeLayout>

@@ -22,7 +22,6 @@ public class Appointments extends AppCompatActivity {
         @Override
         public void onPageFinished(WebView view, String url)
         {
-
             view.loadUrl("javascript:(function() { " +
                     "document.getElementsByClassName('poweredby')[0].style.display='none'; })()");
             // document.getElementsByClassName('poweredby')

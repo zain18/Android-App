@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         mAuth.addAuthStateListener(mAuthListner);
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(0xFFD81B60));
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(0xFF5087DA));
         Spannable text = new SpannableString(getTitle());
         text.setSpan(new ForegroundColorSpan(Color.WHITE), 0, text.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
         setTitle(text);
@@ -78,14 +78,18 @@ public class MainActivity extends AppCompatActivity {
         Button seeBtn =(Button) findViewById(R.id.SeeBtn);
         Button findBtn = (Button) findViewById(R.id.FindBtn);
         Button appointment = (Button) findViewById(R.id.appointment);
-        Button userprofile = (Button) findViewById(R.id.profileSetUp);
+
+        Intent _intent = getIntent();
+        Uri uri = _intent.getParcelableExtra("imageUri");
         circleImageView = findViewById(R.id.profile_image);
+        circleImageView.setImageURI(uri);
+
 
         mAuth = FirebaseAuth.getInstance();
         mAuthListner = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                String getEmail = "Please log in to EverSmile!";
+                String getEmail = "Welcome to SmileKnect! Please Log in.";
                 if (firebaseAuth.getCurrentUser() == null) {
                     startActivity(new Intent(MainActivity.this, signin.class));
                 } else {
@@ -135,20 +139,23 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         circleImageView.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
-                selectImage();
+                startActivity(new Intent(MainActivity.this, UserInfo.class));
+
             }
+
         });
-        userprofile.setOnClickListener(new View.OnClickListener() {
+
+        /*userprofile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, UserInfo.class));
             }
-        });
-
+        });*/
     }
-    private void selectImage() {
+   /* private void selectImage() {
         final CharSequence[] items = { "Take Photo", "Choose from Library",
                 "Cancel" };
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
@@ -173,10 +180,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         builder.show();
-    }
+    }*/
 
 
-    protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
+/*    protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == SELECT_FILE)
@@ -241,7 +248,7 @@ public class MainActivity extends AppCompatActivity {
         drawable.draw(canvas);
 
         return mutableBitmap;
-    }
+    }*/
 
 
 

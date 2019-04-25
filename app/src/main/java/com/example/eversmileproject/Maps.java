@@ -52,8 +52,6 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback,
     Marker mCurrLocationMarker;
     LocationRequest mLocationRequest;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,7 +73,6 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback,
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-
     }
 
 
@@ -108,6 +105,7 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback,
                 mMap.setMyLocationEnabled(true);
             }
         }
+
         else {
             buildGoogleApiClient();
             mMap.setMyLocationEnabled(true);
@@ -137,7 +135,7 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback,
                 startActivity(new Intent(Maps.this, MainActivity.class));
             }
         });
-            }
+    }
 
     protected synchronized void buildGoogleApiClient() {
         mGoogleApiClient = new GoogleApiClient.Builder(this)
@@ -215,7 +213,6 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback,
             Log.d("onLocationChanged", "Removing Location Updates");
         }
         Log.d("onLocationChanged", "Exit");
-
     }
 
     public boolean checkLocationPermission(){
@@ -274,7 +271,6 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback,
                 }
                 return;
             }
-
         }
     }
 }

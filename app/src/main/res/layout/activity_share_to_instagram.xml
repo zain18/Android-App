@@ -4,15 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ShareToInstagram">
+    tools:context=".ShareToInstagram"
+    android:padding="20dp">
 
     <Button
         android:id="@+id/ShareToInsta"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Share.To.Insta"
+        android:text="Share on Instagram"
+        android:background="@color/colorPrimary"
+        android:textColor="@color/white"
+        android:padding="10dp"
         tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="137dp"
-        tools:layout_editor_absoluteY="176dp" />
+        />
 
 </android.support.constraint.ConstraintLayout>

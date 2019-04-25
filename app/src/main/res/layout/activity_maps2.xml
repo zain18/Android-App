@@ -5,7 +5,8 @@
 
     android:layout_height="match_parent"
 
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    >
 
     <fragment android:id="@+id/map"
 
@@ -40,9 +41,9 @@
 
             android:layout_height="wrap_content"
 
-            android:background="@color/colorAccent"
+            android:background="@color/colorPrimary"
             android:text="@string/main_menu"
-            android:textColor="@color/com_facebook_button_background_color_focused" />
+            android:textColor="@color/white" />
 
 
     </LinearLayout>

@@ -4,16 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Facebookintent">
+    tools:context=".Facebookintent"
+    android:padding="20dp">
 
 
     <Button
         android:id="@+id/shareToFace"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:textColor="@color/white"
         android:text="Facebook"
-        tools:layout_editor_absoluteX="115dp"
-        tools:layout_editor_absoluteY="159dp"
         tools:ignore="MissingConstraints" />
 
 </android.support.constraint.ConstraintLayout>

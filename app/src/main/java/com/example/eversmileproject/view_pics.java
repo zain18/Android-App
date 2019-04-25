@@ -112,7 +112,7 @@ public class view_pics extends AppCompatActivity{
                 faceRef.putFile(faceFile);
                 leftRef.putFile(leftFile);
                 rightRef.putFile(rightFile);
-                openDialog("Pictures uploaded, now you're ready to find your EverSmile");
+                openDialog("Pictures uploaded!");
 
             }
         });

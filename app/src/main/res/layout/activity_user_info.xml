@@ -9,27 +9,49 @@
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/light_gray"
+        android:background="@color/white"
         android:orientation="vertical"
-        android:padding="16dp">
+        android:padding="20dp">
 
         <TextView
             android:id="@+id/contact_form_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="16dp"
-            android:layout_marginTop="5dp"
-            android:text="Patient Info"
-            android:textColor="#ce3232"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="15dp"
+            android:text="Patient Profile"
+            android:textColor="@color/colorPrimary"
             android:textSize="40sp"
-            android:typeface="serif" />
+            />
+
+        <View
+            android:id="@+id/divider3"
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:layout_above="@+id/imageView"
+            android:layout_marginBottom="10dp"
+            android:background="@color/colorAccent" />
+
+        <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/profile_image"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_above="@+id/divider3"
+            android:layout_marginStart="0dp"
+            android:layout_marginBottom="10dp"
+            android:clickable="true"
+            android:src="@drawable/rohitpic"
+            android:state_pressed="true"
+            app:civ_border_color="@color/colorAccent"
+            app:civ_border_width="5dp" />
 
         <EditText
             android:id="@+id/FullName"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/colorPrimaryDark"
+            android:layout_marginBottom="10dp"
             android:hint="Full Name"
             android:inputType="textPersonName" />
 
@@ -37,7 +59,6 @@
             android:id="@+id/UserEmail"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:backgroundTint="@color/colorPrimaryDark"
             android:hint="Email"
@@ -47,7 +68,6 @@
             android:id="@+id/UserAddress"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:backgroundTint="@color/colorPrimaryDark"
             android:hint="Address"
@@ -57,7 +77,6 @@
             android:id="@+id/UserAge"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:backgroundTint="@color/colorPrimaryDark"
             android:hint="Age"
@@ -67,24 +86,10 @@
             android:id="@+id/UserNumber"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
             android:backgroundTint="@color/colorPrimaryDark"
             android:hint="Phone"
             android:inputType="textPhonetic" />
-
-        <EditText
-            android:id="@+id/UserMessage"
-            android:layout_width="fill_parent"
-            android:layout_height="100dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:backgroundTint="@color/colorPrimaryDark"
-            android:breakStrategy="balanced"
-            android:fitsSystemWindows="true"
-            android:gravity="top"
-            android:hint="Your Message (optional)"
-            android:inputType="textMultiLine"
-            android:padding="5dp"
-            android:singleLine="false" />
 
         <Button
             android:id="@+id/SubmitButton"
@@ -92,10 +97,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:background="@color/colorPrimaryDark"
-            android:elevation="4dp"
-            android:paddingLeft="70dp"
-            android:paddingRight="71dp"
             android:text="Submit"
+            android:layout_marginBottom="10dp"
             android:textColor="#fff" />
         <Button
             android:id="@+id/homebtn"
@@ -104,8 +107,6 @@
             android:layout_gravity="center_horizontal"
             android:background="@color/colorPrimaryDark"
             android:elevation="4dp"
-            android:paddingLeft="75dp"
-            android:paddingRight="76dp"
             android:text="Home"
             android:textColor="#fff" />
 

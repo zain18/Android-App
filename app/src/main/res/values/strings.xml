@@ -1,25 +1,25 @@
 <resources>
-    <string name="app_name">EverSmile</string>
-    <string name="loginMsg">Please log in to EverSmile!</string>
+    <string name="app_name">SmileKnect</string>
+    <string name="loginMsg">Please log in to SmileKnect!</string>
     <string name="failed" />
     <string name="email_id">Email</string>
     <string name="password">Enter password</string>
     <string name="login">Log In</string>
-    <string name="create_a_new_account">Create a new account</string>
+    <string name="create_a_new_account">Create a New Account</string>
     <string name="image">eversmile</string>
     <string name="logout">LogOut</string>
     <string name="the_activity_after_the_user_login">The Activity after the user Login</string>
     <string name="linktoterms"><a href="http://www.google.com">  Link to Terms</a></string>
-    <string name="seeBtn">See your EverSmile</string>
-    <string name="findBtn">Near By Orthodontists</string>
-    <string name="shareBtn">Share to Social Media</string>
+    <string name="seeBtn">Picture Your Smile</string>
+    <string name="findBtn">Find Your Smile</string>
+    <string name="shareBtn">Share Your Smile</string>
     <string name="facebook_app_id">2129225573819941</string>
     <string name="fb_login_protocol_scheme">fb2129225573819941</string>
     <string name="take_face">Face Photo</string>
     <string name="take_left">Left Photo</string>
     <string name="take_right">Right Photo</string>
     <string name="view_pics">Gallery</string>
-    <string name="everSmile_title">EverSmile</string>
+    <string name="everSmile_title">SmileKnect</string>
     <string name="main_menu">Home</string>
     <string name="camera">Take\nPhotos</string>
     <string name="clientId">04a54c46fd4a496b8da58175bbe4d567</string>
@@ -59,7 +59,7 @@
     <string name="nearbyOrthos">Nearby\nDoctors</string>
     <string name="note">Add\nNote</string>
     <string name="userName">FirebaseAuth.getInstance().getCurrentUser().getEmail()</string>
-    <string name="bookappointment">Book Appointment</string>
+    <string name="bookappointment">Schedule With SmileKnect</string>
     <string name="title_activity_user_info">UserInfo</string>
     <string name="large_text">
         "Material is the metaphor.\n\n"

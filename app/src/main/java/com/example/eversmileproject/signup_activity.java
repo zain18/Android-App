@@ -64,15 +64,15 @@ public class signup_activity extends AppCompatActivity {
                 String email = email_id.getText().toString();
                 String password = passwordcheck.getText().toString();
                 if (TextUtils.isEmpty(email)) {
-                    Toast.makeText(getApplicationContext(), "Enter your Email please", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "The email field is empty!", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if (TextUtils.isEmpty(password)) {
-                    Toast.makeText(getApplicationContext(), "Enter your Password please", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "The password field is empty!", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if (!termsCheck.isChecked()){
-                    Toast.makeText(getApplicationContext(), "Please agree to terms", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Please agree to the terms and conditions.", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 progressBar.setVisibility(View.VISIBLE);

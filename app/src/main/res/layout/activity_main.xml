@@ -5,28 +5,28 @@
     android:id="@+id/FacebookBtn"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/light_gray"
+    android:background="@color/white"
     android:gravity="center"
     android:orientation="vertical"
-    android:padding="2dp"
+    android:padding="20dp"
     android:visibility="visible"
     tools:context=".MainActivity">
 
     <View
         android:id="@+id/divider2"
         android:layout_width="match_parent"
-        android:layout_height="3dp"
+        android:layout_height="5dp"
         android:layout_above="@+id/SeeBtn"
-        android:layout_marginBottom="28dp"
-        android:background="@color/colorPrimary" />
+        android:layout_marginBottom="10dp"
+        android:background="@color/colorAccent" />
 
     <View
         android:id="@+id/divider3"
         android:layout_width="match_parent"
-        android:layout_height="3dp"
+        android:layout_height="5dp"
         android:layout_above="@+id/imageView"
         android:layout_marginBottom="10dp"
-        android:background="@color/colorPrimary" />
+        android:background="@color/colorAccent" />
 
     <View
         android:id="@+id/divider4"
@@ -34,7 +34,7 @@
         android:layout_height="5dp"
         android:layout_below="@+id/signout"
         android:layout_marginTop="10dp"
-        android:background="@color/colorPrimary" />
+        android:background="@color/colorAccent" />
 
     <Button
         android:id="@+id/SeeBtn"
@@ -42,9 +42,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="0dp"
         android:layout_marginTop="0dp"
-        android:layout_marginBottom="0dp"
+        android:layout_marginBottom="5dp"
         android:height="0dp"
-        android:background="@color/colorAccent"
+        android:background="@color/colorPrimary"
         android:text="@string/seeBtn"
         android:textColor="@color/com_facebook_button_background_color_focused" />
 
@@ -54,10 +54,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="0dp"
         android:layout_marginTop="0dp"
-        android:layout_marginBottom="0dp"
+        android:layout_marginBottom="5dp"
         android:layout_below="@+id/SeeBtn"
         android:height="0dp"
-        android:background="@color/colorAccent"
+        android:background="@color/colorPrimary"
         android:text="@string/findBtn"
         android:textColor="@color/com_facebook_button_background_color_focused" />
 
@@ -67,10 +67,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="0dp"
         android:layout_marginTop="0dp"
-        android:layout_marginBottom="0dp"
+        android:layout_marginBottom="5dp"
         android:height="0dp"
         android:layout_below="@+id/FindBtn"
-        android:background="@color/colorAccent"
+        android:background="@color/colorPrimary"
         android:text="@string/shareBtn"
         android:textColor="@color/com_facebook_button_background_color_focused" />
 
@@ -82,8 +82,8 @@
         android:layout_marginTop="0dp"
         android:layout_marginBottom="0dp"
         android:height="0dp"
-        android:background="@color/colorAccent"
-        android:layout_below="@+id/profileSetUp"
+        android:background="@color/colorPrimary"
+        android:layout_below="@+id/appointment"
         android:text="@string/logout"
         android:textColor="@color/com_facebook_button_background_color_focused" />
 
@@ -93,47 +93,36 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="0dp"
         android:layout_marginTop="0dp"
-        android:layout_marginBottom="0dp"
+        android:layout_marginBottom="5dp"
         android:height="0dp"
         android:layout_below="@+id/ShareBtn"
-        android:background="@color/colorAccent"
+        android:background="@color/colorPrimary"
         android:text="@string/bookappointment"
         android:textColor="@color/com_facebook_button_background_color_focused" />
 
-    <Button
-        android:id="@+id/profileSetUp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="0dp"
-        android:layout_marginBottom="0dp"
-        android:height="0dp"
-        android:layout_below="@+id/appointment"
-        android:background="@color/colorAccent"
-        android:text="@string/SetUpProfile"
-        android:textColor="@color/com_facebook_button_background_color_focused" />
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:layout_above="@+id/SeeBtn"
-        android:layout_centerHorizontal="true"
+        android:layout_height="175dp"
+        android:layout_above="@+id/divider2"
+        android:layout_centerHorizontal="false"
         android:layout_marginEnd="0dp"
-        android:layout_marginBottom="40dp"
-        android:background="@drawable/eversmile"
-        app:srcCompat="@drawable/eversmile" />
+        android:layout_marginBottom="10dp"
+        app:srcCompat="@drawable/smileknectlogocroplightblue" />
 
     <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/profile_image"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="0dp"
         android:layout_above="@+id/divider3"
+        android:layout_marginBottom="10dp"
         android:clickable="true"
-        android:src="@drawable/eversmileprofile"
+        android:src="@drawable/rohitpic"
         android:state_pressed="true"
         app:civ_border_color="@color/colorAccent"
-        app:civ_border_width="4dp" />
+        app:civ_border_width="5dp" />
 
 
 </RelativeLayout>

@@ -3,17 +3,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/light_gray">
+    android:background="@color/white"
+    android:padding="20dp">
 
     <Button
         android:id="@+id/dotweet"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/colorAccent"
-        android:text="Tweet"
-        android:textColor="@color/common_google_signin_btn_text_dark_pressed"
+        android:background="@color/colorPrimary"
+        android:textColor="@color/white"
+        android:padding="10dp"
+        android:text="Share with Twitter"
         tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="161dp"
-        tools:layout_editor_absoluteY="176dp" />
+        />
 
 </android.support.constraint.ConstraintLayout>

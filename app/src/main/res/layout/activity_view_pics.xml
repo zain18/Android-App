@@ -3,10 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/light_gray"
+    android:background="@color/white"
     android:orientation="vertical"
     tools:context=".view_pics"
-    android:id="@+id/view_pics_layout">
+    android:id="@+id/view_pics_layout"
+    android:padding="20dp">
 
 
     <ImageView
@@ -21,10 +22,10 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/imageFaceView"
         android:layout_centerHorizontal="true"
-        android:background="@color/colorAccent"
+        android:background="@color/colorPrimary"
         android:text="@string/take_face"
         android:textAlignment="center"
-        android:textColor="@color/com_facebook_button_background_color_focused" />
+        android:textColor="@color/white" />
 
     <ImageView
         android:id="@+id/imageLeftView"
@@ -39,10 +40,10 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/imageLeftView"
         android:layout_centerHorizontal="true"
-        android:background="@color/colorAccent"
+        android:background="@color/colorPrimary"
         android:text="@string/take_left"
         android:textAlignment="center"
-        android:textColor="@color/com_facebook_button_background_color_focused" />
+        android:textColor="@color/white" />
 
     <ImageView
         android:id="@+id/imageRightView"
@@ -57,10 +58,10 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/imageRightView"
         android:layout_centerHorizontal="true"
-        android:background="@color/colorAccent"
+        android:background="@color/colorPrimary"
         android:text="@string/take_right"
         android:textAlignment="center"
-        android:textColor="@color/com_facebook_button_background_color_focused" />
+        android:textColor="@color/white" />
 
     <Button
         android:id="@+id/btn_mainMenu"
@@ -72,10 +73,10 @@
         android:layout_marginEnd="0dp"
         android:layout_marginBottom="0dp"
         android:layout_below="@id/btn_store"
-        android:background="@color/colorAccent"
+        android:background="@color/colorPrimary"
 
         android:text="@string/main_menu"
-        android:textColor="@color/com_facebook_button_background_color_focused" />
+        android:textColor="@color/white" />
 
     <Button
         android:id="@+id/btn_camera"
@@ -88,9 +89,9 @@
         android:layout_marginEnd="0dp"
         android:layout_marginBottom="0dp"
         android:layout_toLeftOf="@id/btn_store"
-        android:background="@color/colorAccent"
+        android:background="@color/colorPrimary"
         android:text="@string/camera"
-        android:textColor="@color/com_facebook_button_background_color_focused" />
+        android:textColor="@color/white" />
 
 
     <Button
@@ -104,9 +105,9 @@
         android:layout_marginEnd="0dp"
         android:layout_marginRight="0dp"
         android:layout_marginBottom="0dp"
-        android:background="@color/colorAccent"
+        android:background="@color/colorPrimary"
         android:text="@string/store"
-        android:textColor="@color/com_facebook_button_background_color_focused" />
+        android:textColor="@color/white" />
 
     <Button
         android:id="@+id/btn_note"
@@ -119,9 +120,9 @@
         android:layout_marginEnd="0dp"
         android:layout_marginBottom="0dp"
         android:layout_toRightOf="@id/btn_store"
-        android:background="@color/colorAccent"
+        android:background="@color/colorPrimary"
         android:text="@string/note"
-        android:textColor="@color/com_facebook_button_background_color_focused" />
+        android:textColor="@color/white" />
 
     <Button
         android:id="@+id/btn_find"
@@ -135,7 +136,7 @@
         android:layout_toRightOf="@id/btn_mainMenu"
         android:layout_below="@id/btn_camera"
         android:layout_centerHorizontal="false"
-        android:background="@color/colorAccent"
-        android:text="Find\nEverSmile"
-        android:textColor="@color/com_facebook_button_background_color_focused" />
+        android:background="@color/colorPrimary"
+        android:text="Find\nYour Smile"
+        android:textColor="@color/white" />
 </RelativeLayout>
