@@ -60,8 +60,8 @@ public class MainActivity extends AppCompatActivity {
     public TextView userName;
     protected void onStart() {
         super.onStart();
-        mAuth.addAuthStateListener(mAuthListner);
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(0xFF5087DA));
+        mAuth.addAuthStateListener(mAuthListner); // start authentication at startup
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(0xFF5087DA)); // main banner
         Spannable text = new SpannableString(getTitle());
         text.setSpan(new ForegroundColorSpan(Color.WHITE), 0, text.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
         setTitle(text);
@@ -85,17 +85,17 @@ public class MainActivity extends AppCompatActivity {
         circleImageView.setImageURI(uri);
 
 
-        mAuth = FirebaseAuth.getInstance();
+        mAuth = FirebaseAuth.getInstance(); // create instance of Firebase Authentication
         mAuthListner = new FirebaseAuth.AuthStateListener() {
             @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) { // check that user has credentials
                 String getEmail = "Welcome to SmileKnect! Please Log in.";
-                if (firebaseAuth.getCurrentUser() == null) {
+                if (firebaseAuth.getCurrentUser() == null) { // if not current user, redirect to sign in
                     startActivity(new Intent(MainActivity.this, signin.class));
-                } else {
+                } else { // else, get user email
                     getEmail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
                 }
-                setTitle(getEmail);
+                setTitle(getEmail); // display email as user name
                 Spannable text = new SpannableString(getTitle());
                 text.setSpan(new ForegroundColorSpan(Color.WHITE), 0, text.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
                 setTitle(text);
@@ -105,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
 
         //userName.setText("Logged in as: " + getEmail);
 
-
+        // button to sign out of app
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -113,31 +113,35 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
+        // button to move to see your smile
         seeBtn.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, see_eversmile.class));
             }
         }));
+        // button to move to social media sharing
         ShareBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, share_eversmile.class));
             }
         });
+        // button to move to find smile map
         findBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, Maps.class));
             }
         });
+        // button to go to appointment system
         appointment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, Appointments.class));
             }
         });
+        // click avatar to move to user info
         circleImageView.setOnClickListener(new View.OnClickListener() {
 
             @Override

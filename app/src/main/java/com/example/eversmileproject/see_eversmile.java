@@ -84,24 +84,28 @@ public class see_eversmile extends AppCompatActivity {
         viewPicsButton = (Button) findViewById(R.id.btn_viewpics);
         assert takePictureButton != null;
         final String userName = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+        // take and save main face picture
         takePictureButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 takePicture("/" + userName + "face.jpg");
             }
         });
+        // take and save left side picture
         takeLeftButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 takePicture("/" + userName + "left.jpg");
             }
         });
+        // take and save right side picture
         takeRightButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 takePicture("/" + userName + "right.jpg");
             }
         });
+        // button to move to viewing gallery
         viewPicsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -337,7 +341,7 @@ public class see_eversmile extends AppCompatActivity {
         if (requestCode == REQUEST_CAMERA_PERMISSION) {
             if (grantResults[0] == PackageManager.PERMISSION_DENIED) {
                 // close the app
-                Toast.makeText(see_eversmile.this, "Sorry!!!, you can't use this app without granting permission", Toast.LENGTH_LONG).show();
+                Toast.makeText(see_eversmile.this, "Please grant permission", Toast.LENGTH_LONG).show();
                 finish();
             }
         }

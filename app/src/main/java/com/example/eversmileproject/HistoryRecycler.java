@@ -17,23 +17,24 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 
 public class HistoryRecycler extends AppCompatActivity {
-    RecyclerView recyclerView;
+    RecyclerView recyclerView; // list view for all the items
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.firebase_recycler);
 
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
-        String currentUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        DatabaseReference historydb = databaseReference.child(currentUser).child("history");
+        String currentUser = FirebaseAuth.getInstance().getCurrentUser().getUid(); // reference for specific user
+        DatabaseReference historydb = databaseReference.child(currentUser).child("history"); // reference for users history box
 
+        // listener to update recycler list
         historydb.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                String fileName = dataSnapshot.getKey();
+                String fileName = dataSnapshot.getKey(); // capture name and download urls
                 String url = dataSnapshot.getValue(String.class);
 
-                ((FBItemAdapter)recyclerView.getAdapter()).update(fileName,url);
+                ((FBItemAdapter)recyclerView.getAdapter()).update(fileName,url); // use adapter to update list
             }
 
             @Override
@@ -58,10 +59,10 @@ public class HistoryRecycler extends AppCompatActivity {
         });
 
         recyclerView = findViewById(R.id.firebaseRecycler);
-        recyclerView.setLayoutManager(new LinearLayoutManager(HistoryRecycler.this));
-
+        recyclerView.setLayoutManager(new LinearLayoutManager(HistoryRecycler.this)); // set up layout
+        // call the firebase adapter constructor
         FBItemAdapter myAdapter = new FBItemAdapter(recyclerView, HistoryRecycler.this,new ArrayList<String>(), new ArrayList<String>());
-        recyclerView.setAdapter(myAdapter);
+        recyclerView.setAdapter(myAdapter); // set FBItemAdapter as the adapter for recycler view
 
 
     }

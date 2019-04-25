@@ -86,19 +86,21 @@ public class view_pics extends AppCompatActivity{
                 startActivity(new Intent(view_pics.this, MainActivity.class));
             }
         });
+        // return to camera
         cameraBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(view_pics.this, see_eversmile.class));
             }
         });
+        // button to allow user to write a note
         noteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(view_pics.this, edit_text.class));
             }
         });
-
+        // after pictures, allow user to move to find office map
         findBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

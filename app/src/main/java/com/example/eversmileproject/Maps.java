@@ -56,6 +56,7 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback,
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps2);
+        // check for map permission
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             checkLocationPermission();
         }
@@ -76,7 +77,7 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback,
     }
 
 
-    private boolean CheckGooglePlayServices() {
+    private boolean CheckGooglePlayServices() { // check that google play available
         GoogleApiAvailability googleAPI = GoogleApiAvailability.getInstance();
         int result = googleAPI.isGooglePlayServicesAvailable(this);
         if(result != ConnectionResult.SUCCESS) {
@@ -92,7 +93,7 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback,
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        mMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
+        mMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN); // set map type to drawn style
         DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
         DatabaseReference officesRef = rootRef.child("offices");
 
@@ -112,11 +113,12 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback,
         }
 
         FirebaseFirestore firebase = FirebaseFirestore.getInstance();
+        // grab the collection of doctor offices using firebase
         firebase.collection("offices").addSnapshotListener(new EventListener<QuerySnapshot>() {
-            LatLng marker;
+            LatLng marker; // create latitude-longitude marker
             @Override
             public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
-                for (DocumentSnapshot doc:queryDocumentSnapshots) {
+                for (DocumentSnapshot doc:queryDocumentSnapshots) { // capture value of office list
                     double officeLatitude = doc.getDouble("latitude");   //Obtains the latitude for a given address
                     double officeLongitude = doc.getDouble("longitude"); //Obtains the longitude for a given address
                     double officeRating = doc.getDouble("rating");
@@ -128,6 +130,7 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback,
         });
 
         findBtn = (Button) findViewById(R.id.btn_find);
+        // button to return to main menu
         findBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -136,7 +139,7 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback,
         });
     }
 
-    protected synchronized void buildGoogleApiClient() {
+    protected synchronized void buildGoogleApiClient() { // connect to google map api
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)

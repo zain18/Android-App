@@ -57,6 +57,7 @@ public class UserRecords extends AppCompatActivity {
         storage = FirebaseStorage.getInstance();
         database = FirebaseDatabase.getInstance();
 
+        // button to allow user to select file to upload
         selectBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -67,7 +68,7 @@ public class UserRecords extends AppCompatActivity {
                     ActivityCompat.requestPermissions(UserRecords.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 9);
             }
         });
-
+        // upload selected file to history folder
         ulHistory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -81,7 +82,7 @@ public class UserRecords extends AppCompatActivity {
 
             }
         });
-
+        // upload selected file to xray folder
         ulXray.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -94,21 +95,21 @@ public class UserRecords extends AppCompatActivity {
 
             }
         });
-
+        // open history recycler view
         dlHistory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(UserRecords.this, HistoryRecycler.class));
             }
         });
-
+        // open xray recycler view
         dlXray.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(UserRecords.this, XrayRecycler.class));
             }
         });
-
+        // open doctor report recycler view
         dlReport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -117,7 +118,7 @@ public class UserRecords extends AppCompatActivity {
         });
 
 
-
+        // button to return to main menu
         homeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -139,19 +140,19 @@ public class UserRecords extends AppCompatActivity {
     }
 
     private void selectFile(){
-        Intent intent = new Intent();
-        intent.setType("*/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(intent, 86);
+        Intent intent = new Intent(); // create intent
+        intent.setType("*/*"); // allow user to select any type of file
+        intent.setAction(Intent.ACTION_GET_CONTENT); // intent which retrieves files
+        startActivityForResult(intent, 86); // start intent, 86 is arbitrary request code
 
     }
 
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        if (requestCode==86 && resultCode==RESULT_OK && data != null){
-            fileUri = data.getData();
-            uploadName = data.getData().getLastPathSegment();
+        if (requestCode==86 && resultCode==RESULT_OK && data != null){ // check for arbitrary request code from retrieve intent
+            fileUri = data.getData(); // capture uri
+            uploadName = data.getData().getLastPathSegment(); // capture file name
         }
         else{
             Toast.makeText(UserRecords.this,"Please select file",Toast.LENGTH_SHORT).show();
@@ -160,24 +161,25 @@ public class UserRecords extends AppCompatActivity {
     }
 
     private void uploadHistory(Uri fileUri){
-        final String fileName = uploadName + ".pdf";
-        final String fileName1 = uploadName;
-        final Uri myuri = fileUri;
+        final String fileName = uploadName + ".pdf"; // upload name, add .pdf so user can download from base
+        final String fileName1 = uploadName; // file name for firebase database
         StorageReference storageReference=storage.getReference();
         final String currentUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
         StorageReference userRef = storageReference.child(currentUser);
+        // generate reference for users history folder
         final StorageReference historyUserRef = userRef.child("history").child(fileName);
 
         historyUserRef.putFile(fileUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) { // add file to firebase cloud
                 historyUserRef.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
                     @Override
-                    public void onComplete(@NonNull Task<Uri> task) {
-                        url =task.getResult().toString();
+                    public void onComplete(@NonNull Task<Uri> task) { // wait for on complete
+                        url =task.getResult().toString(); // retrieve download url
+                        // create firebase database reference
                         DatabaseReference reference = database.getReference();
                         DatabaseReference historydb = reference.child(currentUser).child("history");
-
+                        // once file is upload to cloud, store the download url in firebase database
                         historydb.child(fileName1).setValue(url).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
@@ -194,12 +196,12 @@ public class UserRecords extends AppCompatActivity {
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
-            public void onFailure(@NonNull Exception e) {
+            public void onFailure(@NonNull Exception e) { // failure message
                 Toast.makeText(UserRecords.this,"Upload failed",Toast.LENGTH_SHORT).show();
             }
         }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
             @Override
-            public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+            public void onProgress(UploadTask.TaskSnapshot taskSnapshot) { // message that file is uploading
                 Toast.makeText(UserRecords.this,"Upload In Progress",Toast.LENGTH_SHORT).show();
             }
         });
@@ -207,23 +209,25 @@ public class UserRecords extends AppCompatActivity {
     }
 
     private void uploadXray(Uri xrayUri){
-        final String fileName = uploadName + ".pdf";
-        final String fileName1 = uploadName;
+        final String fileName = uploadName + ".pdf"; // upload name, add .pdf so user can download from base
+        final String fileName1 = uploadName; // file name for firebase database
         StorageReference storageReference=storage.getReference();
         final String currentUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
         StorageReference userRef = storageReference.child(currentUser);
+        // generate reference for users history folder
         final StorageReference xrayUserRef = userRef.child("xray").child(fileName);
 
         xrayUserRef.putFile(xrayUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) { // add file to firebase cloud
                 xrayUserRef.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
                     @Override
-                    public void onComplete(@NonNull Task<Uri> task) {
-                        url =task.getResult().toString();
+                    public void onComplete(@NonNull Task<Uri> task) { // wait for on complete
+                        url =task.getResult().toString(); // retrieve download url
+                        // create firebase database reference
                         DatabaseReference reference = database.getReference();
                         DatabaseReference xraydb = reference.child(currentUser).child("xray");
-
+                        // once file is upload to cloud, store the download url in firebase database
                         xraydb.child(fileName1).setValue(url).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
@@ -239,12 +243,12 @@ public class UserRecords extends AppCompatActivity {
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
-            public void onFailure(@NonNull Exception e) {
+            public void onFailure(@NonNull Exception e) { // failure message
                 Toast.makeText(UserRecords.this,"Upload failed",Toast.LENGTH_SHORT).show();
             }
         }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
             @Override
-            public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+            public void onProgress(UploadTask.TaskSnapshot taskSnapshot) { // message that file is uploading
                 Toast.makeText(UserRecords.this,"Upload In Progress",Toast.LENGTH_SHORT).show();
             }
         });

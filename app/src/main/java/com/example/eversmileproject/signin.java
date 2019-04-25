@@ -61,7 +61,7 @@ public class signin extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        mAuth.addAuthStateListener(mAuthListner);
+        mAuth.addAuthStateListener(mAuthListner); // start firebase authenticator
         String getEmail = "Welcome to SmileKnect! Please log in.";
         setTitle(getEmail);
         Spannable text = new SpannableString(getTitle());
@@ -93,6 +93,7 @@ public class signin extends AppCompatActivity {
             }
         });
 
+        // button to move to signup screen
         btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

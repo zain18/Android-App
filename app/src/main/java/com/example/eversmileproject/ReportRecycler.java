@@ -20,13 +20,14 @@ public class ReportRecycler extends AppCompatActivity {
     RecyclerView recyclerView;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+        super.onCreate(savedInstanceState); // list view for all the items
         setContentView(R.layout.firebase_recycler);
 
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
-        String currentUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        DatabaseReference reportdb = databaseReference.child(currentUser).child("report");
+        String currentUser = FirebaseAuth.getInstance().getCurrentUser().getUid(); // reference for specific user
+        DatabaseReference reportdb = databaseReference.child(currentUser).child("report"); // reference for user doctor reports
 
+        // listener to update recycler list
         reportdb.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
@@ -58,10 +59,10 @@ public class ReportRecycler extends AppCompatActivity {
         });
 
         recyclerView = findViewById(R.id.firebaseRecycler);
-        recyclerView.setLayoutManager(new LinearLayoutManager(ReportRecycler.this));
-
+        recyclerView.setLayoutManager(new LinearLayoutManager(ReportRecycler.this)); // set up layout
+        // call the firebase adapter constructor
         FBItemAdapter myAdapter = new FBItemAdapter(recyclerView, ReportRecycler.this,new ArrayList<String>(), new ArrayList<String>());
-        recyclerView.setAdapter(myAdapter);
+        recyclerView.setAdapter(myAdapter); // set FBItemAdapter as the adapter for recycler view
 
 
     }
