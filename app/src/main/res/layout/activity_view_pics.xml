@@ -3,18 +3,38 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
     android:orientation="vertical"
     tools:context=".view_pics"
     android:id="@+id/view_pics_layout"
-    android:padding="20dp">
+    android:paddingLeft="20dp"
+    android:paddingTop="60dp"
+    android:paddingRight="20dp">
 
 
     <ImageView
         android:id="@+id/imageFaceView"
-        android:layout_width="165dp"
-        android:layout_height="165dp"
-        android:layout_centerHorizontal="true" />
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp" />
+
+    <ImageView
+        android:id="@+id/imageLeftView"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_below="@+id/faceView"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginBottom="10dp" />
+
+    <ImageView
+        android:id="@+id/imageRightView"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_below="@+id/faceView"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="10dp" />
 
     <TextView
         android:id="@+id/faceView"
@@ -22,59 +42,55 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/imageFaceView"
         android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp"
         android:background="@color/colorPrimary"
         android:text="@string/take_face"
         android:textAlignment="center"
         android:textColor="@color/white" />
 
-    <ImageView
-        android:id="@+id/imageLeftView"
-        android:layout_width="165dp"
-        android:layout_height="165dp"
-        android:layout_below="@+id/faceView"
-        android:layout_centerHorizontal="true" />
-
     <TextView
         android:id="@+id/leftView"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/imageLeftView"
-        android:layout_centerHorizontal="true"
         android:background="@color/colorPrimary"
+        android:layout_below="@id/imageLeftView"
         android:text="@string/take_left"
+        android:layout_alignParentLeft="true"
         android:textAlignment="center"
+        android:layout_marginLeft="40dp"
         android:textColor="@color/white" />
 
-    <ImageView
-        android:id="@+id/imageRightView"
-        android:layout_width="165dp"
-        android:layout_height="165dp"
-        android:layout_below="@+id/leftView"
-        android:layout_centerHorizontal="true" />
 
     <TextView
         android:id="@+id/rightView"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/imageRightView"
-        android:layout_centerHorizontal="true"
         android:background="@color/colorPrimary"
+        android:layout_alignParentRight="true"
         android:text="@string/take_right"
         android:textAlignment="center"
+        android:layout_marginRight="40dp"
+        android:layout_marginBottom="10dp"
         android:textColor="@color/white" />
+
+    <View
+        android:id="@+id/picDivider"
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:layout_below="@+id/rightView"
+        android:layout_marginBottom="10dp"
+        android:background="@color/colorAccent" />
 
     <Button
         android:id="@+id/btn_mainMenu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="0dp"
-        android:layout_marginBottom="0dp"
         android:layout_below="@id/btn_store"
         android:background="@color/colorPrimary"
-
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:text="@string/main_menu"
         android:textColor="@color/white" />
 
@@ -82,14 +98,10 @@
         android:id="@+id/btn_camera"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="false"
-        android:layout_marginStart="12dp"
-        android:layout_marginLeft="0dp"
-        android:layout_marginTop="580dp"
-        android:layout_marginEnd="0dp"
-        android:layout_marginBottom="0dp"
         android:layout_toLeftOf="@id/btn_store"
+        android:layout_below="@+id/picDivider"
         android:background="@color/colorPrimary"
+        android:layout_marginBottom="10dp"
         android:text="@string/camera"
         android:textColor="@color/white" />
 
@@ -99,27 +111,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="12dp"
-        android:layout_marginLeft="0dp"
-        android:layout_marginTop="580dp"
-        android:layout_marginEnd="0dp"
-        android:layout_marginRight="0dp"
-        android:layout_marginBottom="0dp"
+        android:layout_below="@+id/picDivider"
         android:background="@color/colorPrimary"
         android:text="@string/store"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="10dp"
+
         android:textColor="@color/white" />
 
     <Button
         android:id="@+id/btn_note"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="false"
-        android:layout_marginStart="12dp"
-        android:layout_marginLeft="0dp"
-        android:layout_marginTop="580dp"
-        android:layout_marginEnd="0dp"
-        android:layout_marginBottom="0dp"
-        android:layout_toRightOf="@id/btn_store"
+        android:layout_below="@+id/btn_camera"
+        android:layout_toLeftOf="@id/btn_mainMenu"
         android:background="@color/colorPrimary"
         android:text="@string/note"
         android:textColor="@color/white" />
@@ -128,15 +133,10 @@
         android:id="@+id/btn_find"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginLeft="0dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginRight="0dp"
-        android:layout_marginBottom="0dp"
         android:layout_toRightOf="@id/btn_mainMenu"
-        android:layout_below="@id/btn_camera"
-        android:layout_centerHorizontal="false"
+        android:layout_below="@+id/picDivider"
         android:background="@color/colorPrimary"
         android:text="Find\nYour Smile"
+        android:layout_marginBottom="10dp"
         android:textColor="@color/white" />
 </RelativeLayout>
