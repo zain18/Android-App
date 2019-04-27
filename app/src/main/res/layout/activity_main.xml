@@ -104,7 +104,7 @@
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="match_parent"
-        android:layout_height="175dp"
+        android:layout_height="150dp"
         android:layout_above="@+id/divider2"
         android:layout_centerHorizontal="false"
         android:layout_marginEnd="0dp"
@@ -115,15 +115,28 @@
         android:id="@+id/profile_image"
         android:layout_width="70dp"
         android:layout_height="70dp"
-        android:layout_marginStart="0dp"
         android:layout_above="@+id/divider3"
-        android:layout_marginBottom="10dp"
+        android:layout_marginStart="0dp"
         android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         android:clickable="true"
-        android:src="@drawable/rohitpic"
+        android:src="@color/white"
         android:state_pressed="true"
         app:civ_border_color="@color/colorAccent"
         app:civ_border_width="5dp" />
+
+    <!--<ImageView
+        android:id="@+id/profile_image"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_above="@+id/divider3"
+        android:layout_marginStart="0dp"
+        android:layout_marginBottom="10dp"
+        android:clickable="true"
+        android:src="@drawable/rohitpic"
+        android:state_pressed="true"
+        android:scaleType="centerCrop"
+        />-->
 
 
 </RelativeLayout>

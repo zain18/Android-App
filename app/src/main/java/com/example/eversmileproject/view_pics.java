@@ -3,15 +3,14 @@ package com.example.eversmileproject;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-
-import android.net.Uri;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.storage.FirebaseStorage;
@@ -51,14 +50,14 @@ public class view_pics extends AppCompatActivity{
         // Initialize layout elements
         setContentView(R.layout.activity_view_pics);
         openDialog("Don't forget to upload your photos!");
-        mainMenuBtn = (Button) findViewById(R.id.btn_mainMenu);
-        cameraBtn = (Button) findViewById(R.id.btn_camera);
-        storeBtn = (Button) findViewById(R.id.btn_store);
-        noteBtn = (Button) findViewById(R.id.btn_note);
-        findBtn = (Button) findViewById(R.id.btn_find);
-        faceView = (ImageView) findViewById(R.id.imageFaceView);
-        leftView = (ImageView) findViewById(R.id.imageLeftView);
-        rightView = (ImageView) findViewById(R.id.imageRightView);
+        mainMenuBtn = findViewById(R.id.btn_mainMenu);
+        cameraBtn = findViewById(R.id.btn_camera);
+        storeBtn = findViewById(R.id.btn_store);
+        noteBtn = findViewById(R.id.btn_note);
+        findBtn = findViewById(R.id.btn_find);
+        faceView = findViewById(R.id.imageFaceView);
+        leftView = findViewById(R.id.imageLeftView);
+        rightView = findViewById(R.id.imageRightView);
         faceView.setImageBitmap(BitmapFactory.decodeFile(Environment.getExternalStorageDirectory()+"/face.jpg"));
         leftView.setImageBitmap(BitmapFactory.decodeFile(Environment.getExternalStorageDirectory()+"/left.jpg"));
         rightView.setImageBitmap(BitmapFactory.decodeFile(Environment.getExternalStorageDirectory()+"/right.jpg"));
@@ -76,8 +75,6 @@ public class view_pics extends AppCompatActivity{
         final Uri faceFile = Uri.fromFile(new File(Environment.getExternalStorageDirectory()+"/" + userName +"face.jpg"));
         final Uri leftFile = Uri.fromFile(new File(Environment.getExternalStorageDirectory()+"/" + userName + "face.jpg"));
         final Uri rightFile = Uri.fromFile(new File(Environment.getExternalStorageDirectory()+"/" + userName + "face.jpg"));
-
-
 
         // Buttons to switch activities
         mainMenuBtn.setOnClickListener(new View.OnClickListener() {

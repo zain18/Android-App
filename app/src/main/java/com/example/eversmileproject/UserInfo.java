@@ -7,15 +7,12 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -24,12 +21,18 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.Continuation;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -57,7 +60,8 @@ public class UserInfo extends AppCompatActivity {
     private static final String PHONE_KEY = "Phone";
     private static final String AGE_KEY = "Age";
     private static final String ADDRESS_KEY = "Address";
-    CircleImageView circleImageView;
+    CircleImageView profileView;
+    //private ImageView profileView;
     int REQUEST_CAMERA = 0, SELECT_FILE = 1;
 
     @Override
@@ -75,8 +79,36 @@ public class UserInfo extends AppCompatActivity {
         recordBtn = findViewById(R.id.recordBtn);
         db = FirebaseFirestore.getInstance();
 
-        circleImageView = findViewById(R.id.profile_image);
+        profileView = findViewById(R.id.profile_image);
 
+        final String userName = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+        profileView = findViewById(R.id.profile_image);
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        StorageReference storageRef = storage.getReference();
+        String currentUser = FirebaseAuth.getInstance().getCurrentUser().getUid(); // unique reference for user
+        StorageReference userRef = storageRef.child(currentUser);
+        StorageReference imagesUserRef = userRef.child("images");
+        final StorageReference profileRef = imagesUserRef.child(userName + "profile.jpg");
+
+        File localFile = new File(Environment.getExternalStorageDirectory() + "/" + userName + "temp.jpg");
+
+        profileRef.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                // Local temp file has been created
+/*                Glide
+                        .with(MainActivity.this)
+                        .load(tempUri) // the uri you got from Firebase
+                        .into(profileView);*/
+                profileView.setImageBitmap(BitmapFactory.decodeFile(Environment.getExternalStorageDirectory() + "/" + userName + "temp.jpg"));
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                // Handle any errors
+            }
+        });
         Submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -132,7 +164,7 @@ public class UserInfo extends AppCompatActivity {
             }
         });
 
-        circleImageView.setOnClickListener(new View.OnClickListener() {
+        profileView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 selectImage();
@@ -167,21 +199,68 @@ public class UserInfo extends AppCompatActivity {
         builder.show();
     }
 
+    public void openDialog(String dialog) {
+        android.support.v7.app.AlertDialog.Builder alertDialogBuilder = new android.support.v7.app.AlertDialog.Builder(this);
+        alertDialogBuilder.setMessage(dialog);
+
+        alertDialogBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface arg0, int arg1) {
+            }
+        });
+
+        android.support.v7.app.AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
+    }
+
     protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        StorageReference storageRef = storage.getReference();
+        String currentUser = FirebaseAuth.getInstance().getCurrentUser().getUid(); // unique reference for user
+        String userName = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+        StorageReference userRef = storageRef.child(currentUser);
+        StorageReference imagesUserRef = userRef.child("images");
+        final StorageReference profileRef = imagesUserRef.child(userName + "profile.jpg");
+        final Uri profileFile = Uri.fromFile(new File(Environment.getExternalStorageDirectory() + "/" + userName + "profile.jpg"));
+
+
+
+
         if (resultCode == Activity.RESULT_OK) {
-            if (requestCode == SELECT_FILE)
-                onSelectFromGalleryResult(data);
-            else if (requestCode == REQUEST_CAMERA)
-                onCaptureImageResult(data);
+
+            if (requestCode == SELECT_FILE || requestCode == REQUEST_CAMERA) {
+                if (requestCode == SELECT_FILE)
+                    onSelectFromGalleryResult(data);
+
+                else if (requestCode == REQUEST_CAMERA)
+                    onCaptureImageResult(data);
+
+                profileRef.putFile(profileFile).continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+                    @Override
+                    public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                        if (!task.isSuccessful()) {
+                            throw task.getException();
+                        }
+                        return profileRef.getDownloadUrl();
+                    }
+                }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Uri> task) {
+                        if (task.isSuccessful()) {
+                            Uri downloadUri = task.getResult();
+                            Glide
+                                    .with(UserInfo.this)
+                                    .load(downloadUri) // the uri you got from Firebase
+                                    .into(profileView);
+                        } else {
+                            Toast.makeText(UserInfo.this, "Upload failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+                openDialog("Profile Picture Changed!");
+            }
         }
-
-        Uri selectedImageUri = data.getData();
-
-        Intent _intent = new Intent(UserInfo.this, MainActivity.class);
-        _intent.putExtra("imageUri", selectedImageUri);
-        startActivity(_intent);
-        this.finish();
     }
 
     private void onSelectFromGalleryResult(Intent data) {
@@ -193,6 +272,7 @@ public class UserInfo extends AppCompatActivity {
         int column_index = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DATA);
         cursor.moveToFirst();
         String selectedImagePath = cursor.getString(column_index);
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         Bitmap thumbnail;
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds = true;
@@ -206,16 +286,9 @@ public class UserInfo extends AppCompatActivity {
         options.inJustDecodeBounds = false;
         thumbnail = BitmapFactory.decodeFile(selectedImagePath, options);
 
-        Drawable drawable = new BitmapDrawable(getResources(), thumbnail);
-        circleImageView.setImageDrawable(drawable);
-    }
-
-    private void onCaptureImageResult(Intent data) {
-        Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
-        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         thumbnail.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
-        File destination = new File(Environment.getExternalStorageDirectory(),
-                System.currentTimeMillis() + ".jpg");
+        final String userName = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+        File destination = new File(Environment.getExternalStorageDirectory() + "/" + userName + "profile.jpg");
         FileOutputStream fo;
         try {
             destination.createNewFile();
@@ -227,19 +300,25 @@ public class UserInfo extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        //Convert bitmap to drawable
-        Drawable drawable = new BitmapDrawable(getResources(), thumbnail);
-        circleImageView.setImageDrawable(drawable);
     }
 
-    public Bitmap convertToBitmap(Drawable drawable, int widthPixels, int heightPixels) {
-        Bitmap mutableBitmap = Bitmap.createBitmap(widthPixels, heightPixels, Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(mutableBitmap);
-        drawable.setBounds(0, 0, widthPixels, heightPixels);
-        drawable.draw(canvas);
-
-        return mutableBitmap;
+    private void onCaptureImageResult(Intent data) {
+        Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        thumbnail.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
+        final String userName = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+        File destination = new File(Environment.getExternalStorageDirectory() + "/" + userName + "profile.jpg");
+        FileOutputStream fo;
+        try {
+            destination.createNewFile();
+            fo = new FileOutputStream(destination);
+            fo.write(bytes.toByteArray());
+            fo.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void addNewContact(String name, String email, String age, String phone, String Address) {
