@@ -2,16 +2,19 @@ package com.example.eversmileproject;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
@@ -64,6 +67,7 @@ public class UserInfo extends AppCompatActivity {
     //private ImageView profileView;
     int REQUEST_CAMERA = 0, SELECT_FILE = 1;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,7 +94,7 @@ public class UserInfo extends AppCompatActivity {
         StorageReference imagesUserRef = userRef.child("images");
         final StorageReference profileRef = imagesUserRef.child(userName + "profile.jpg");
 
-        File localFile = new File(Environment.getExternalStorageDirectory() + "/" + userName + "temp.jpg");
+        File localFile = new File(getApplicationContext().getFilesDir().getPath() + "/" + userName + "profile.jpg");
 
         profileRef.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
             @Override
@@ -100,7 +104,7 @@ public class UserInfo extends AppCompatActivity {
                         .with(MainActivity.this)
                         .load(tempUri) // the uri you got from Firebase
                         .into(profileView);*/
-                profileView.setImageBitmap(BitmapFactory.decodeFile(Environment.getExternalStorageDirectory() + "/" + userName + "temp.jpg"));
+                profileView.setImageBitmap(BitmapFactory.decodeFile(getApplicationContext().getFilesDir().getPath() + "/" + userName + "profile.jpg"));
 
             }
         }).addOnFailureListener(new OnFailureListener() {
@@ -118,6 +122,7 @@ public class UserInfo extends AppCompatActivity {
                 String email = Email.getText().toString();
                 String address = Address.getText().toString();
                 String phone = Phone.getText().toString();
+
 
                 if (TextUtils.isEmpty(fullname)) {
                     Toast.makeText(getApplicationContext(), "Please enter your Full Name ", Toast.LENGTH_SHORT).show();
@@ -180,8 +185,18 @@ public class UserInfo extends AppCompatActivity {
         builder.setItems(items, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int item) {
+
+
+                Context context = UserInfo.this;
+
+                if (ContextCompat.checkSelfPermission(context, android.Manifest.permission.CAMERA)
+                        == PackageManager.PERMISSION_DENIED) {
+                    ActivityCompat.requestPermissions(UserInfo.this, new String[]{android.Manifest.permission.CAMERA}, REQUEST_CAMERA);
+                }
+
                 if (items[item].equals("Take Photo")) {
                     Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
                     startActivityForResult(intent, REQUEST_CAMERA);
                 } else if (items[item].equals("Choose from Library")) {
                     Intent intent = new Intent(
@@ -214,6 +229,7 @@ public class UserInfo extends AppCompatActivity {
     }
 
     protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
+        Context context = UserInfo.this;
         super.onActivityResult(requestCode, resultCode, data);
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference storageRef = storage.getReference();
@@ -222,10 +238,13 @@ public class UserInfo extends AppCompatActivity {
         StorageReference userRef = storageRef.child(currentUser);
         StorageReference imagesUserRef = userRef.child("images");
         final StorageReference profileRef = imagesUserRef.child(userName + "profile.jpg");
-        final Uri profileFile = Uri.fromFile(new File(Environment.getExternalStorageDirectory() + "/" + userName + "profile.jpg"));
+        final Uri profileFile = Uri.fromFile(new File(getApplicationContext().getFilesDir().getPath() + "/" + userName + "profile.jpg"));
+        //final Uri profileFile = FileProvider.getUriForFile(context, context.getApplicationContext().getPackageName() + ".provider", new File(getApplicationContext().getFilesDir().getPath() + "/" + userName + "profile.jpg"));
 
-
-
+        /*if (ContextCompat.checkSelfPermission(context, android.Manifest.permission.CAMERA)
+                == PackageManager.PERMISSION_DENIED) {
+            ActivityCompat.requestPermissions(UserInfo.this, new String[] {android.Manifest.permission.CAMERA}, requestCode);
+        }*/
 
         if (resultCode == Activity.RESULT_OK) {
 
@@ -288,10 +307,10 @@ public class UserInfo extends AppCompatActivity {
 
         thumbnail.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
         final String userName = FirebaseAuth.getInstance().getCurrentUser().getEmail();
-        File destination = new File(Environment.getExternalStorageDirectory() + "/" + userName + "profile.jpg");
+        File destination = new File(getApplicationContext().getFilesDir().getPath() + "/" + userName + "profile.jpg");
         FileOutputStream fo;
         try {
-            destination.createNewFile();
+            //destination.createNewFile();
             fo = new FileOutputStream(destination);
             fo.write(bytes.toByteArray());
             fo.close();
@@ -307,10 +326,10 @@ public class UserInfo extends AppCompatActivity {
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         thumbnail.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
         final String userName = FirebaseAuth.getInstance().getCurrentUser().getEmail();
-        File destination = new File(Environment.getExternalStorageDirectory() + "/" + userName + "profile.jpg");
+        File destination = new File(getApplicationContext().getFilesDir().getPath() + "/" + userName + "profile.jpg");
         FileOutputStream fo;
         try {
-            destination.createNewFile();
+            //destination.createNewFile();
             fo = new FileOutputStream(destination);
             fo.write(bytes.toByteArray());
             fo.close();
