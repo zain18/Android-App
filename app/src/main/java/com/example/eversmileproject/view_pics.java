@@ -58,15 +58,16 @@ public class view_pics extends AppCompatActivity{
         faceView = findViewById(R.id.imageFaceView);
         leftView = findViewById(R.id.imageLeftView);
         rightView = findViewById(R.id.imageRightView);
-        faceView.setImageBitmap(BitmapFactory.decodeFile(Environment.getExternalStorageDirectory()+"/face.jpg"));
-        leftView.setImageBitmap(BitmapFactory.decodeFile(Environment.getExternalStorageDirectory()+"/left.jpg"));
-        rightView.setImageBitmap(BitmapFactory.decodeFile(Environment.getExternalStorageDirectory()+"/right.jpg"));
+        String userName = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+        faceView.setImageBitmap(BitmapFactory.decodeFile(Environment.getExternalStorageDirectory()+"/" + userName+ "face.jpg"));
+        leftView.setImageBitmap(BitmapFactory.decodeFile(Environment.getExternalStorageDirectory()+"/" + userName + "left.jpg"));
+        rightView.setImageBitmap(BitmapFactory.decodeFile(Environment.getExternalStorageDirectory()+"/" + userName + "right.jpg"));
 
         //Create Firebase storage references
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference storageRef = storage.getReference();
         String currentUser = FirebaseAuth.getInstance().getCurrentUser().getUid(); // unique reference for user
-        String userName = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+
         StorageReference userRef = storageRef.child(currentUser);
         StorageReference imagesUserRef = userRef.child("images");
         final StorageReference faceRef = imagesUserRef.child(userName + "face.jpg");
