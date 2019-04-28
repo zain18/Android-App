@@ -11,10 +11,10 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
@@ -25,17 +25,11 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.google.android.gms.tasks.Continuation;
-import com.google.android.gms.tasks.OnCompleteListener;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.storage.FileDownloadTask;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -68,6 +62,17 @@ public class UserInfo extends AppCompatActivity {
     int REQUEST_CAMERA = 0, SELECT_FILE = 1;
 
 
+    public static boolean hasPermissions(Context context, String... permissions) {
+        if (context != null && permissions != null) {
+            for (String permission : permissions) {
+                if (ActivityCompat.checkSelfPermission(context, permission) != PackageManager.PERMISSION_GRANTED) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,34 +90,17 @@ public class UserInfo extends AppCompatActivity {
 
         profileView = findViewById(R.id.profile_image);
 
-        final String userName = FirebaseAuth.getInstance().getCurrentUser().getEmail();
-        profileView = findViewById(R.id.profile_image);
-        FirebaseStorage storage = FirebaseStorage.getInstance();
-        StorageReference storageRef = storage.getReference();
-        String currentUser = FirebaseAuth.getInstance().getCurrentUser().getUid(); // unique reference for user
-        StorageReference userRef = storageRef.child(currentUser);
-        StorageReference imagesUserRef = userRef.child("images");
-        final StorageReference profileRef = imagesUserRef.child(userName + "profile.jpg");
+        File imgFile = new File(Environment.getExternalStorageDirectory() + "/profile.jpg");
 
-        File localFile = new File(getApplicationContext().getFilesDir().getPath() + "/" + userName + "profile.jpg");
+        if (imgFile.exists()) {
+            Glide.with(UserInfo.this)
+                    .load(imgFile)
+                    .apply(new RequestOptions()
+                            .diskCacheStrategy(DiskCacheStrategy.NONE)
+                            .skipMemoryCache(true))
+                    .into(profileView);
+        }
 
-        profileRef.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                // Local temp file has been created
-/*                Glide
-                        .with(MainActivity.this)
-                        .load(tempUri) // the uri you got from Firebase
-                        .into(profileView);*/
-                profileView.setImageBitmap(BitmapFactory.decodeFile(getApplicationContext().getFilesDir().getPath() + "/" + userName + "profile.jpg"));
-
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception exception) {
-                // Handle any errors
-            }
-        });
         Submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -122,7 +110,6 @@ public class UserInfo extends AppCompatActivity {
                 String email = Email.getText().toString();
                 String address = Address.getText().toString();
                 String phone = Phone.getText().toString();
-
 
                 if (TextUtils.isEmpty(fullname)) {
                     Toast.makeText(getApplicationContext(), "Please enter your Full Name ", Toast.LENGTH_SHORT).show();
@@ -148,7 +135,6 @@ public class UserInfo extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Please enter your Phone Number ", Toast.LENGTH_SHORT).show();
                     return;
                 }
-
                 addNewContact(fullname, email, age, phone, address);
             }
 
@@ -178,6 +164,20 @@ public class UserInfo extends AppCompatActivity {
     }
 
     private void selectImage() {
+
+        Context context = UserInfo.this;
+        int PERMISSION_ALL = 1;
+        String[] PERMISSIONS = {
+                android.Manifest.permission.READ_EXTERNAL_STORAGE,
+                android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                android.Manifest.permission.CAMERA
+        };
+
+        if (!hasPermissions(this, PERMISSIONS)) {
+            ActivityCompat.requestPermissions(this, PERMISSIONS, PERMISSION_ALL);
+        }
+
+
         final CharSequence[] items = { "Take Photo", "Choose from Library",
                 "Cancel" };
         AlertDialog.Builder builder = new AlertDialog.Builder(UserInfo.this);
@@ -185,14 +185,6 @@ public class UserInfo extends AppCompatActivity {
         builder.setItems(items, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int item) {
-
-
-                Context context = UserInfo.this;
-
-                if (ContextCompat.checkSelfPermission(context, android.Manifest.permission.CAMERA)
-                        == PackageManager.PERMISSION_DENIED) {
-                    ActivityCompat.requestPermissions(UserInfo.this, new String[]{android.Manifest.permission.CAMERA}, REQUEST_CAMERA);
-                }
 
                 if (items[item].equals("Take Photo")) {
                     Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -203,6 +195,7 @@ public class UserInfo extends AppCompatActivity {
                             Intent.ACTION_PICK,
                             android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                     intent.setType("image/*");
+
                     startActivityForResult(
                             Intent.createChooser(intent, "Select File"),
                             SELECT_FILE);
@@ -229,56 +222,14 @@ public class UserInfo extends AppCompatActivity {
     }
 
     protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
-        Context context = UserInfo.this;
         super.onActivityResult(requestCode, resultCode, data);
-        FirebaseStorage storage = FirebaseStorage.getInstance();
-        StorageReference storageRef = storage.getReference();
-        String currentUser = FirebaseAuth.getInstance().getCurrentUser().getUid(); // unique reference for user
-        String userName = FirebaseAuth.getInstance().getCurrentUser().getEmail();
-        StorageReference userRef = storageRef.child(currentUser);
-        StorageReference imagesUserRef = userRef.child("images");
-        final StorageReference profileRef = imagesUserRef.child(userName + "profile.jpg");
-        final Uri profileFile = Uri.fromFile(new File(getApplicationContext().getFilesDir().getPath() + "/" + userName + "profile.jpg"));
-        //final Uri profileFile = FileProvider.getUriForFile(context, context.getApplicationContext().getPackageName() + ".provider", new File(getApplicationContext().getFilesDir().getPath() + "/" + userName + "profile.jpg"));
-
-        /*if (ContextCompat.checkSelfPermission(context, android.Manifest.permission.CAMERA)
-                == PackageManager.PERMISSION_DENIED) {
-            ActivityCompat.requestPermissions(UserInfo.this, new String[] {android.Manifest.permission.CAMERA}, requestCode);
-        }*/
 
         if (resultCode == Activity.RESULT_OK) {
-
-            if (requestCode == SELECT_FILE || requestCode == REQUEST_CAMERA) {
                 if (requestCode == SELECT_FILE)
                     onSelectFromGalleryResult(data);
 
                 else if (requestCode == REQUEST_CAMERA)
                     onCaptureImageResult(data);
-
-                profileRef.putFile(profileFile).continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
-                    @Override
-                    public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
-                        if (!task.isSuccessful()) {
-                            throw task.getException();
-                        }
-                        return profileRef.getDownloadUrl();
-                    }
-                }).addOnCompleteListener(new OnCompleteListener<Uri>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Uri> task) {
-                        if (task.isSuccessful()) {
-                            Uri downloadUri = task.getResult();
-                            Glide
-                                    .with(UserInfo.this)
-                                    .load(downloadUri) // the uri you got from Firebase
-                                    .into(profileView);
-                        } else {
-                            Toast.makeText(UserInfo.this, "Upload failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
-                openDialog("Profile Picture Changed!");
-            }
         }
     }
 
@@ -303,14 +254,13 @@ public class UserInfo extends AppCompatActivity {
             scale *= 2;
         options.inSampleSize = scale;
         options.inJustDecodeBounds = false;
-        thumbnail = BitmapFactory.decodeFile(selectedImagePath, options);
 
+        thumbnail = BitmapFactory.decodeFile(selectedImagePath, options);
         thumbnail.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
-        final String userName = FirebaseAuth.getInstance().getCurrentUser().getEmail();
-        File destination = new File(getApplicationContext().getFilesDir().getPath() + "/" + userName + "profile.jpg");
+        File destination = new File(Environment.getExternalStorageDirectory() + "/profile.jpg");
         FileOutputStream fo;
         try {
-            //destination.createNewFile();
+            destination.createNewFile();
             fo = new FileOutputStream(destination);
             fo.write(bytes.toByteArray());
             fo.close();
@@ -319,17 +269,33 @@ public class UserInfo extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        profileView.setImageBitmap(thumbnail);
+
+        if (destination.exists()) {
+            Glide.with(UserInfo.this)
+                    .load(thumbnail)
+                    .apply(new RequestOptions()
+                            .placeholder(R.drawable.avatar_placeholder))
+                    .into(profileView);
+        }
+
+        /*Intent i = new Intent(this, MainActivity.class);
+        Bitmap b; // your bitmap
+        ByteArrayOutputStream bs = new ByteArrayOutputStream();
+        thumbnail.compress(Bitmap.CompressFormat.PNG, 50, bs);
+        i.putExtra("byteArray", bs.toByteArray());
+        startActivity(i);*/
     }
 
     private void onCaptureImageResult(Intent data) {
         Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         thumbnail.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
-        final String userName = FirebaseAuth.getInstance().getCurrentUser().getEmail();
-        File destination = new File(getApplicationContext().getFilesDir().getPath() + "/" + userName + "profile.jpg");
+        File destination = new File(Environment.getExternalStorageDirectory() + "/profile.jpg");
         FileOutputStream fo;
         try {
-            //destination.createNewFile();
+            destination.createNewFile();
             fo = new FileOutputStream(destination);
             fo.write(bytes.toByteArray());
             fo.close();
@@ -338,6 +304,23 @@ public class UserInfo extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        profileView.setImageBitmap(thumbnail);
+
+        if (destination.exists()) {
+            Glide.with(UserInfo.this)
+                    .load(thumbnail)
+                    .apply(new RequestOptions()
+                            .placeholder(R.drawable.avatar_placeholder))
+                    .into(profileView);
+        }
+
+        /*Intent i = new Intent(this, MainActivity.class);
+        Bitmap b; // your bitmap
+        ByteArrayOutputStream bs = new ByteArrayOutputStream();
+        thumbnail.compress(Bitmap.CompressFormat.PNG, 50, bs);
+        i.putExtra("byteArray", bs.toByteArray());
+        startActivity(i);*/
     }
 
     private void addNewContact(String name, String email, String age, String phone, String Address) {

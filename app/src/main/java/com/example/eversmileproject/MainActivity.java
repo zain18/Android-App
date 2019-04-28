@@ -1,11 +1,10 @@
 package com.example.eversmileproject;
 
 import android.content.Intent;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Spannable;
@@ -15,16 +14,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.storage.FileDownloadTask;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -56,7 +51,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-
         //TextView userName = (TextView) findViewById(R.id.userName);
         Button button = findViewById(R.id.signout);
         Button ShareBtn = findViewById(R.id.ShareBtn);
@@ -64,9 +58,28 @@ public class MainActivity extends AppCompatActivity {
         Button findBtn = findViewById(R.id.FindBtn);
         Button appointment = findViewById(R.id.appointment);
 
+        //profileView = findViewById(R.id.profile_image);
+
         profileView = findViewById(R.id.profile_image);
 
-        final File localFile = new File(getApplicationContext().getFilesDir().getPath() + "/" + userName + "profile.jpg");
+        File imgFile = new File(Environment.getExternalStorageDirectory() + "/profile.jpg");
+
+        if (imgFile.exists()) {
+            Glide.with(MainActivity.this)
+                    .load(imgFile)
+                    .apply(new RequestOptions()
+                            .diskCacheStrategy(DiskCacheStrategy.NONE)
+                            .skipMemoryCache(true))
+                    .into(profileView);
+        }
+
+        /*if (getIntent().hasExtra("byteArray")) {
+            Bitmap b = BitmapFactory.decodeByteArray(
+                    getIntent().getByteArrayExtra("byteArray"), 0, getIntent().getByteArrayExtra("byteArray").length);
+            profileView.setImageBitmap(b);
+        }*/
+
+        /*final File localFile = new File(getApplicationContext().getFilesDir().getPath() + "/profile.jpg");
         if (!localFile.getParentFile().exists())
             localFile.getParentFile().mkdirs();
         if (!localFile.exists())
@@ -76,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
                 e.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
-            }
+            }*/
 
 
         mAuth = FirebaseAuth.getInstance(); // create instance of Firebase Authentication
@@ -88,34 +101,11 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(new Intent(MainActivity.this, signin.class));
                 } else { // else, get user email
                     getEmail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
-                    final String userName = FirebaseAuth.getInstance().getCurrentUser().getEmail();
-                    FirebaseStorage storage = FirebaseStorage.getInstance();
-                    StorageReference storageRef = storage.getReference();
-                    String currentUser = FirebaseAuth.getInstance().getCurrentUser().getUid(); // unique reference for user
-                    StorageReference userRef = storageRef.child(currentUser);
-                    StorageReference imagesUserRef = userRef.child("images");
-                    StorageReference profileRef = imagesUserRef.child(userName + "profile.jpg");
-
-                    final Uri tempUri = Uri.fromFile(localFile);
-
-                    profileRef.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-                        @Override
-                        public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                            // Local temp file has been created
-                            profileView.setImageBitmap(BitmapFactory.decodeFile(getApplicationContext().getFilesDir().getPath() + "/" + userName + "profile.jpg"));
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception exception) {
-                            // Handle any errors
-                        }
-                    });
                 }
                 setTitle(getEmail); // display email as user name
                 Spannable text = new SpannableString(getTitle());
                 text.setSpan(new ForegroundColorSpan(Color.WHITE), 0, text.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
                 setTitle(text);
-
 
             }
         };
@@ -171,46 +161,16 @@ public class MainActivity extends AppCompatActivity {
     public void onRestart() {
         super.onRestart();
         profileView = findViewById(R.id.profile_image);
-        mAuth = FirebaseAuth.getInstance(); // create instance of Firebase Authentication
-        mAuthListner = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) { // check that user has credentials
-                String getEmail = "Welcome to SmileKnect! Please Log in.";
-                if (firebaseAuth.getCurrentUser() == null) { // if not current user, redirect to sign in
-                    startActivity(new Intent(MainActivity.this, signin.class));
-                } else { // else, get user email
-                    getEmail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
-                    final String userName = FirebaseAuth.getInstance().getCurrentUser().getEmail();
-                    FirebaseStorage storage = FirebaseStorage.getInstance();
-                    StorageReference storageRef = storage.getReference();
-                    String currentUser = FirebaseAuth.getInstance().getCurrentUser().getUid(); // unique reference for user
-                    StorageReference userRef = storageRef.child(currentUser);
-                    StorageReference imagesUserRef = userRef.child("images");
-                    final StorageReference profileRef = imagesUserRef.child(userName + "profile.jpg");
 
-                    File localFile = new File(getApplicationContext().getFilesDir().getPath() + "/" + userName + "profile.jpg");
-                    final Uri tempUri = Uri.fromFile(localFile);
+        File imgFile = new File(Environment.getExternalStorageDirectory() + "/profile.jpg");
 
-                    profileRef.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-                        @Override
-                        public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                            // Local temp file has been created
-                            profileView.setImageBitmap(BitmapFactory.decodeFile(getApplicationContext().getFilesDir().getPath() + "/" + userName + "profile.jpg"));
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception exception) {
-                            // Handle any errors
-                        }
-                    });
-                }
-                setTitle(getEmail); // display email as user name
-                Spannable text = new SpannableString(getTitle());
-                text.setSpan(new ForegroundColorSpan(Color.WHITE), 0, text.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
-                setTitle(text);
-
-
-            }
-        };
+        if (imgFile.exists()) {
+            Glide.with(MainActivity.this)
+                    .load(imgFile)
+                    .apply(new RequestOptions()
+                            .diskCacheStrategy(DiskCacheStrategy.NONE)
+                            .skipMemoryCache(true))
+                    .into(profileView);
+        }
     }
 }
