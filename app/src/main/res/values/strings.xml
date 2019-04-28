@@ -15,9 +15,9 @@
     <string name="shareBtn">Share Your Smile</string>
     <string name="facebook_app_id">2129225573819941</string>
     <string name="fb_login_protocol_scheme">fb2129225573819941</string>
-    <string name="take_face">Face Photo</string>
-    <string name="take_left">Left Photo</string>
-    <string name="take_right">Right Photo</string>
+    <string name="take_face">Face\nPhoto</string>
+    <string name="take_left">Left\nPhoto</string>
+    <string name="take_right">Right\nPhoto</string>
     <string name="view_pics">Gallery</string>
     <string name="everSmile_title">SmileKnect</string>
     <string name="main_menu">Home</string>

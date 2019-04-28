@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".see_eversmile"
+    android:paddingBottom="40dp"
     >
 
     <TextureView
@@ -17,24 +18,23 @@
 
     <Button
         android:id="@+id/btn_takepicture"
-        android:layout_width="100dp"
-        android:layout_height="25dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="20dp"
         android:background="@color/colorPrimary"
         android:text="@string/take_face"
+        android:padding="5dp"
         android:textColor="@color/white" />
 
     <Button
         android:id="@+id/btn_leftpicture"
-        android:layout_width="100dp"
-        android:layout_height="25dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_marginTop="0dp"
         android:layout_marginRight="10dp"
-        android:layout_marginBottom="20dp"
         android:layout_toLeftOf="@id/btn_takepicture"
         android:background="@color/colorPrimary"
         android:text="@string/take_left"
@@ -42,12 +42,11 @@
 
     <Button
         android:id="@+id/btn_rightpicture"
-        android:layout_width="100dp"
-        android:layout_height="25dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="0dp"
-        android:layout_marginBottom="20dp"
         android:layout_toRightOf="@id/btn_takepicture"
         android:background="@color/colorPrimary"
         android:text="@string/take_right"
@@ -55,8 +54,8 @@
 
     <Button
         android:id="@+id/btn_viewpics"
-        android:layout_width="100dp"
-        android:layout_height="25dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_above="@id/btn_takepicture"
         android:layout_alignEnd="@+id/btn_takepicture"
         android:layout_marginTop="20dp"
