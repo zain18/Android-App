@@ -279,13 +279,6 @@ public class UserInfo extends AppCompatActivity {
                             .placeholder(R.drawable.avatar_placeholder))
                     .into(profileView);
         }
-
-        /*Intent i = new Intent(this, MainActivity.class);
-        Bitmap b; // your bitmap
-        ByteArrayOutputStream bs = new ByteArrayOutputStream();
-        thumbnail.compress(Bitmap.CompressFormat.PNG, 50, bs);
-        i.putExtra("byteArray", bs.toByteArray());
-        startActivity(i);*/
     }
 
     private void onCaptureImageResult(Intent data) {
@@ -314,13 +307,6 @@ public class UserInfo extends AppCompatActivity {
                             .placeholder(R.drawable.avatar_placeholder))
                     .into(profileView);
         }
-
-        /*Intent i = new Intent(this, MainActivity.class);
-        Bitmap b; // your bitmap
-        ByteArrayOutputStream bs = new ByteArrayOutputStream();
-        thumbnail.compress(Bitmap.CompressFormat.PNG, 50, bs);
-        i.putExtra("byteArray", bs.toByteArray());
-        startActivity(i);*/
     }
 
     private void addNewContact(String name, String email, String age, String phone, String Address) {

@@ -50,15 +50,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-        //TextView userName = (TextView) findViewById(R.id.userName);
         Button button = findViewById(R.id.signout);
         Button ShareBtn = findViewById(R.id.ShareBtn);
         Button seeBtn = findViewById(R.id.SeeBtn);
         Button findBtn = findViewById(R.id.FindBtn);
         Button appointment = findViewById(R.id.appointment);
-
-        //profileView = findViewById(R.id.profile_image);
 
         profileView = findViewById(R.id.profile_image);
 
@@ -72,25 +68,6 @@ public class MainActivity extends AppCompatActivity {
                             .skipMemoryCache(true))
                     .into(profileView);
         }
-
-        /*if (getIntent().hasExtra("byteArray")) {
-            Bitmap b = BitmapFactory.decodeByteArray(
-                    getIntent().getByteArrayExtra("byteArray"), 0, getIntent().getByteArrayExtra("byteArray").length);
-            profileView.setImageBitmap(b);
-        }*/
-
-        /*final File localFile = new File(getApplicationContext().getFilesDir().getPath() + "/profile.jpg");
-        if (!localFile.getParentFile().exists())
-            localFile.getParentFile().mkdirs();
-        if (!localFile.exists())
-            try {
-                localFile.createNewFile();
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }*/
-
 
         mAuth = FirebaseAuth.getInstance(); // create instance of Firebase Authentication
         mAuthListner = new FirebaseAuth.AuthStateListener() {
