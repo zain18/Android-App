@@ -58,9 +58,7 @@ public class UserInfo extends AppCompatActivity {
     private static final String AGE_KEY = "Age";
     private static final String ADDRESS_KEY = "Address";
     CircleImageView profileView;
-    //private ImageView profileView;
     int REQUEST_CAMERA = 0, SELECT_FILE = 1;
-
 
     public static boolean hasPermissions(Context context, String... permissions) {
         if (context != null && permissions != null) {
@@ -137,8 +135,6 @@ public class UserInfo extends AppCompatActivity {
                 }
                 addNewContact(fullname, email, age, phone, address);
             }
-
-
         });
 
         homebtn.setOnClickListener(new View.OnClickListener() {
@@ -165,7 +161,6 @@ public class UserInfo extends AppCompatActivity {
 
     private void selectImage() {
 
-        Context context = UserInfo.this;
         int PERMISSION_ALL = 1;
         String[] PERMISSIONS = {
                 android.Manifest.permission.READ_EXTERNAL_STORAGE,
@@ -176,7 +171,6 @@ public class UserInfo extends AppCompatActivity {
         if (!hasPermissions(this, PERMISSIONS)) {
             ActivityCompat.requestPermissions(this, PERMISSIONS, PERMISSION_ALL);
         }
-
 
         final CharSequence[] items = { "Take Photo", "Choose from Library",
                 "Cancel" };
@@ -237,8 +231,13 @@ public class UserInfo extends AppCompatActivity {
         Uri selectedImageUri = data.getData();
 
         String[] projection = { MediaStore.MediaColumns.DATA };
-        Cursor cursor = managedQuery(selectedImageUri, projection, null, null,
-                null);
+
+        // replaced this deprecated code with the code below it, leaving old code until I'm sure it works
+        /*Cursor cursor = managedQuery(selectedImageUri, projection, null, null,
+                null);*/
+
+        Cursor cursor = getContentResolver().query(selectedImageUri, null, null, null, null);
+
         int column_index = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DATA);
         cursor.moveToFirst();
         String selectedImagePath = cursor.getString(column_index);

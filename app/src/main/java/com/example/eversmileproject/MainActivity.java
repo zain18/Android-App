@@ -12,7 +12,6 @@ import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -23,17 +22,11 @@ import java.io.File;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-
-
-
 public class MainActivity extends AppCompatActivity {
 
     FirebaseAuth mAuth;
     FirebaseAuth.AuthStateListener mAuthListner;
     CircleImageView profileView;
-
-    int REQUEST_CAMERA = 0, SELECT_FILE = 1;
-    public TextView userName;
 
     protected void onStart() {
         super.onStart();
