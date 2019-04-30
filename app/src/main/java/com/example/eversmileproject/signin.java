@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -65,6 +66,7 @@ public class signin extends AppCompatActivity {
         String getEmail = "Welcome to SmileKnect! Please log in.";
         setTitle(getEmail);
         Spannable text = new SpannableString(getTitle());
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(0xFF4788F6)); // main banner
         text.setSpan(new ForegroundColorSpan(Color.WHITE), 0, text.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
         setTitle(text);
     }

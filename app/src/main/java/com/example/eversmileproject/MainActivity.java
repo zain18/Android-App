@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         mAuth.addAuthStateListener(mAuthListner); // start authentication at startup
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(0xFF5087DA)); // main banner
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(0xFF4788F6)); // main banner
         Spannable text = new SpannableString(getTitle());
         text.setSpan(new ForegroundColorSpan(Color.WHITE), 0, text.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
         setTitle(text);
