@@ -2,6 +2,7 @@ package com.example.eversmileproject;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -40,6 +41,7 @@ public class signup_activity extends AppCompatActivity {
         final TextView btnSignUp = (TextView) findViewById(R.id.login_page);
         final CheckBox termsCheck = (CheckBox) findViewById(R.id.termsCheckBox); // terms checkbox
         setTitle("Please log in to EverSmile!");
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(0xFF4788F6)); // main banner
         Spannable text = new SpannableString(getTitle());
         text.setSpan(new ForegroundColorSpan(Color.WHITE), 0, text.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
         setTitle(text);
