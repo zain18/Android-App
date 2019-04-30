@@ -21,7 +21,7 @@
             android:contentDescription="@string/image"
             android:cropToPadding="true"
             android:src="@drawable/logo"
-            android:layout_marginBottom="40dp"/>
+            android:layout_marginBottom="20dp"/>
 
         <View
             android:id="@+id/divider3"
