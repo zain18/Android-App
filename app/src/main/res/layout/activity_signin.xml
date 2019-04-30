@@ -20,7 +20,7 @@
             android:layout_height="175dp"
             android:contentDescription="@string/image"
             android:cropToPadding="true"
-            android:src="@drawable/smileknectlogocroplightblue"
+            android:src="@drawable/logo"
             android:layout_marginBottom="40dp"/>
 
         <View
