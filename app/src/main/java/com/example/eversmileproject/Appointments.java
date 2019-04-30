@@ -18,14 +18,16 @@ public class Appointments extends AppCompatActivity {
             view.loadUrl(url);
             return true;
         }
-
+//btn btn-link
         @Override
         public void onPageFinished(WebView view, String url)
         {
             view.loadUrl("javascript:(function() { " +
                     "document.getElementsByClassName('poweredby')[0].style.display='none'; })()");
             view.loadUrl("javascript:(function() { " +
-                    "document.getElementsByClassName('btn btn-small')[0].style.display='none'; })()");
+                "document.getElementsByClassName('btn btn-small')[0].style.display='none'; })()");
+            view.loadUrl("javascript:(function() { " +
+                    "document.getElementsByClassName('btn btn-link')[0].style.display='none'; })()");
             // document.getElementsByClassName('poweredby')
         }
         @Override
@@ -35,6 +37,8 @@ public class Appointments extends AppCompatActivity {
                     "document.getElementsByClassName('poweredby')[0].style.display='none'; })()");
             view.loadUrl("javascript:(function() { " +
                     "document.getElementsByClassName('btn btn-small')[0].style.display='none'; })()");
+            view.loadUrl("javascript:(function() { " +
+                    "document.getElementsByClassName('btn btn-link')[0].style.display='none'; })()");
         }
         @Override
         public void onLoadResource(WebView view, String url){
@@ -42,6 +46,8 @@ public class Appointments extends AppCompatActivity {
                     "document.getElementsByClassName('poweredby')[0].style.display='none'; })()");
             view.loadUrl("javascript:(function() { " +
                     "document.getElementsByClassName('btn btn-small')[0].style.display='none'; })()");
+            view.loadUrl("javascript:(function() { " +
+                    "document.getElementsByClassName('btn btn-link')[0].style.display='none'; })()");
         }
     }
     @Override
