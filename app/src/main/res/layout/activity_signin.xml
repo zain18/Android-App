@@ -56,6 +56,15 @@
             android:textColorHint="@android:color/darker_gray"
             android:visibility="visible" />
 
+        <View
+            android:id="@+id/divider5"
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:layout_above="@+id/ah_login"
+            android:layout_below="@+id/password"
+            android:layout_marginBottom="10dp"
+            android:background="@color/colorAccent" />
+
         <!-- Login Button -->
         <Button
             android:id="@+id/ah_login"
