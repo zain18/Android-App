@@ -24,6 +24,8 @@ public class Appointments extends AppCompatActivity {
         {
             view.loadUrl("javascript:(function() { " +
                     "document.getElementsByClassName('poweredby')[0].style.display='none'; })()");
+            view.loadUrl("javascript:(function() { " +
+                    "document.getElementsByClassName('btn btn-small')[0].style.display='none'; })()");
             // document.getElementsByClassName('poweredby')
         }
         @Override
@@ -31,11 +33,15 @@ public class Appointments extends AppCompatActivity {
             super.onPageStarted(view, url, favicon);
             view.loadUrl("javascript:(function() { " +
                     "document.getElementsByClassName('poweredby')[0].style.display='none'; })()");
+            view.loadUrl("javascript:(function() { " +
+                    "document.getElementsByClassName('btn btn-small')[0].style.display='none'; })()");
         }
         @Override
         public void onLoadResource(WebView view, String url){
             view.loadUrl("javascript:(function() { " +
                     "document.getElementsByClassName('poweredby')[0].style.display='none'; })()");
+            view.loadUrl("javascript:(function() { " +
+                    "document.getElementsByClassName('btn btn-small')[0].style.display='none'; })()");
         }
     }
     @Override

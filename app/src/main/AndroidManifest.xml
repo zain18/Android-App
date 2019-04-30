@@ -34,10 +34,13 @@
         android:theme="@style/AppTheme"
         android:titleTextColor="#FFFFFe"
         tools:ignore="ExtraText">
-        <activity android:name=".UserInfo"
-            android:theme="@style/AppThemeNoBar"></activity>
-        <activity android:name=".Appointments"
-            android:theme="@style/AppThemeNoBar"/>
+        <activity android:name=".Survey"></activity>
+        <activity
+            android:name=".UserInfo"
+            android:theme="@style/AppThemeNoBar" />
+        <activity
+            android:name=".Appointments"
+            android:theme="@style/AppThemeNoBar" />
         <activity
             android:name=".Facebookintent"
             android:theme="@style/AppThemeNoBar" />
@@ -85,7 +88,7 @@
             android:theme="@style/AppThemeNoBar" />
         <activity android:name=".signin" />
         <activity android:name=".UserRecords" />
-        <activity android:name=".HistoryRecycler"/>
+        <activity android:name=".HistoryRecycler" />
         <activity android:name=".XrayRecycler" />
         <activity android:name=".ReportRecycler" />
         <activity android:name=".MainActivity">
