@@ -139,4 +139,14 @@
         android:text="Find\nYour Smile"
         android:layout_marginBottom="10dp"
         android:textColor="@color/white" />
+
+    <Button
+        android:id="@+id/btn_delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btn_find"
+        android:layout_toRightOf="@id/btn_mainMenu"
+        android:background="@color/colorPrimary"
+        android:text="@string/DeletePictures"
+        android:textColor="@color/white" />
 </RelativeLayout>

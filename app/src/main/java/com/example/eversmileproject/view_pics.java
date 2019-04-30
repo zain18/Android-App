@@ -6,12 +6,15 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -26,9 +29,20 @@ public class view_pics extends AppCompatActivity{
     private Button storeBtn;
     private Button noteBtn;
     private Button findBtn;
+    private Button deleteBtn;
     private ImageView faceView;
     private ImageView leftView;
     private ImageView rightView;
+    //Create Firebase storage references
+    FirebaseStorage storage = FirebaseStorage.getInstance();
+    StorageReference storageRef = storage.getReference();
+    String currentUser = FirebaseAuth.getInstance().getCurrentUser().getUid(); // unique reference for user
+    String userName = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+    StorageReference userRef = storageRef.child(currentUser);
+    StorageReference imagesUserRef = userRef.child("images");
+    final StorageReference faceRef = imagesUserRef.child(userName + "face.jpg");
+    final StorageReference leftRef = imagesUserRef.child(userName + "left.jpg");
+    final StorageReference rightRef = imagesUserRef.child(userName +"right.jpg");
 
     //Popup Window
     public void openDialog(String dialog){
@@ -41,8 +55,26 @@ public class view_pics extends AppCompatActivity{
             }
         });
 
-        AlertDialog alertDialog = alertDialogBuilder.create();
-        alertDialog.show();
+        final AlertDialog alertDialog = alertDialogBuilder.create();
+        // check to see if each of the files exist
+        faceRef.getDownloadUrl().addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                alertDialog.show();
+            }
+        });
+        leftRef.getDownloadUrl().addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                alertDialog.show();
+            }
+        });
+        rightRef.getDownloadUrl().addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                alertDialog.show();
+            }
+        });
     }
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,24 +90,18 @@ public class view_pics extends AppCompatActivity{
         faceView = findViewById(R.id.imageFaceView);
         leftView = findViewById(R.id.imageLeftView);
         rightView = findViewById(R.id.imageRightView);
-        String userName = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+        deleteBtn = findViewById(R.id.btn_delete);
         faceView.setImageBitmap(BitmapFactory.decodeFile(Environment.getExternalStorageDirectory()+"/" + userName+ "face.jpg"));
         leftView.setImageBitmap(BitmapFactory.decodeFile(Environment.getExternalStorageDirectory()+"/" + userName + "left.jpg"));
         rightView.setImageBitmap(BitmapFactory.decodeFile(Environment.getExternalStorageDirectory()+"/" + userName + "right.jpg"));
 
-        //Create Firebase storage references
-        FirebaseStorage storage = FirebaseStorage.getInstance();
-        StorageReference storageRef = storage.getReference();
-        String currentUser = FirebaseAuth.getInstance().getCurrentUser().getUid(); // unique reference for user
 
-        StorageReference userRef = storageRef.child(currentUser);
-        StorageReference imagesUserRef = userRef.child("images");
-        final StorageReference faceRef = imagesUserRef.child(userName + "face.jpg");
-        final StorageReference leftRef = imagesUserRef.child(userName + "left.jpg");
-        final StorageReference rightRef = imagesUserRef.child(userName +"right.jpg");
-        final Uri faceFile = Uri.fromFile(new File(Environment.getExternalStorageDirectory()+"/" + userName +"face.jpg"));
-        final Uri leftFile = Uri.fromFile(new File(Environment.getExternalStorageDirectory()+"/" + userName + "face.jpg"));
-        final Uri rightFile = Uri.fromFile(new File(Environment.getExternalStorageDirectory()+"/" + userName + "face.jpg"));
+        final File facepic = new File(Environment.getExternalStorageDirectory()+"/" + userName +"face.jpg");
+        final File leftpic = new File(Environment.getExternalStorageDirectory()+"/" + userName +"left.jpg");
+        final File rightpic = new File(Environment.getExternalStorageDirectory()+"/" + userName +"right.jpg");
+        final Uri faceFile = Uri.fromFile(facepic);
+        final Uri leftFile = Uri.fromFile(leftpic);
+        final Uri rightFile = Uri.fromFile(rightpic);
 
         // Buttons to switch activities
         mainMenuBtn.setOnClickListener(new View.OnClickListener() {
@@ -114,6 +140,27 @@ public class view_pics extends AppCompatActivity{
                 rightRef.putFile(rightFile);
                 openDialog("Pictures uploaded!");
 
+            }
+        });
+
+        // allow user to delete all photos from phone and firebase
+        deleteBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // delete photos from external storage
+                facepic.delete();
+                leftpic.delete();
+                rightpic.delete();
+                // delete photos from firebase
+                faceRef.delete();
+                leftRef.delete();
+                rightRef.delete();
+                // update image views
+                faceView.setImageBitmap(BitmapFactory.decodeFile(Environment.getExternalStorageDirectory()+"/" + userName+ "face.jpg"));
+                leftView.setImageBitmap(BitmapFactory.decodeFile(Environment.getExternalStorageDirectory()+"/" + userName + "left.jpg"));
+                rightView.setImageBitmap(BitmapFactory.decodeFile(Environment.getExternalStorageDirectory()+"/" + userName + "right.jpg"));
+                // pop up message
+                openDialog("Photos deleted");
             }
         });
     }
