@@ -90,11 +90,24 @@ public class UserInfo extends AppCompatActivity {
 
         File imgFile = new File(Environment.getExternalStorageDirectory() + "/profile.jpg");
 
+        // if/else statement to avoid null pointer exception
         if (imgFile.exists()) {
             Glide.with(UserInfo.this)
                     .load(imgFile)
                     .apply(new RequestOptions()
+                            .placeholder(R.drawable.avatar_placeholder)
                             .diskCacheStrategy(DiskCacheStrategy.NONE)
+                            .centerCrop()
+                            .skipMemoryCache(true))
+                    .into(profileView);
+        }
+        else {
+            Glide.with(UserInfo.this)
+                    .load(imgFile)
+                    .apply(new RequestOptions()
+                            .placeholder(R.drawable.avatar_placeholder)
+                            .diskCacheStrategy(DiskCacheStrategy.NONE)
+                            .centerCrop()
                             .skipMemoryCache(true))
                     .into(profileView);
         }
@@ -270,12 +283,25 @@ public class UserInfo extends AppCompatActivity {
         }
 
         profileView.setImageBitmap(thumbnail);
-
+        // if/else statement to avoid null pointer exception
         if (destination.exists()) {
             Glide.with(UserInfo.this)
                     .load(thumbnail)
                     .apply(new RequestOptions()
-                            .placeholder(R.drawable.avatar_placeholder))
+                            .placeholder(R.drawable.avatar_placeholder)
+                            .diskCacheStrategy(DiskCacheStrategy.NONE)
+                            .centerCrop()
+                            .skipMemoryCache(true))
+                    .into(profileView);
+        }
+        else {
+            Glide.with(UserInfo.this)
+                    .load(thumbnail)
+                    .apply(new RequestOptions()
+                            .placeholder(R.drawable.avatar_placeholder)
+                            .diskCacheStrategy(DiskCacheStrategy.NONE)
+                            .centerCrop()
+                            .skipMemoryCache(true))
                     .into(profileView);
         }
     }
@@ -298,12 +324,25 @@ public class UserInfo extends AppCompatActivity {
         }
 
         profileView.setImageBitmap(thumbnail);
-
+        // if/else statement to avoid null pointer exception
         if (destination.exists()) {
             Glide.with(UserInfo.this)
                     .load(thumbnail)
                     .apply(new RequestOptions()
-                            .placeholder(R.drawable.avatar_placeholder))
+                            .placeholder(R.drawable.avatar_placeholder)
+                            .diskCacheStrategy(DiskCacheStrategy.NONE)
+                            .centerCrop()
+                            .skipMemoryCache(true))
+                    .into(profileView);
+        }
+        else {
+            Glide.with(UserInfo.this)
+                    .load(thumbnail)
+                    .apply(new RequestOptions()
+                            .placeholder(R.drawable.avatar_placeholder)
+                            .diskCacheStrategy(DiskCacheStrategy.NONE)
+                            .centerCrop()
+                            .skipMemoryCache(true))
                     .into(profileView);
         }
     }
