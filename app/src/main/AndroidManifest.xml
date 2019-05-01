@@ -87,7 +87,8 @@
             android:name=".view_pics"
             android:theme="@style/AppThemeNoBar" />
         <activity android:name=".signin" />
-        <activity android:name=".UserRecords" />
+        <activity android:name=".UserRecords"
+            android:theme="@style/AppThemeNoBar" />
         <activity android:name=".HistoryRecycler" />
         <activity android:name=".XrayRecycler" />
         <activity android:name=".ReportRecycler" />
