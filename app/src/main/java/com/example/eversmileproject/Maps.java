@@ -46,7 +46,7 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback,
     double latitude;
     double longitude;
     private int PROXIMITY_RADIUS = 10000;
-    private Button findBtn;
+    private Button homeBtn;
     GoogleApiClient mGoogleApiClient;
     Location mLastLocation;
     Marker mCurrLocationMarker;
@@ -129,9 +129,9 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback,
             }
         });
 
-        findBtn = (Button) findViewById(R.id.btn_find);
+        homeBtn = (Button) findViewById(R.id.btn_home);
         // button to return to main menu
-        findBtn.setOnClickListener(new View.OnClickListener() {
+        homeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(Maps.this, MainActivity.class));
