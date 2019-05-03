@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -27,9 +28,17 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -57,8 +66,10 @@ public class UserInfo extends AppCompatActivity {
     private static final String PHONE_KEY = "Phone";
     private static final String AGE_KEY = "Age";
     private static final String ADDRESS_KEY = "Address";
+    private static final String ID_KEY = "User ID";
     CircleImageView profileView;
     int REQUEST_CAMERA = 0, SELECT_FILE = 1;
+    String currentUser = FirebaseAuth.getInstance().getCurrentUser().getUid(); // unique reference for user
 
     public static boolean hasPermissions(Context context, String... permissions) {
         if (context != null && permissions != null) {
@@ -112,6 +123,28 @@ public class UserInfo extends AppCompatActivity {
                     .into(profileView);
         }
 
+        FirebaseFirestore firebase = FirebaseFirestore.getInstance();
+        // grab the collection of doctor offices using firebase
+        firebase.collection("UserInfo").addSnapshotListener(new EventListener<QuerySnapshot>() {
+            String test;
+            @Override
+            public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
+                for (DocumentSnapshot doc:queryDocumentSnapshots) { // scroll of user looking for matching ID
+                        test = doc.getString("User ID");
+                        if (test.equals(currentUser)) {
+
+                            FullName.setText(doc.getString("Name"));
+                            Age.setText(doc.getString("Age"));
+                            Email.setText(doc.getString("Email"));
+                            Address.setText(doc.getString("Address"));
+                            Phone.setText(doc.getString("Phone"));
+                            break;
+
+                        }
+                }
+            }
+        });
+
         Submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -145,7 +178,7 @@ public class UserInfo extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Please enter your Phone Number ", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                addNewContact(fullname, email, age, phone, address);
+                addNewContact(fullname, email, age, phone, address, currentUser);
             }
         });
 
@@ -170,6 +203,8 @@ public class UserInfo extends AppCompatActivity {
             }
         });
     }
+
+
 
     private void selectImage() {
 
@@ -340,20 +375,22 @@ public class UserInfo extends AppCompatActivity {
         }
     }
 
-    private void addNewContact(String name, String email, String age, String phone, String Address) {
+    private void addNewContact(String name, String email, String age, String phone, String Address, String userId) {
         Map<String, Object> newContact = new HashMap<>();
+        newContact.put(ID_KEY, userId);
         newContact.put(NAME_KEY, name);
         newContact.put(EMAIL_KEY, email);
         newContact.put(PHONE_KEY, phone);
         newContact.put(AGE_KEY, age);
         newContact.put(ADDRESS_KEY, Address);
+
         progressBar.setVisibility(View.VISIBLE);
-        db.collection("UserInfo").document(name).set(newContact)
+        db.collection("UserInfo").document(userId).set(newContact)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
                         progressBar.setVisibility(View.GONE);
-                        Toast.makeText(UserInfo.this, "User Registered",
+                        Toast.makeText(UserInfo.this, "User Profile Updated",
                                 Toast.LENGTH_SHORT).show();
                     }
                 })
