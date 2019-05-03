@@ -1,7 +1,6 @@
 package com.example.eversmileproject;
 
 import android.Manifest;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -41,7 +40,6 @@ public class UserRecords extends AppCompatActivity {
     String uploadName = "test";
     Intent intent;
     String url;
-
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,7 +90,6 @@ public class UserRecords extends AppCompatActivity {
                 else{
                     Toast.makeText(UserRecords.this,"File Selection error", Toast.LENGTH_SHORT).show();
                 }
-
             }
         });
         // open history recycler view
@@ -125,8 +122,6 @@ public class UserRecords extends AppCompatActivity {
                 startActivity(new Intent(UserRecords.this, MainActivity.class));
             }
         });
-
-
     }
 
     @Override
@@ -144,7 +139,6 @@ public class UserRecords extends AppCompatActivity {
         intent.setType("*/*"); // allow user to select any type of file
         intent.setAction(Intent.ACTION_GET_CONTENT); // intent which retrieves files
         startActivityForResult(intent, 86); // start intent, 86 is arbitrary request code
-
     }
 
 
@@ -157,7 +151,6 @@ public class UserRecords extends AppCompatActivity {
         else{
             Toast.makeText(UserRecords.this,"Please select file",Toast.LENGTH_SHORT).show();
         }
-
     }
 
     private void uploadHistory(Uri fileUri){
@@ -192,7 +185,6 @@ public class UserRecords extends AppCompatActivity {
                         });
                     }
                 });
-
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -205,7 +197,6 @@ public class UserRecords extends AppCompatActivity {
                 Toast.makeText(UserRecords.this,"Upload In Progress",Toast.LENGTH_SHORT).show();
             }
         });
-
     }
 
     private void uploadXray(Uri xrayUri){
@@ -252,6 +243,5 @@ public class UserRecords extends AppCompatActivity {
                 Toast.makeText(UserRecords.this,"Upload In Progress",Toast.LENGTH_SHORT).show();
             }
         });
-
     }
 }

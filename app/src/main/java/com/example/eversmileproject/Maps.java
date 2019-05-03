@@ -76,7 +76,6 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback,
         mapFragment.getMapAsync(this);
     }
 
-
     private boolean CheckGooglePlayServices() { // check that google play available
         GoogleApiAvailability googleAPI = GoogleApiAvailability.getInstance();
         int result = googleAPI.isGooglePlayServicesAvailable(this);

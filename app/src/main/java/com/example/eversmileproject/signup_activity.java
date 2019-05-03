@@ -27,7 +27,6 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class signup_activity extends AppCompatActivity {
 
-
     private EditText name, email_id, passwordcheck;
     private FirebaseAuth mAuth;
     private static final String TAG = "";
@@ -45,7 +44,6 @@ public class signup_activity extends AppCompatActivity {
         Spannable text = new SpannableString(getTitle());
         text.setSpan(new ForegroundColorSpan(Color.WHITE), 0, text.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
         setTitle(text);
-
 
         termsText.setMovementMethod(LinkMovementMethod.getInstance());
         btnSignUp.setOnClickListener(new View.OnClickListener() {
@@ -91,7 +89,6 @@ public class signup_activity extends AppCompatActivity {
                                         Intent intent = new Intent(signup_activity.this, MainActivity.class);
                                         startActivity(intent);
                                         finish();
-
 
                                 } else {
                                     // If sign in fails, display a message to the user.

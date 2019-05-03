@@ -12,7 +12,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -21,7 +20,6 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.io.File;
-
 
 public class view_pics extends AppCompatActivity{
 
@@ -38,6 +36,7 @@ public class view_pics extends AppCompatActivity{
     private boolean faceExists;
     private boolean rightExists;
     private boolean leftExists;
+
     //Create Firebase storage references
     FirebaseStorage storage = FirebaseStorage.getInstance();
     StorageReference storageRef = storage.getReference();
@@ -62,8 +61,8 @@ public class view_pics extends AppCompatActivity{
 
         final AlertDialog alertDialog = alertDialogBuilder.create();
         alertDialog.show();
-
     }
+
     // check that user uploaded files exist on firebase, nested listeners to select and display message
     protected void checkUpload(){
         // check to see if each of the files exist
@@ -110,7 +109,6 @@ public class view_pics extends AppCompatActivity{
                                 openDialog(uploadMessage);
                             }
                         });
-
                     }
                 });
             }
@@ -157,7 +155,6 @@ public class view_pics extends AppCompatActivity{
                                 openDialog(uploadMessage);
                             }
                         });
-
                     }
                 });
             }
@@ -201,7 +198,6 @@ public class view_pics extends AppCompatActivity{
         faceView.setImageBitmap(BitmapFactory.decodeFile(Environment.getExternalStorageDirectory()+"/" + userName+ "face.jpg"));
         leftView.setImageBitmap(BitmapFactory.decodeFile(Environment.getExternalStorageDirectory()+"/" + userName + "left.jpg"));
         rightView.setImageBitmap(BitmapFactory.decodeFile(Environment.getExternalStorageDirectory()+"/" + userName + "right.jpg"));
-
 
         final File facepic = new File(Environment.getExternalStorageDirectory()+"/" + userName +"face.jpg");
         final File leftpic = new File(Environment.getExternalStorageDirectory()+"/" + userName +"left.jpg");
@@ -248,7 +244,6 @@ public class view_pics extends AppCompatActivity{
                 leftRef.putFile(leftFile);
                 rightRef.putFile(rightFile);
                 openDialog("Pictures uploaded!");
-
             }
         });
 
@@ -273,5 +268,4 @@ public class view_pics extends AppCompatActivity{
             }
         });
     }
-
 }

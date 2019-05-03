@@ -18,7 +18,6 @@ import android.widget.Button;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.io.File;
@@ -39,7 +38,6 @@ public class MainActivity extends AppCompatActivity {
         text.setSpan(new ForegroundColorSpan(Color.WHITE), 0, text.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
         setTitle(text);
     }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -172,8 +170,6 @@ public class MainActivity extends AppCompatActivity {
                             .skipMemoryCache(true))
                     .into(profileView);
         }
-
-
     }
 
     //Popup Window

@@ -115,7 +115,6 @@ public class UserInfo extends AppCompatActivity {
         Submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 String fullname = FullName.getText().toString();
                 String age = Age.getText().toString();
                 String email = Email.getText().toString();
@@ -242,12 +241,6 @@ public class UserInfo extends AppCompatActivity {
 
     private void onSelectFromGalleryResult(Intent data) {
         Uri selectedImageUri = data.getData();
-
-        String[] projection = { MediaStore.MediaColumns.DATA };
-
-        // replaced this deprecated code with the code below it, leaving old code until I'm sure it works
-        /*Cursor cursor = managedQuery(selectedImageUri, projection, null, null,
-                null);*/
 
         Cursor cursor = getContentResolver().query(selectedImageUri, null, null, null, null);
 

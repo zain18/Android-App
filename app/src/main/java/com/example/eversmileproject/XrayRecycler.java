@@ -63,7 +63,5 @@ public class XrayRecycler extends AppCompatActivity {
         // call the firebase adapter constructor
         FBItemAdapter myAdapter = new FBItemAdapter(recyclerView, XrayRecycler.this,new ArrayList<String>(), new ArrayList<String>());
         recyclerView.setAdapter(myAdapter); // set FBItemAdapter as the adapter for recycler view
-
-
     }
 }

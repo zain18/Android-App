@@ -379,7 +379,5 @@ public class see_eversmile extends AppCompatActivity {
         stopBackgroundThread();
         super.onPause();
     }
-
-
 }
 

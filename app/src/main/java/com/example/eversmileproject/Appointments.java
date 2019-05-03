@@ -11,14 +11,13 @@ public class Appointments extends AppCompatActivity {
 
     private WebView wb;
 
-
     public class WebClient extends WebViewClient {
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
             view.loadUrl(url);
             return true;
         }
-//btn btn-link
+        //btn btn-link
         //navbar-inner
         @Override
         public void onPageFinished(WebView view, String url)

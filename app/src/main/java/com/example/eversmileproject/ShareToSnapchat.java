@@ -42,6 +42,7 @@ public class ShareToSnapchat extends AppCompatActivity {
         });
 
     }
+
     private void initShareIntent(String type, Bitmap bit) {
         boolean found = false;
         Intent share = new Intent(android.content.Intent.ACTION_SEND);
@@ -75,20 +76,6 @@ public class ShareToSnapchat extends AppCompatActivity {
             startActivity(Intent.createChooser(share, "Select"));
         }
     }
-    /*private void shareImage(Bitmap bitmap){
-
-        Drawable d = new BitmapDrawable(getResources(), bitmap);
-        Bitmap b = convertToBitmap(d, 50, 50);
-        Intent share = new Intent(Intent.ACTION_SEND);
-        share.setType("image/*");
-        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        b.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
-        String path = MediaStore.Images.Media.insertImage(getContentResolver(),
-                b, "Title", null);
-        Uri imageUri =  Uri.parse(path);
-        share.putExtra(Intent.EXTRA_STREAM, imageUri);
-        startActivity(Intent.createChooser(share, "Select"));
-    }*/
 
     private void selectImageToShare() {
         final CharSequence[] items = { "Take Photo", "Choose from Library",
@@ -117,7 +104,6 @@ public class ShareToSnapchat extends AppCompatActivity {
         builder.show();
     }
 
-
     protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == Activity.RESULT_OK) {
@@ -127,6 +113,7 @@ public class ShareToSnapchat extends AppCompatActivity {
                 onCaptureImageResult(data);
         }
     }
+
     private void onSelectFromGalleryResult(Intent data) {
         Uri selectedImageUri = data.getData();
         String[] projection = { MediaStore.MediaColumns.DATA };
@@ -148,9 +135,7 @@ public class ShareToSnapchat extends AppCompatActivity {
         options.inJustDecodeBounds = false;
         thumbnail = BitmapFactory.decodeFile(selectedImagePath, options);
         initShareIntent("snap",thumbnail);
-
     }
-
 
     private void onCaptureImageResult(Intent data) {
         Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
@@ -170,8 +155,8 @@ public class ShareToSnapchat extends AppCompatActivity {
             e.printStackTrace();
         }
         initShareIntent("snap",thumbnail);
-
     }
+
     public Bitmap convertToBitmap(Drawable drawable, int widthPixels, int heightPixels) {
         Bitmap mutableBitmap = Bitmap.createBitmap(widthPixels, heightPixels, Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(mutableBitmap);
@@ -180,8 +165,6 @@ public class ShareToSnapchat extends AppCompatActivity {
 
         return mutableBitmap;
     }
-
-
 }
 
 

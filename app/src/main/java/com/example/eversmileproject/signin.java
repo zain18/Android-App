@@ -37,8 +37,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
-
-
 public class signin extends AppCompatActivity {
 
     private static final String TAG = "";
@@ -169,7 +167,6 @@ public class signin extends AppCompatActivity {
             } catch (ApiException e) {
                 // Google Sign In failed, update UI appropriately
                 Log.w(TAG, "Google sign in failed", e);
-
             }
         }
     }
@@ -218,6 +215,7 @@ public class signin extends AppCompatActivity {
         editor.putString(PREF_PASSWORD, PasswordValue);
         editor.commit();
     }
+
     private void loadPreferences() {
 
         SharedPreferences settings = getSharedPreferences(PREFS_NAME,

@@ -33,7 +33,6 @@ public class FBItemAdapter extends RecyclerView.Adapter<FBItemAdapter.ViewHolder
         this.urls = urls;
     }
 
-
     @NonNull
     @Override // creates the layout for item on recycler list
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
@@ -65,8 +64,6 @@ public class FBItemAdapter extends RecyclerView.Adapter<FBItemAdapter.ViewHolder
                     Intent intent = new Intent(Intent.ACTION_VIEW); // ininitialize intent to connect to browser
                     intent.setData(Uri.parse(urls.get(position))); // grab url from recycler list item
                     context.startActivity(intent); // go to browser to download item
-
-
                 }
             });
         }

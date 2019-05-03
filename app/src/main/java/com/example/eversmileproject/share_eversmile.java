@@ -18,7 +18,6 @@ import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -26,7 +25,6 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
-
 
 public class share_eversmile extends AppCompatActivity {
 
@@ -82,9 +80,8 @@ public class share_eversmile extends AppCompatActivity {
                 startActivity(new Intent(share_eversmile.this, MainActivity.class));
             }
         });
-
-
     }
+
     private void initShareIntent(String type, Bitmap bit) {
         boolean found = false;
         Intent share = new Intent(android.content.Intent.ACTION_SEND);
@@ -104,7 +101,6 @@ public class share_eversmile extends AppCompatActivity {
                 if (info.activityInfo.packageName.toLowerCase().contains(type) ||
                         info.activityInfo.name.toLowerCase().contains(type) ) {
 
-
                     share.putExtra(Intent.EXTRA_STREAM, imageUri);
 
                     share.setPackage(info.activityInfo.packageName);
@@ -114,25 +110,9 @@ public class share_eversmile extends AppCompatActivity {
             }
             if (!found)
                 return;
-
             startActivity(Intent.createChooser(share, "Select"));
         }
     }
-
-    /*private void shareImage(Bitmap bitmap){
-
-        Drawable d = new BitmapDrawable(getResources(), bitmap);
-        Bitmap b = convertToBitmap(d, 50, 50);
-        Intent share = new Intent(Intent.ACTION_SEND);
-        share.setType("image/*");
-        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        b.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
-        String path = MediaStore.Images.Media.insertImage(getContentResolver(),
-                b, "Title", null);
-        Uri imageUri =  Uri.parse(path);
-        share.putExtra(Intent.EXTRA_STREAM, imageUri);
-        startActivity(Intent.createChooser(share, "Select"));
-    }*/
 
     private void selectImageToShare() {
         final CharSequence[] items = { "Take Photo", "Choose from Library",
@@ -186,7 +166,6 @@ public class share_eversmile extends AppCompatActivity {
             }
         });
         builder.show();
-
     }
 
     private void selectImageToShare2() {
@@ -242,6 +221,7 @@ public class share_eversmile extends AppCompatActivity {
         });
         builder.show();
     }
+
     private void onSelectFromGalleryResult1(Intent data) {
         Uri selectedImageUri = data.getData();
         String[] projection = { MediaStore.MediaColumns.DATA };
@@ -263,7 +243,6 @@ public class share_eversmile extends AppCompatActivity {
         options.inJustDecodeBounds = false;
         thumbnail = BitmapFactory.decodeFile(selectedImagePath, options);
         initShareIntent("twi",thumbnail);
-
     }
 
     private void onSelectFromGalleryResult2(Intent data) {
@@ -287,7 +266,6 @@ public class share_eversmile extends AppCompatActivity {
         options.inJustDecodeBounds = false;
         thumbnail = BitmapFactory.decodeFile(selectedImagePath, options);
         initShareIntent("int",thumbnail);
-
     }
 
     private void onSelectFromGalleryResult3(Intent data) {
@@ -311,10 +289,7 @@ public class share_eversmile extends AppCompatActivity {
         options.inJustDecodeBounds = false;
         thumbnail = BitmapFactory.decodeFile(selectedImagePath, options);
         initShareIntent("snap",thumbnail);
-
     }
-
-
 
     protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -337,6 +312,7 @@ public class share_eversmile extends AppCompatActivity {
                 onCaptureImageResult3(data);
         }
     }
+
     private void onSelectFromGalleryResult(Intent data) {
         Uri selectedImageUri = data.getData();
         String[] projection = { MediaStore.MediaColumns.DATA };
@@ -358,9 +334,7 @@ public class share_eversmile extends AppCompatActivity {
         options.inJustDecodeBounds = false;
         thumbnail = BitmapFactory.decodeFile(selectedImagePath, options);
         initShareIntent("face",thumbnail);
-
     }
-
 
     private void onCaptureImageResult(Intent data) {
         Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
@@ -380,8 +354,8 @@ public class share_eversmile extends AppCompatActivity {
             e.printStackTrace();
         }
         initShareIntent("face",thumbnail);
-
     }
+
     private void onCaptureImageResult1(Intent data) {
         Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
@@ -400,7 +374,6 @@ public class share_eversmile extends AppCompatActivity {
             e.printStackTrace();
         }
         initShareIntent("twi",thumbnail);
-
     }
 
     private void onCaptureImageResult2(Intent data) {
@@ -421,7 +394,6 @@ public class share_eversmile extends AppCompatActivity {
             e.printStackTrace();
         }
         initShareIntent("inst",thumbnail);
-
     }
 
     private void onCaptureImageResult3(Intent data) {
@@ -442,8 +414,8 @@ public class share_eversmile extends AppCompatActivity {
             e.printStackTrace();
         }
         initShareIntent("snap",thumbnail);
-
     }
+
     public Bitmap convertToBitmap(Drawable drawable, int widthPixels, int heightPixels) {
         Bitmap mutableBitmap = Bitmap.createBitmap(widthPixels, heightPixels, Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(mutableBitmap);
@@ -452,7 +424,5 @@ public class share_eversmile extends AppCompatActivity {
 
         return mutableBitmap;
     }
-
-
 }
 

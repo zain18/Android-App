@@ -63,7 +63,5 @@ public class ReportRecycler extends AppCompatActivity {
         // call the firebase adapter constructor
         FBItemAdapter myAdapter = new FBItemAdapter(recyclerView, ReportRecycler.this,new ArrayList<String>(), new ArrayList<String>());
         recyclerView.setAdapter(myAdapter); // set FBItemAdapter as the adapter for recycler view
-
-
     }
 }
