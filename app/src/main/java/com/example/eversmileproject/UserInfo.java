@@ -131,7 +131,8 @@ public class UserInfo extends AppCompatActivity {
             public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
                 for (DocumentSnapshot doc:queryDocumentSnapshots) { // scroll of user looking for matching ID
                         test = doc.getString("User ID");
-                        if (test.equals(currentUser)) {
+                        // check that user is not null and look to match key
+                        if (currentUser != null && test.equals(currentUser)) {
 
                             FullName.setText(doc.getString("Name"));
                             Age.setText(doc.getString("Age"));
