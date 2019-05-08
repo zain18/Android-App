@@ -45,7 +45,7 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback,
     private GoogleMap mMap;
     double latitude;
     double longitude;
-    private int PROXIMITY_RADIUS = 10000;
+    private int PROXIMITY_RADIUS = 10000;// not needed since we are retrieving all Eversmile certified across the country, but it's needed in the future
     private Button homeBtn;
     GoogleApiClient mGoogleApiClient;
     Location mLastLocation;
@@ -147,6 +147,8 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback,
         mGoogleApiClient.connect();
     }
 
+    //initialize the map
+    //get the user current location after granting permission
     @Override
     public void onConnected(@Nullable Bundle bundle) {
         mLocationRequest = new LocationRequest();
@@ -160,6 +162,9 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback,
         }
     }
 
+    // this method is not used, it uses Google map API to get nearby orthodontists but not eversmile certified
+    //didn't remove the methide because it might be useful for the future when Eversmile certified orthodontists get retrieved
+    //from google API
     private String getUrl(double latitude, double longitude, String nearbyPlace) {
 
         StringBuilder googlePlacesUrl = new StringBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?");

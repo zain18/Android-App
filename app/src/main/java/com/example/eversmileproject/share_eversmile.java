@@ -39,6 +39,7 @@ public class share_eversmile extends AppCompatActivity {
             SELECT_FILE4 = 4, REQUEST_CAMERA1 = 1,
             REQUEST_CAMERA2 = 2, REQUEST_CAMERA3 = 3;
 
+    //initialize the content layout
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,7 +49,6 @@ public class share_eversmile extends AppCompatActivity {
         instaBtn =(Button) findViewById(R.id.shareInsta);
         snapBtn =(Button) findViewById(R.id.shareSnap);
         mainBtn = (Button) findViewById(R.id.shareMain);
-
         faceBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -82,7 +82,10 @@ public class share_eversmile extends AppCompatActivity {
         });
     }
 
+    //share image
+    //pass the image and type is social media
     private void initShareIntent(String type, Bitmap bit) {
+        final String appPackageName = getPackageName(); // getPackageName() from Context or Activity object
         boolean found = false;
         Intent share = new Intent(android.content.Intent.ACTION_SEND);
         share.setType("image/*");
@@ -108,17 +111,24 @@ public class share_eversmile extends AppCompatActivity {
                     break;
                 }
             }
-            if (!found)
-                return;
+            //if the app is not installed, launch play store
+            if (!found) {
+                try {
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
+                } catch (android.content.ActivityNotFoundException anfe) {
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName)));
+                }
+            }
             startActivity(Intent.createChooser(share, "Select"));
         }
     }
-
+    //select image either from library or open the camera
     private void selectImageToShare() {
         final CharSequence[] items = { "Take Photo", "Choose from Library",
                 "Cancel" };
+        //display an alert dialog for the user to choos from 3 different options
         AlertDialog.Builder builder = new AlertDialog.Builder(share_eversmile.this);
-        builder.setTitle("Select profile Photo!");
+        builder.setTitle("Please select a Photo!");
         builder.setItems(items, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int item) {
@@ -221,16 +231,20 @@ public class share_eversmile extends AppCompatActivity {
         });
         builder.show();
     }
-
+    // get image
     private void onSelectFromGalleryResult1(Intent data) {
-        Uri selectedImageUri = data.getData();
+        Uri selectedImageUri = data.getData(); //retrieve image from the argument passed
+        //get the full path for an image from URI
         String[] projection = { MediaStore.MediaColumns.DATA };
         Cursor cursor = managedQuery(selectedImageUri, projection, null, null,
                 null);
+        //get the full path for an image from URI
         int column_index = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DATA);
         cursor.moveToFirst();
         String selectedImagePath = cursor.getString(column_index);
         Bitmap thumbnail;
+        // load and pre-scale images so that they are as close as possible to their final displayed size.
+        // Scaling images at drawing time is extremely expensive and should be avoided at all cost
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds = true;
         BitmapFactory.decodeFile(selectedImagePath, options);
@@ -242,7 +256,7 @@ public class share_eversmile extends AppCompatActivity {
         options.inSampleSize = scale;
         options.inJustDecodeBounds = false;
         thumbnail = BitmapFactory.decodeFile(selectedImagePath, options);
-        initShareIntent("twi",thumbnail);
+        initShareIntent("twi",thumbnail);//share to twitter
     }
 
     private void onSelectFromGalleryResult2(Intent data) {
@@ -253,19 +267,19 @@ public class share_eversmile extends AppCompatActivity {
         int column_index = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DATA);
         cursor.moveToFirst();
         String selectedImagePath = cursor.getString(column_index);
-        Bitmap thumbnail;
+        Bitmap thumbnail;//convert image to bitmap
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds = true;
         BitmapFactory.decodeFile(selectedImagePath, options);
         final int REQUIRED_SIZE = 200;
         int scale = 1;
         while (options.outWidth / scale / 2 >= REQUIRED_SIZE
-                && options.outHeight / scale / 2 >= REQUIRED_SIZE)
+                && options.outHeight / scale / 2 >= REQUIRED_SIZE)//scale image to fit
             scale *= 2;
         options.inSampleSize = scale;
         options.inJustDecodeBounds = false;
         thumbnail = BitmapFactory.decodeFile(selectedImagePath, options);
-        initShareIntent("int",thumbnail);
+        initShareIntent("inst",thumbnail);//share to instagram
     }
 
     private void onSelectFromGalleryResult3(Intent data) {
@@ -288,7 +302,7 @@ public class share_eversmile extends AppCompatActivity {
         options.inSampleSize = scale;
         options.inJustDecodeBounds = false;
         thumbnail = BitmapFactory.decodeFile(selectedImagePath, options);
-        initShareIntent("snap",thumbnail);
+        initShareIntent("snap",thumbnail);//share to snapchat
     }
 
     protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
@@ -333,7 +347,7 @@ public class share_eversmile extends AppCompatActivity {
         options.inSampleSize = scale;
         options.inJustDecodeBounds = false;
         thumbnail = BitmapFactory.decodeFile(selectedImagePath, options);
-        initShareIntent("face",thumbnail);
+        initShareIntent("face",thumbnail);//share to facebook
     }
 
     private void onCaptureImageResult(Intent data) {

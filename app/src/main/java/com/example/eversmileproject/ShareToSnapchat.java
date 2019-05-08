@@ -25,7 +25,8 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
-
+//this whole activity is not being used, everything is being done from share_eversmile activity,
+//but i didn't wanna delete it, just in case it might be useful later on
 public class ShareToSnapchat extends AppCompatActivity {
 
     int REQUEST_CAMERA = 0, SELECT_FILE = 1;

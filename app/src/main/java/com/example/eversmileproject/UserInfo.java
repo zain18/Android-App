@@ -51,6 +51,7 @@ import java.util.Map;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class UserInfo extends AppCompatActivity {
+    //reference all content layout
     private EditText FullName;
     private EditText Email;
     private EditText Age;
@@ -69,6 +70,8 @@ public class UserInfo extends AppCompatActivity {
     private static final String ID_KEY = "User ID";
     CircleImageView profileView;
     int REQUEST_CAMERA = 0, SELECT_FILE = 1;
+    // check to see if the user is authorized to access the database
+    //if permission is granted get his unique ID
     String currentUser = FirebaseAuth.getInstance().getCurrentUser().getUid(); // unique reference for user
 
     public static boolean hasPermissions(Context context, String... permissions) {
@@ -98,10 +101,11 @@ public class UserInfo extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
 
         profileView = findViewById(R.id.profile_image);
-
+        // access the external storage in order to retrieve the profile image and save into a file
         File imgFile = new File(Environment.getExternalStorageDirectory() + "/profile.jpg");
 
         // if/else statement to avoid null pointer exception
+        // use Glide to retrieve the profile image and apply it
         if (imgFile.exists()) {
             Glide.with(UserInfo.this)
                     .load(imgFile)
@@ -155,30 +159,32 @@ public class UserInfo extends AppCompatActivity {
                 String address = Address.getText().toString();
                 String phone = Phone.getText().toString();
 
+                //check to see if the user entered his/her fullname
                 if (TextUtils.isEmpty(fullname)) {
                     Toast.makeText(getApplicationContext(), "Please enter your Full Name ", Toast.LENGTH_SHORT).show();
                     return;
                 }
-
+                //check to see if the user entered his/her age
                 if (TextUtils.isEmpty(age)) {
                     Toast.makeText(getApplicationContext(), "Please enter your Age ", Toast.LENGTH_SHORT).show();
                     return;
                 }
-
+                //check to see if the user entered his/her email
                 if (TextUtils.isEmpty(email)) {
                     Toast.makeText(getApplicationContext(), "Please enter your Email", Toast.LENGTH_SHORT).show();
                     return;
                 }
-
+                //check to see if the user entered his/her address
                 if (TextUtils.isEmpty(address)) {
                     Toast.makeText(getApplicationContext(), "Please enter your address ", Toast.LENGTH_SHORT).show();
                     return;
                 }
-
+                //check to see if the user entered his/her phone number
                 if (TextUtils.isEmpty(phone)) {
                     Toast.makeText(getApplicationContext(), "Please enter your Phone Number ", Toast.LENGTH_SHORT).show();
                     return;
                 }
+                // if everything checks out store all these info into the database
                 addNewContact(fullname, email, age, phone, address, currentUser);
             }
         });
@@ -189,14 +195,14 @@ public class UserInfo extends AppCompatActivity {
                 startActivity(new Intent(UserInfo.this, MainActivity.class));
             }
         });
-
+        //get the user records
         recordBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(UserInfo.this, UserRecords.class));
             }
         });
-
+        //select a profile pic from the external storage
         profileView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -206,7 +212,7 @@ public class UserInfo extends AppCompatActivity {
     }
 
 
-
+    //select a profile pic from the external storage or open camera
     private void selectImage() {
 
         int PERMISSION_ALL = 1;
@@ -376,6 +382,7 @@ public class UserInfo extends AppCompatActivity {
         }
     }
 
+    //store user info in the database (key, value) pair
     private void addNewContact(String name, String email, String age, String phone, String Address, String userId) {
         Map<String, Object> newContact = new HashMap<>();
         newContact.put(ID_KEY, userId);

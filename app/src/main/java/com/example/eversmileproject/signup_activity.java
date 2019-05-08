@@ -27,6 +27,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class signup_activity extends AppCompatActivity {
 
+    //initialize content layout with all its buttons, Edit texts, Firebase
     private EditText name, email_id, passwordcheck;
     private FirebaseAuth mAuth;
     private static final String TAG = "";
@@ -53,6 +54,8 @@ public class signup_activity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        //get user ID
+        //check if user have permission to access the database to post and write
         mAuth = FirebaseAuth.getInstance();
         email_id = (EditText) findViewById(R.id.input_email);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
