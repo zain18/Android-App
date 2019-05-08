@@ -114,8 +114,8 @@ public class share_eversmile extends AppCompatActivity {
             //if the app is not installed, launch play store
             if (!found) {
                 try {
-                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://search?q=")));
-                    //startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
+                    //startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://search?q=")));
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
                 } catch (android.content.ActivityNotFoundException anfe) {
                     startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName)));
                 }

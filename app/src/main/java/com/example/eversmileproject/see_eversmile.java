@@ -45,6 +45,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+
+// this activity opens a camera view and each button allows the user to take a picture
+// and these pictures are saved with the useremail+picture angle as the name
+// please refer to https://inducesmile.com/android/android-camera2-api-example-tutorial/
+// to better understand how camera2 API is implemented
 public class see_eversmile extends AppCompatActivity {
     private static final String TAG = "see_eversmile";
     private Button takePictureButton;
@@ -184,6 +189,7 @@ public class see_eversmile extends AppCompatActivity {
         }
     }
 
+    // this method captures the photos and names it with the string passed in
     protected void takePicture(String picName) {
         if(null == cameraDevice) {
             Log.e(TAG, "cameraDevice is null");
@@ -278,6 +284,7 @@ public class see_eversmile extends AppCompatActivity {
         }
     }
 
+    // creates the camera preview and overlays it over the texture view
     protected void createCameraPreview() {
         try {
             SurfaceTexture texture = textureView.getSurfaceTexture();
@@ -307,10 +314,12 @@ public class see_eversmile extends AppCompatActivity {
         }
     }
 
+    // opens the front facing camera
     private void openCamera() {
         CameraManager manager = (CameraManager) getSystemService(Context.CAMERA_SERVICE);
         Log.e(TAG, "is camera open");
         try {
+            // 1 is the front camera, 0 is back camera
             cameraId = manager.getCameraIdList()[1];
             CameraCharacteristics characteristics = manager.getCameraCharacteristics(cameraId);
             StreamConfigurationMap map = characteristics.get(CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP);
@@ -327,6 +336,7 @@ public class see_eversmile extends AppCompatActivity {
         }
         Log.e(TAG, "openCamera X");
     }
+
 
     protected void updatePreview() {
         if(null == cameraDevice) {
@@ -351,7 +361,7 @@ public class see_eversmile extends AppCompatActivity {
         }
     }
 
-    @Override
+    @Override // make sure app has permissions
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (requestCode == REQUEST_CAMERA_PERMISSION) {
             if (grantResults[0] == PackageManager.PERMISSION_DENIED) {
@@ -361,7 +371,7 @@ public class see_eversmile extends AppCompatActivity {
             }
         }
     }
-    @Override
+    @Override // reopen camera on resume
     protected void onResume() {
         super.onResume();
         Log.e(TAG, "onResume");
@@ -372,10 +382,10 @@ public class see_eversmile extends AppCompatActivity {
             textureView.setSurfaceTextureListener(textureListener);
         }
     }
-    @Override
+    @Override // stop the thread if paused
     protected void onPause() {
         Log.e(TAG, "onPause");
-        //closeCamera();
+        closeCamera();
         stopBackgroundThread();
         super.onPause();
     }

@@ -17,23 +17,24 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 
 public class XrayRecycler extends AppCompatActivity {
-    RecyclerView recyclerView;
+    RecyclerView recyclerView; // list view for all the items
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState); // list view for all the items
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.firebase_recycler);
 
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
         String currentUser = FirebaseAuth.getInstance().getCurrentUser().getUid(); // reference for specific user
-        DatabaseReference xraydb = databaseReference.child(currentUser).child("xray"); // reference for user xrays
+        DatabaseReference xraydb = databaseReference.child(currentUser).child("xray"); // reference for users history box
 
         // listener to update recycler list
         xraydb.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                // capture name and download urls
                 String fileName = dataSnapshot.getKey();
                 String url = dataSnapshot.getValue(String.class);
-
+                // use adapter to update list
                 ((FBItemAdapter)recyclerView.getAdapter()).update(fileName,url);
             }
 
@@ -59,9 +60,11 @@ public class XrayRecycler extends AppCompatActivity {
         });
 
         recyclerView = findViewById(R.id.firebaseRecycler);
-        recyclerView.setLayoutManager(new LinearLayoutManager(XrayRecycler.this)); // set up layout
+        // set up layout
+        recyclerView.setLayoutManager(new LinearLayoutManager(XrayRecycler.this));
         // call the firebase adapter constructor
         FBItemAdapter myAdapter = new FBItemAdapter(recyclerView, XrayRecycler.this,new ArrayList<String>(), new ArrayList<String>());
-        recyclerView.setAdapter(myAdapter); // set FBItemAdapter as the adapter for recycler view
+        // set FBItemAdapter as the adapter for recycler view
+        recyclerView.setAdapter(myAdapter);
     }
 }

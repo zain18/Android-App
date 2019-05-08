@@ -31,10 +31,11 @@ public class HistoryRecycler extends AppCompatActivity {
         historydb.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                String fileName = dataSnapshot.getKey(); // capture name and download urls
+                // capture name and download urls
+                String fileName = dataSnapshot.getKey();
                 String url = dataSnapshot.getValue(String.class);
-
-                ((FBItemAdapter)recyclerView.getAdapter()).update(fileName,url); // use adapter to update list
+                // use adapter to update list
+                ((FBItemAdapter)recyclerView.getAdapter()).update(fileName,url);
             }
 
             @Override
@@ -59,9 +60,11 @@ public class HistoryRecycler extends AppCompatActivity {
         });
 
         recyclerView = findViewById(R.id.firebaseRecycler);
-        recyclerView.setLayoutManager(new LinearLayoutManager(HistoryRecycler.this)); // set up layout
+        // set up layout
+        recyclerView.setLayoutManager(new LinearLayoutManager(HistoryRecycler.this));
         // call the firebase adapter constructor
         FBItemAdapter myAdapter = new FBItemAdapter(recyclerView, HistoryRecycler.this,new ArrayList<String>(), new ArrayList<String>());
-        recyclerView.setAdapter(myAdapter); // set FBItemAdapter as the adapter for recycler view
+        // set FBItemAdapter as the adapter for recycler view
+        recyclerView.setAdapter(myAdapter);
     }
 }

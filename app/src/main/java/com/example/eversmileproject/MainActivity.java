@@ -32,8 +32,10 @@ public class MainActivity extends AppCompatActivity {
 
     protected void onStart() {
         super.onStart();
-        mAuth.addAuthStateListener(mAuthListner); // start authentication at startup
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(0xFF4788F6)); // main banner
+        // start authentication at startup
+        mAuth.addAuthStateListener(mAuthListner);
+        // main banner
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(0xFF4788F6));
         Spannable text = new SpannableString(getTitle());
         text.setSpan(new ForegroundColorSpan(Color.WHITE), 0, text.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
         setTitle(text);
@@ -52,9 +54,11 @@ public class MainActivity extends AppCompatActivity {
 
         profileView = findViewById(R.id.profile_image);
 
+        // File for the profile picture named profile.jpg on user's phone
         File imgFile = new File(Environment.getExternalStorageDirectory() + "/profile.jpg");
 
         // if/else statement to avoid null pointer exception
+        // Glide library is used to display the profile picture
         if (imgFile.exists()) {
             Glide.with(MainActivity.this)
                     .load(imgFile)
@@ -77,17 +81,23 @@ public class MainActivity extends AppCompatActivity {
                     openDialog("Remember to click the circle icon to select profile photo");
         }
 
-        mAuth = FirebaseAuth.getInstance(); // create instance of Firebase Authentication
+        // create instance of Firebase Authentication
+        mAuth = FirebaseAuth.getInstance();
+        // check that user has credentials
         mAuthListner = new FirebaseAuth.AuthStateListener() {
             @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) { // check that user has credentials
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 String getEmail = "Welcome to SmileKnect! Please Log in.";
-                if (firebaseAuth.getCurrentUser() == null) { // if not current user, redirect to sign in
+                // if not current user, redirect to sign in
+                if (firebaseAuth.getCurrentUser() == null) {
                     startActivity(new Intent(MainActivity.this, signin.class));
-                } else { // else, get user email
+                }
+                // else, get user email
+                else {
                     getEmail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
                 }
-                setTitle(getEmail); // display email as user name
+                // display email as user name
+                setTitle(getEmail);
                 Spannable text = new SpannableString(getTitle());
                 text.setSpan(new ForegroundColorSpan(Color.WHITE), 0, text.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
                 setTitle(text);
@@ -147,9 +157,11 @@ public class MainActivity extends AppCompatActivity {
         super.onRestart();
         profileView = findViewById(R.id.profile_image);
 
+        // File for the profile picture named profile.jpg on user's phone
         File imgFile = new File(Environment.getExternalStorageDirectory() + "/profile.jpg");
 
         // if/else statement to avoid null pointer exception
+        // Glide library is used to display the profile picture
         if (imgFile.exists()) {
             Glide.with(MainActivity.this)
                     .load(imgFile)
@@ -172,11 +184,12 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    //Popup Window
+    //Popup Window, displays the String passsed in as dialog
     public void openDialog(String dialog){
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
         alertDialogBuilder.setMessage(dialog);
 
+        // set ok button to close box
         alertDialogBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface arg0, int arg1) {
@@ -184,6 +197,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         final AlertDialog alertDialog = alertDialogBuilder.create();
+        // show the actual dialog box
         alertDialog.show();
     }
 }

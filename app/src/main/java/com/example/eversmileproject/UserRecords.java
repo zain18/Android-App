@@ -26,6 +26,7 @@ import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+// this activity allows user to upload and download records
 public class UserRecords extends AppCompatActivity {
     private Button ulHistory;
     private Button ulXray;
@@ -124,7 +125,7 @@ public class UserRecords extends AppCompatActivity {
         });
     }
 
-    @Override
+    @Override // get permission for selecting files
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (requestCode==9 && grantResults[0]==PackageManager.PERMISSION_GRANTED)
         {
@@ -134,17 +135,20 @@ public class UserRecords extends AppCompatActivity {
             Toast.makeText(UserRecords.this,"Please grant permission", Toast.LENGTH_SHORT).show();
     }
 
+    // allow user to select file for upload
     private void selectFile(){
         Intent intent = new Intent(); // create intent
         intent.setType("*/*"); // allow user to select any type of file
         intent.setAction(Intent.ACTION_GET_CONTENT); // intent which retrieves files
-        startActivityForResult(intent, 86); // start intent, 86 is arbitrary request code
+        // start intent, 86 is arbitrary request code
+        startActivityForResult(intent, 86);
     }
 
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        if (requestCode==86 && resultCode==RESULT_OK && data != null){ // check for arbitrary request code from retrieve intent
+        // check for arbitrary request code from retrieve intent
+        if (requestCode==86 && resultCode==RESULT_OK && data != null){
             fileUri = data.getData(); // capture uri
             uploadName = data.getData().getLastPathSegment(); // capture file name
         }
@@ -154,7 +158,8 @@ public class UserRecords extends AppCompatActivity {
     }
 
     private void uploadHistory(Uri fileUri){
-        final String fileName = uploadName + ".pdf"; // upload name, add .pdf so user can download from base
+        // upload name, add .pdf so user can download from base
+        final String fileName = uploadName + ".pdf";
         final String fileName1 = uploadName; // file name for firebase database
         StorageReference storageReference=storage.getReference();
         final String currentUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
@@ -200,7 +205,8 @@ public class UserRecords extends AppCompatActivity {
     }
 
     private void uploadXray(Uri xrayUri){
-        final String fileName = uploadName + ".pdf"; // upload name, add .pdf so user can download from base
+        // upload name, add .pdf so user can download from base
+        final String fileName = uploadName + ".pdf";
         final String fileName1 = uploadName; // file name for firebase database
         StorageReference storageReference=storage.getReference();
         final String currentUser = FirebaseAuth.getInstance().getCurrentUser().getUid();

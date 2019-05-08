@@ -35,6 +35,9 @@ public class edit_text extends AppCompatActivity {
 
     EditText mEditText; // text window
 
+
+    // This activity presents the user with an editable text window, they can add text
+    // and save this text to Firebase, the default name is the time the note is created
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,27 +50,33 @@ public class edit_text extends AppCompatActivity {
         //Create Firebase storage references
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference storageRef = storage.getReference();
-        String currentUser = FirebaseAuth.getInstance().getCurrentUser().getUid(); // unique reference for user
+        // unique reference for user
+        String currentUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
         StorageReference userRef = storageRef.child(currentUser);
         StorageReference noteUserRef = userRef.child("notes");
         final StorageReference noteRef = noteUserRef.child(userName + FILE_NAME);
-        final Uri noteFile = Uri.fromFile(new File(Environment.getExternalStorageDirectory()+"/" + userName + FILE_NAME)); // create uri for note file
+        // create uri for note file
+        final Uri noteFile = Uri.fromFile(new File(Environment.getExternalStorageDirectory()+"/" + userName + FILE_NAME));
 
         // This button takes the text in the box and saves it to cloud
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String text = mEditText.getText().toString(); // capture text in textbox
+                // capture text in textbox
+                String text = mEditText.getText().toString();
                 FileOutputStream fos = null;
 
                 try {
-                    fos = new FileOutputStream(tempFile); // create file output stream
-                    fos.write(text.getBytes()); // write to stream
+                    // create file output stream
+                    fos = new FileOutputStream(tempFile);
+                    // write to stream
+                    fos.write(text.getBytes());
                     mEditText.getText().clear();
-                    Toast.makeText(edit_text.this, "Note saved to cloud", // message user that file is being saves
+                    // message user that file is being saved
+                    Toast.makeText(edit_text.this, "Note saved to cloud",
                             Toast.LENGTH_LONG).show();
-
-                    noteRef.putFile(noteFile); // write to cloud
+                    // write to cloud
+                    noteRef.putFile(noteFile);
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 } catch (IOException e) {

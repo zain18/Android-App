@@ -45,7 +45,8 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback,
     private GoogleMap mMap;
     double latitude;
     double longitude;
-    private int PROXIMITY_RADIUS = 10000;// not needed since we are retrieving all Eversmile certified across the country, but it's needed in the future
+    // not needed since we are retrieving all Eversmile certified across the country, but it's needed in the future
+    private int PROXIMITY_RADIUS = 10000;
     private Button homeBtn;
     GoogleApiClient mGoogleApiClient;
     Location mLastLocation;
@@ -92,7 +93,8 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback,
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        mMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN); // set map type to drawn style
+        // set map type to drawn style
+        mMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
         DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
         DatabaseReference officesRef = rootRef.child("offices");
 
@@ -117,12 +119,16 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback,
             LatLng marker; // create latitude-longitude marker
             @Override
             public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
-                for (DocumentSnapshot doc:queryDocumentSnapshots) { // capture value of office list
-                    double officeLatitude = doc.getDouble("latitude");   //Obtains the latitude for a given address
-                    double officeLongitude = doc.getDouble("longitude"); //Obtains the longitude for a given address
+                // capture all values of office list
+                for (DocumentSnapshot doc:queryDocumentSnapshots) {
+                    //Obtains the latitude for a given office
+                    double officeLatitude = doc.getDouble("latitude");
+                    //Obtains the longitude for a given office
+                    double officeLongitude = doc.getDouble("longitude");
                     double officeRating = doc.getDouble("rating");
                     String officeName = doc.getString("doctor");
-                    marker = new LatLng(officeLatitude, officeLongitude);    //Creates a map marker utilising the latitude and longitude values retrieved from the database
+                    //Creates a map marker utilising the latitude and longitude values retrieved from the database
+                    marker = new LatLng(officeLatitude, officeLongitude);
                     mMap.addMarker(new MarkerOptions().position(marker).title(officeName).snippet("Rating: "+officeRating+" stars.").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA)));
                 }
             }

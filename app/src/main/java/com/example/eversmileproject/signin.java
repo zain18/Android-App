@@ -60,11 +60,13 @@ public class signin extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        mAuth.addAuthStateListener(mAuthListner); // start firebase authenticator
+        // start firebase authenticator
+        mAuth.addAuthStateListener(mAuthListner);
         String getEmail = "Welcome to SmileKnect! Please log in.";
         setTitle(getEmail);
         Spannable text = new SpannableString(getTitle());
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(0xFF4788F6)); // main banner
+        // main banner
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(0xFF4788F6));
         text.setSpan(new ForegroundColorSpan(Color.WHITE), 0, text.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
         setTitle(text);
     }

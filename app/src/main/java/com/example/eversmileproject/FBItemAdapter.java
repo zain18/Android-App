@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+// This class is the FireBase item adapter for the recycler views
 public class FBItemAdapter extends RecyclerView.Adapter<FBItemAdapter.ViewHolder> {
 
     RecyclerView recyclerView;
@@ -19,13 +20,14 @@ public class FBItemAdapter extends RecyclerView.Adapter<FBItemAdapter.ViewHolder
     ArrayList<String> items = new ArrayList<String>();
     ArrayList<String> urls = new ArrayList<String>();
 
-    public void update (String name, String url){ // update the recycler view item with name and download url
+    // update the recycler view item with name and download url
+    public void update (String name, String url){
         items.add(name); // add name
         urls.add(url); // add url
         notifyDataSetChanged(); // refresh recycler view
     }
 
-    // firebase item constructor
+    // firebase item constructor, pass in the recycler, context, item and url lists
     public FBItemAdapter(RecyclerView recyclerView, Context context, ArrayList<String> item, ArrayList<String> urls) {
         this.recyclerView = recyclerView;
         this.context = context;
@@ -56,14 +58,19 @@ public class FBItemAdapter extends RecyclerView.Adapter<FBItemAdapter.ViewHolder
 
         public ViewHolder(View itemView){
             super(itemView);
-            nameOfFile=itemView.findViewById(R.id.fbitemtextview); // initialize text view
+            // initialize text view
+            nameOfFile=itemView.findViewById(R.id.fbitemtextview);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    int position = recyclerView.getChildLayoutPosition(v); // retrieve index of item
-                    Intent intent = new Intent(Intent.ACTION_VIEW); // ininitialize intent to connect to browser
-                    intent.setData(Uri.parse(urls.get(position))); // grab url from recycler list item
-                    context.startActivity(intent); // go to browser to download item
+                    // retrieve index of item
+                    int position = recyclerView.getChildLayoutPosition(v);
+                    // ininitialize intent to connect to browser
+                    Intent intent = new Intent(Intent.ACTION_VIEW);
+                    // grab url from recycler list item
+                    intent.setData(Uri.parse(urls.get(position)));
+                    // go to browser to download item
+                    context.startActivity(intent);
                 }
             });
         }
