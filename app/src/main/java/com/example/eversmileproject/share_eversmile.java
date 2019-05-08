@@ -85,7 +85,7 @@ public class share_eversmile extends AppCompatActivity {
     //share image
     //pass the image and type is social media
     private void initShareIntent(String type, Bitmap bit) {
-        final String appPackageName = getPackageName(); // getPackageName() from Context or Activity object
+        final String appPackageName = "com.android.vending"; // getPackageName() from Context or Activity object
         boolean found = false;
         Intent share = new Intent(android.content.Intent.ACTION_SEND);
         share.setType("image/*");
