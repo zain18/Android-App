@@ -85,7 +85,7 @@ public class share_eversmile extends AppCompatActivity {
     //share image
     //pass the image and type is social media
     private void initShareIntent(String type, Bitmap bit) {
-        final String appPackageName = "com.android.vending"; // getPackageName() from Context or Activity object
+        final String appPackageName = "com.example.eversmileproject"; // getPackageName() from Context or Activity object
         boolean found = false;
         Intent share = new Intent(android.content.Intent.ACTION_SEND);
         share.setType("image/*");
@@ -114,8 +114,8 @@ public class share_eversmile extends AppCompatActivity {
             //if the app is not installed, launch play store
             if (!found) {
                 try {
-                    Intent launchIntent = getPackageManager().getLaunchIntentForPackage("com.android.vending");
-                    startActivity(launchIntent);
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://search?q=")));
+                    //startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
                 } catch (android.content.ActivityNotFoundException anfe) {
                     startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName)));
                 }

@@ -34,7 +34,6 @@
         android:theme="@style/AppTheme"
         android:titleTextColor="#FFFFFe"
         tools:ignore="ExtraText">
-        <activity android:name=".Survey"></activity>
         <activity
             android:name=".UserInfo"
             android:theme="@style/AppThemeNoBar" />
