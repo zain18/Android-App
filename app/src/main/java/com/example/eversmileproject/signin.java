@@ -126,11 +126,13 @@ public class signin extends AppCompatActivity {
                                 progressBar.setVisibility(View.GONE);
                                 if (task.isSuccessful()) {
                                     // there was an error
+
                                     Log.d(TAG, "signInWithEmail:success");
                                     Intent intent = new Intent(signin.this, MainActivity.class);
                                     startActivity(intent);
                                     finish();
                                 } else {
+                                    Toast.makeText(getApplicationContext(), "Wrong password", Toast.LENGTH_SHORT).show();
                                     Log.d(TAG, "singInWithEmail:Fail");
                                     Toast.makeText(signin.this, getString(R.string.failed), Toast.LENGTH_LONG).show();
                                 }
@@ -187,7 +189,7 @@ public class signin extends AppCompatActivity {
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithCredential:failure", task.getException());
-                            Toast.makeText(signin.this, "Aut Fail", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(signin.this, "wrong password or email ", Toast.LENGTH_SHORT).show();
                             //updateUI(null);
                         }
                     }
